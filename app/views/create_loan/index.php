@@ -29,6 +29,7 @@
                               <th>DATE_APPLIED</th>
                               <th>CUSTOMER_PROFILE</th>
                               <th>REGISTRATION_NO.</th>
+                              <th>LOAN_CODE</th>
                               <th>CAPACITY</th>
                               <th>LOAN_AMOUNT</th>
                               <th>MATURITY</th>
@@ -48,6 +49,7 @@
                               <th>DATE_APPLIED</th>
                               <th>CUSTOMER_PROFILE</th>
                               <th>REGISTRATION_NO.</th>
+                              <th>LOAN_CODE</th>
                               <th>CAPACITY</th>
                               <th>LOAN_AMOUNT</th>
                               <th>MATURITY</th>
@@ -104,7 +106,7 @@
                                       if($query!==0){
                                       foreach($query as $row)
                                       {
-                                          echo "<option data-image='".$row['image']."' data-id='".$row['regtype']."' data-value='".$row['code']."' value='".$row['id']."'>".$row['surname']." ".$row["othername"]."</option>";
+                                          echo "<option data-image='".$row['image']."' data-id='".$row['regtype']."' data-value='".$row['code']."' value='".$row['id']."'>".$row['surname']." ".$row["othername"]." (".$row["code"].")</option>";
                                           }
                                         }
                                     ?>
@@ -179,6 +181,7 @@
             </button>
           </div>
           <div class="modal-body">
+              <input type="hidden" id="loanid">
             <div class="form-group">
                           <label> Date Paid <span style="color:red">*</span></label>
                           <input id="paydate" class="form-control lpay" type="date">

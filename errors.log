@@ -176,3 +176,30 @@ Stack trace:
 #4 /Applications/AMPPS/www/lbook_green/index.php(18): App->__construct()
 #5 {main}
   thrown in /Applications/AMPPS/www/lbook_green/app/models/extend_function.php on line 391
+[07-Aug-2024 15:57:00 UTC] PHP Notice:  Undefined variable: update_ in /Applications/AMPPS/www/lbook_green/app/controllers/processor/postLoanPayment.php on line 46
+[07-Aug-2024 15:57:02 UTC] PHP Notice:  Undefined variable: update_ in /Applications/AMPPS/www/lbook_green/app/controllers/processor/postLoanPayment.php on line 46
+[07-Aug-2024 15:58:52 UTC] PHP Notice:  Undefined variable: update_ in /Applications/AMPPS/www/lbook_green/app/controllers/processor/postLoanPayment.php on line 46
+[07-Aug-2024 16:20:00 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'LOANID' in 'where clause' in /Applications/AMPPS/www/lbook_green/app/models/extend_function.php:390
+Stack trace:
+#0 /Applications/AMPPS/www/lbook_green/app/models/extend_function.php(390): PDOStatement->execute()
+#1 /Applications/AMPPS/www/lbook_green/app/controllers/processor/postLoanPayment.php(38): extend_function->get_data_here_value(Object(PDOStatement), 'AMOUNT')
+#2 /Applications/AMPPS/www/lbook_green/app/controllers/processor/postLoanPayment.php(20): amwork_controller->post_loan()
+#3 /Applications/AMPPS/www/lbook_green/app/core/app.php(44): amwork_controller->index()
+#4 /Applications/AMPPS/www/lbook_green/index.php(18): App->__construct()
+#5 {main}
+  thrown in /Applications/AMPPS/www/lbook_green/app/models/extend_function.php on line 390
+[13-Aug-2024 12:59:52 UTC] PHP Notice:  Undefined index: ccode in /Applications/AMPPS/www/lbook_green/app/controllers/processor/processLogin.php on line 113
+[13-Aug-2024 12:59:52 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'ORDER BY ID DESC LIMIT 1000' at line 1 in /Applications/AMPPS/www/lbook_green/app/models/extend_function.php:314
+Stack trace:
+#0 /Applications/AMPPS/www/lbook_green/app/models/extend_function.php(314): PDOStatement->execute()
+#1 /Applications/AMPPS/www/lbook_green/app/controllers/processor/processLogin.php(114): extend_function->getAllData(Object(PDOStatement))
+#2 /Applications/AMPPS/www/lbook_green/app/controllers/processor/processLogin.php(81): amwork_controller->calcInterest()
+#3 /Applications/AMPPS/www/lbook_green/app/controllers/processor/processLogin.php(28): amwork_controller->login()
+#4 /Applications/AMPPS/www/lbook_green/app/core/app.php(44): amwork_controller->index()
+#5 /Applications/AMPPS/www/lbook_green/index.php(18): App->__construct()
+#6 {main}
+  thrown in /Applications/AMPPS/www/lbook_green/app/models/extend_function.php on line 314
+[16-Aug-2024 16:53:48 UTC] PHP Notice:  Undefined variable: dlast in /Applications/AMPPS/www/lbook_green/app/controllers/processor/check_amt_topay.php on line 51
+[16-Aug-2024 16:53:48 UTC] PHP Notice:  Trying to access array offset on value of type null in /Applications/AMPPS/www/lbook_green/app/controllers/processor/check_amt_topay.php on line 51
+[16-Aug-2024 17:13:27 UTC] PHP Parse error:  syntax error, unexpected '}', expecting ';' in /Applications/AMPPS/www/lbook_green/app/controllers/processor/check_amt_topay.php on line 85
+[16-Aug-2024 17:15:14 UTC] PHP Parse error:  syntax error, unexpected '}', expecting ';' in /Applications/AMPPS/www/lbook_green/app/controllers/processor/check_amt_topay.php on line 87

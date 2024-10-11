@@ -519,37 +519,46 @@ class extend_function extends master_class
                return $data;
           }
 
+          
+
 
 	function calcPay($weektype, $stopay, $days_bet){
+			
+			if($weektype==="1"){
+			 //return json_encode(array("amount"=>round($stopay)));
+			
 			if($days_bet>=7&&$days_bet<14){
-		 	 return json_encode(array("amount"=>$stopay));	
+		 	 return json_encode(array("amount"=>round($stopay)));	
 		 	}else if($days_bet>=14&&$days_bet<21){
-		 	 return json_encode(array("amount"=>$stopay*2));	
+		 	 return json_encode(array("amount"=>round($stopay*2)));	
 		 	}else if($days_bet>=21&&$days_bet<28){
-		 	 return json_encode(array("amount"=>$stopay*3));	
+		 	 return json_encode(array("amount"=>round($stopay*3)));	
 		 	}else if($days_bet>=35&&$days_bet<42){
-		 	 return json_encode(array("amount"=>$stopay*4));	
+		 	 return json_encode(array("amount"=>round($stopay*4)));	
 		 	}else if($days_bet>=49&&$days_bet<56){
-		 	 return json_encode(array("amount"=>$stopay*5));	
+		 	 return json_encode(array("amount"=>round($stopay*5)));	
 		 	}else if($days_bet>=63&&$days_bet<70){
-		 	 return json_encode(array("amount"=>$stopay*6));	
+		 	 return json_encode(array("amount"=>round($stopay*6)));	
 		 	}else if($days_bet>=77&&$days_bet<84){
-		 	 return json_encode(array("amount"=>$stopay*7));	
+		 	 return json_encode(array("amount"=>round($stopay*7)));	
 		 	}else{
-		     return json_encode(array("amount"=>$stopay));
+		     return json_encode(array("amount"=>round($stopay)));
 		 	}
+		  }
 
 		  if($weektype==="2"){
+		   //return json_encode(array("amount"=>round($stopay)));
+		      
 		  if($days_bet>=14&&$days_bet<21){
-		 	 return json_encode(array("amount"=>$stopay));	
+		 	 return json_encode(array("amount"=>round($stopay)));	
 		 	}else if($days_bet>=35&&$days_bet<49){
-		 	 return json_encode(array("amount"=>$stopay*2));	
+		 	 return json_encode(array("amount"=>round($stopay*2)));	
 		 	}else if($days_bet>=63&&$days_bet<77){
-		 	 return json_encode(array("amount"=>$stopay*3));	
+		 	 return json_encode(array("amount"=>round($stopay*3)));	
 		 	}else if($days_bet>=91&&$days_bet<105){
-		 	 return json_encode(array("amount"=>$stopay*4));	
+		 	 return json_encode(array("amount"=>round($stopay*4)));	
 		 	}else{
-		 	 return json_encode(array("amount"=>$stopay));		
+		 	 return json_encode(array("amount"=>round($stopay)));		
 		 	}
 		 }
 	}
@@ -901,8 +910,10 @@ class extend_function extends master_class
 		$penalty=$this->get_data_here_value("SELECT SUM(AMOUNT) AS AMT FROM penalty_tb WHERE LOANID=$loanid AND CUSTOMERID=$customerid","AMT");
 		$penalty=isset($penalty)?$penalty:0;
 		$total=$lamount+$interest+$penalty;
+		$total=isset($total)?round($total):0;
 		$user=$_SESSION["id"];
 		$allpayment=$this->get_data_here_value("SELECT SUM(AMOUNT) AS AMT FROM loan_payment WHERE LOANID=$loanid AND CUSTOMERID=$customerid","AMT");
+		$allpayment=isset($allpayment)?round($allpayment):0;
 		$balremain=$total-$allpayment;
 		if($balremain<=0){
 		$result = $this->updateFunction("UPDATE loan_tb SET REPAY_STATUS = 0, DATE_MODIFIED = '$currDate' WHERE ID=".$row["ID"]."");

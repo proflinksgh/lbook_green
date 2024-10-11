@@ -35,19 +35,22 @@ class amwork_controller extends route
         	   $query = "INSERT INTO loan_payment (CUSTOMERID, LOANID, AMOUNT, POSTED_BY, DATE_NORMAL, DATE_CREATED,DATE_MODIFIED, CCODE, HCODE) VALUES (?,?,?,?,?,?,?,?,?)";
                $insert_ = $db->InsertRecords($query, $params);	
                if($insert_>0){
-               $lamount=$db->get_data_here_value("SELECT AMOUNT FROM loan_tb WHERE ACCOUNT_NO='$accno'","AMOUNT");
-               $interest=$db->get_data_here_value("SELECT INTEREST FROM loan_tb WHERE ACCOUNT_NO='$accno'","INTEREST");
+               $lamount=$db->get_data_here_value("SELECT AMOUNT FROM loan_tb WHERE ACCOUNT_NO='$accno' AND ID=$loanid","AMOUNT");
+               $interest=$db->get_data_here_value("SELECT INTEREST FROM loan_tb WHERE ACCOUNT_NO='$accno' AND ID=$loanid","INTEREST");
+               $interest=isset($interest)?$interest:0;
 			   $getpenalty=$db->get_data_here_value("SELECT SUM(AMOUNT) AS AMT FROM penalty_tb WHERE LOANID=$loanid AND CUSTOMERID=$customerid","AMT");
+			   $getpenalty=isset($getpenalty)?$getpenalty:0;
 			   $allpayment=$db->get_data_here_value("SELECT SUM(AMOUNT) AS AMT FROM loan_payment WHERE LOANID=$loanid AND CUSTOMERID=$customerid","AMT");
+			   $allpayment=isset($allpayment)?$allpayment:0;
 			   $total=$lamount+$interest;
 			   $balance=$total+$getpenalty-$allpayment;
 			   if($balance<=0){
 			   	$update_= $db->updateFunction("UPDATE loan_tb SET REPAY_STATUS=0 WHERE ID=$loanid");
 			   	if($update_==="0"){
-			   	 echo json_encode(array("status"=>"success", "repay_status"=>"complete"));	
+			   	 echo json_encode(array("status"=>"success", "accno"=>$accno, "repay_status"=>"complete", "balance1"=>$balance, "total"=>$total, "lamount"=>$lamount, "penalty"=>$getpenalty, "interest"=>$interest, "allpayment"=>$allpayment));	
 			   	}
 			   }else{
-			   	 echo json_encode(array("status"=>"success", "repay_status"=>"notcomplete"));	
+			   	 echo json_encode(array("status"=>"success", "accno"=>$accno, "repay_status"=>"notcomplete", "balance2"=>$balance, "total"=>$total, "lamount"=>$lamount, "penalty"=>$getpenalty, "interest"=>$interest, "allpayment"=>$allpayment, "loanid"=>$loanid, "customerid"=>$customerid));	
 			     }               	
                }else{
                	echo json_encode(array("status"=>"failed"));

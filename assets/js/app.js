@@ -1727,6 +1727,7 @@ var code='';
                   {'data': 'date'},
                   {'data': 'customer'},
                   {'data': 'accno'},
+                  {'data': 'code'},
                   {'data': 'capacity'},
                   {'data': 'amount'},
                   {'data': 'period'},
@@ -2657,6 +2658,7 @@ var path = false;
                 alert('Select only one record');
            }else{
             check_amt_topay(selected, accno);
+            $("#loanid").val(selected);
             $("#idAppLoan").val(selected);
             $('#appName').val(name);
             $('#regNo').val(accno);
@@ -4286,10 +4288,8 @@ function reactivate(){
             }
           },
           error: function(err){
-            alert(err.responseText)
             console.log(err)
            $("#payAmt").val("0");
-           //alert("In error: "+err.responseText);
         }
     });
 }
@@ -6696,9 +6696,9 @@ function reactivate(){
 
 
     function postSavings(){   
-     if(!validationDate($("#idDate").val())){
-       swal("Please Enter a Valid date");
-     }else{
+    //  if(!validationDate($("#idDate").val())){
+    //   swal("Please Enter a Valid date");
+    //  }else{
      var userId = sessionStorage.getItem('id');
      var idDate = $("#idDate").val();
      
@@ -6765,7 +6765,7 @@ function reactivate(){
         }
     });
      } 
-    }
+    //}
 }
 
 
@@ -7102,9 +7102,9 @@ function reactivate(){
      
 
     function postWithdrawal(minBalance){    
-    if(!validationDate($("#idDate30").val())){
-       swal("Please Enter a Valid date");
-     }else{
+    // if(!validationDate($("#idDate30").val())){
+    //   swal("Please Enter a Valid date");
+    //  }else{
 
      $("#btnPostWithdrawal > i").removeClass().addClass("fa fa-spinner fa-spin");
      $("#btnPostWithdrawal").prop("disabled", true);
@@ -7220,7 +7220,7 @@ function reactivate(){
         });
       }
     }
- }
+ //}
 }
     
     
@@ -7355,7 +7355,7 @@ function reactivate(){
      if($(this).val()){
       amount=parseFloat($(this).val());
       if(amount!==0){
-       fetchMinAmt(amount, loanprod);
+       //fetchMinAmt(amount, loanprod);
       }
      }else{
         $("#shAmtErr").hide();
@@ -8514,8 +8514,8 @@ function reactivate(){
            }
         },
         error: function(err) {
-            //console.log(err);
-          //alert(err.responseText);
+            console.log(err);
+          alert(err.responseText);
         }
     });
 }

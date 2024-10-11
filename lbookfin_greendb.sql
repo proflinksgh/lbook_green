@@ -2,10 +2,10 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost
--- Generation Time: Aug 06, 2024 at 11:58 PM
--- Server version: 8.0.36
--- PHP Version: 7.4.33
+-- Host: localhost:3306
+-- Generation Time: Oct 11, 2024 at 11:04 AM
+-- Server version: 10.6.19-MariaDB-cll-lve
+-- PHP Version: 8.3.11
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -28,15 +28,15 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `account_number_tb` (
-  `ID` int NOT NULL,
-  `NEXT_ACCOUNT` bigint NOT NULL,
+  `ID` int(200) NOT NULL,
+  `NEXT_ACCOUNT` bigint(200) NOT NULL,
   `FORMATION` varchar(200) NOT NULL,
-  `USER_ID` int DEFAULT NULL,
+  `USER_ID` int(11) DEFAULT NULL,
   `DATE_CREATED` varchar(100) DEFAULT NULL,
   `DATE_MODIFIED` varchar(100) DEFAULT NULL,
-  `CCODE` int DEFAULT NULL,
-  `HCODE` longtext
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+  `CCODE` int(11) DEFAULT NULL,
+  `HCODE` longtext DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Dumping data for table `account_number_tb`
@@ -88,7 +88,7 @@ INSERT INTO `account_number_tb` (`ID`, `NEXT_ACCOUNT`, `FORMATION`, `USER_ID`, `
 (46, 2, '3022010001', NULL, NULL, '2023-05-29 10:46:06am', 473858, NULL),
 (47, 2, 'Pak', NULL, NULL, NULL, 169954, NULL),
 (48, 1, 'Kwa', NULL, NULL, NULL, 379999, NULL),
-(49, 24, 'GRE', NULL, NULL, '2024-04-26 11:55:03am', 340059, NULL),
+(49, 33, 'GRE', NULL, NULL, '2024-04-26 11:55:03am', 340059, NULL),
 (50, 1, 'Max', NULL, NULL, NULL, 197163, NULL),
 (51, 2, 'Max', NULL, NULL, NULL, 518163, NULL),
 (52, 1, 'Lin', NULL, NULL, NULL, 929764, NULL),
@@ -112,9 +112,9 @@ INSERT INTO `account_number_tb` (`ID`, `NEXT_ACCOUNT`, `FORMATION`, `USER_ID`, `
 --
 
 CREATE TABLE `account_tb` (
-  `ID` int NOT NULL,
-  `PRODUCT_ID` int DEFAULT NULL,
-  `CLIENT_ID` bigint DEFAULT NULL,
+  `ID` int(11) NOT NULL,
+  `PRODUCT_ID` int(11) DEFAULT NULL,
+  `CLIENT_ID` bigint(11) DEFAULT NULL,
   `ACCOUNT_NO` varchar(255) DEFAULT NULL,
   `SUBSCRIPTION` varchar(200) DEFAULT NULL,
   `ACC_STATUS` varchar(5) DEFAULT NULL,
@@ -122,9 +122,24 @@ CREATE TABLE `account_tb` (
   `DESCRIPTION` varchar(255) NOT NULL,
   `DATE_CREATED` varchar(100) DEFAULT NULL,
   `DATE_MODIFIED` varchar(50) DEFAULT NULL,
-  `CCODE` int DEFAULT NULL,
-  `HCODE` longtext
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+  `CCODE` int(11) DEFAULT NULL,
+  `HCODE` longtext DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+--
+-- Dumping data for table `account_tb`
+--
+
+INSERT INTO `account_tb` (`ID`, `PRODUCT_ID`, `CLIENT_ID`, `ACCOUNT_NO`, `SUBSCRIPTION`, `ACC_STATUS`, `SMS_STATUS`, `DESCRIPTION`, `DATE_CREATED`, `DATE_MODIFIED`, `CCODE`, `HCODE`) VALUES
+(1, 247344, 165980726, 'GRE 0000000024', 'null', '0', '0', 'DAILY SAVINGS', '2024-07-22', '2024-07-22', 340059, '19f603f751c31f7e461db778333eadfd92ea1fa0'),
+(2, 247344, 964216306, 'GRE 0000000025', 'null', '0', '0', 'DAILY SAVINGS', '2022-04-28', '2022-04-28', 340059, '13a91ea3aad1eb8e2726dfb063f08028e11c2f1b'),
+(3, 247344, 558365177, 'GRE 0000000026', 'null', '0', '0', 'DAILY SAVINGS', '2022-12-19', '2022-12-19', 340059, '7dae7cbe1adb274a835bfafee9a01036b1dde5f2'),
+(4, 247344, 417764857, 'GRE 0000000027', 'null', '0', '0', 'DAILY SAVINGS', '2023-09-28', '2023-09-28', 340059, 'ebd7f94d25072c81450e6d4ad3230e06e9c53e1b'),
+(5, 247344, 502344178, 'GRE 0000000028', 'null', '0', '0', 'DAILY SAVINGS', '2022-06-22', '2022-06-22', 340059, '77db092a9063099f6ca2526990770a5799d08e24'),
+(6, 247344, 118760168, 'GRE 0000000029', 'null', '0', '0', 'DAILY SAVINGS', '2022-10-06', '2022-10-06', 340059, 'b71b4654c4fbd01fc6c6c0d935d785bd90e5fa01'),
+(7, 247344, 829181896, 'GRE 0000000030', 'null', '0', '0', 'DAILY SAVINGS', '2024-06-01', '2024-06-01', 340059, '1511d1d586829b9478dc272bb9551b2c20fe0175'),
+(8, 247344, 576165856, 'GRE 0000000031', 'null', '0', '0', 'DAILY SAVINGS', '2023-06-23', '2023-06-23', 340059, 'cd987b2556d794eb587b09b4ca65aca1fc74f4ea'),
+(9, 247344, 326252747, 'GRE 0000000032', 'null', '0', '0', 'DAILY SAVINGS', '2022-06-07', '2022-06-07', 340059, 'd2b3946a313225a3f9f33a09e24d51a53abbb184');
 
 -- --------------------------------------------------------
 
@@ -133,9 +148,9 @@ CREATE TABLE `account_tb` (
 --
 
 CREATE TABLE `acc_status_tb` (
-  `ID` int NOT NULL,
+  `ID` int(11) NOT NULL,
   `DESCRIPTION` varchar(200) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb3;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
 
 --
 -- Dumping data for table `acc_status_tb`
@@ -152,67 +167,21 @@ INSERT INTO `acc_status_tb` (`ID`, `DESCRIPTION`) VALUES
 --
 
 CREATE TABLE `activation_tb` (
-  `ID` int NOT NULL,
+  `ID` int(11) NOT NULL,
   `NEXT_DATE` varchar(50) DEFAULT NULL,
-  `USED_CODE` longtext,
-  `DATE_CREATED` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `USED_CODE` longtext DEFAULT NULL,
+  `DATE_CREATED` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `DATE_MODIFIED` varchar(50) DEFAULT NULL,
-  `CCODE` int NOT NULL,
+  `CCODE` int(11) NOT NULL,
   `HCODE` longtext NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
 
 --
 -- Dumping data for table `activation_tb`
 --
 
 INSERT INTO `activation_tb` (`ID`, `NEXT_DATE`, `USED_CODE`, `DATE_CREATED`, `DATE_MODIFIED`, `CCODE`, `HCODE`) VALUES
-(1, '2024-02-03', '8790676055', '2024-02-03 22:20:55', NULL, 233211, '5a32a97e508e474d757559ecd9d13817'),
-(2, '2022-06-12 15:56:06', 'af1585cc6e60a1a4572c9dcb9eede80157205d1d524844790d789399c34b94da410b77af9ae15ee098240776d0a72b7478021be7feac581f92530bfec886cf4e', '2022-06-29 04:03:50', '2022-06-29 03:58:58', 603870, 'kdkajkdfjafnlkieruikdakljakslnbijij'),
-(3, '2022-07-14', '790a9a78432e7781e9b27d287e79a8be03a6f9d7', '2022-07-14 00:00:00', '2022-07-14', 520403, 'd5ca6e56e08ff907ad46ec0b60095e47302c897e'),
-(4, '2022-08-29', '7846489535', '2022-08-29 11:17:39', '2022-07-14', 949796, '7739b7482e1e72515bf29a6ecfa447d58f7288a3'),
-(5, '2022-07-15', 'b7fa25bc87128e29208ae2c3e61d4cb55733b863', '2022-07-15 00:00:00', '2022-07-15', 984706, '8e0b2e30a59edc29f9c1d043062d113d87d4e387'),
-(6, '2022-07-15', '4a9fb47cdfbf68360ae624c67d3ad8a7d9593fd1', '2022-07-15 00:00:00', '2022-07-15', 618608, '0ab05143e9873610218e0fb98b11f4daf6bcbedb'),
-(7, '2022-07-15', '882bece5d1166d911d182cc9c455c97f7a819906', '2022-07-15 00:00:00', '2022-07-15', 297358, '5309a0a003b9a5b627f62529a1d14ecc9901ff74'),
-(8, '2022-07-15', '0fdd642ea5183e901422ef0bc00b2712806f5e09', '2022-07-15 00:00:00', '2022-07-15', 618782, '73224e5cda3cce0683c43bb94e656cf5bdc5679c'),
-(9, '2022-07-15', 'f5cec5d2c0f0e783524ad944339a07459711f15d', '2022-07-15 00:00:00', '2022-07-15', 984103, 'd49e7ba768c063668d71f3477d00a62204dd0fbc'),
-(10, '2022-07-15', '98a8ca301a974a991345014d3544240bdee39f87', '2022-07-15 00:00:00', '2022-07-15', 515097, 'c1be9aedf2153e60327e4139aa6dbc516e1d1519'),
-(11, '2022-07-15', 'f00eb441362ce832ad4dbac0b9f56728b12a5194', '2022-07-15 00:00:00', '2022-07-15', 626175, 'f3579ffdeaa5c7970194dd807659d271aec52ba9'),
-(12, '2022-07-15', '1cd6ec64850b2305c714297d4190be291d14819e', '2022-07-15 00:00:00', '2022-07-15', 463006, 'a5d122bc01760dfcb4cbf1e3718114e5f47c4d3c'),
-(13, '2022-07-15', 'ecb07e89e77611f8a9c238a8940ef018a6b43a05', '2022-07-15 00:00:00', '2022-07-15', 723795, '8fb68be00f1726d488f58995f792098da50ce66d'),
-(15, '2022-07-15', '8450e2e071c72a044a9e4e52cd8ef5fce7c8af1a', '2022-07-15 00:00:00', '2022-07-15', 563554, 'eecf4cb1173bb4c391bc6b8165693bf267a30637'),
-(16, '2022-07-15', '2b5b34b9a9a769aea3e73f458933df85561ba561', '2022-07-15 00:00:00', '2022-07-15', 811193, '657476da900a9c7e041d940dea1bb0057e603280'),
-(17, '2022-08-09', '011f650ee6a55c8e9aaffa72500670880e43e276', '2022-08-09 00:00:00', '2022-08-09', 715676, '89c4ba72307d26eca78d96e5c3895fea288940f5'),
-(18, '2022-08-23', 'd363230680229736819eb420ff5fba56ca5b66b9', '2022-08-23 00:00:00', '2022-08-23', 610240, 'c7f0e7f0341fb502b307501248c3ea0a226093f4'),
-(19, '2023-10-26', '4748315730', '2023-10-26 08:48:43', '2022-08-29', 570826, '257254ade87e1d741edcca401976820f4872a0e7'),
-(20, '2022-09-13', 'a47dcccc37e33d502e0b3450096d802945869a25', '2022-09-13 00:00:00', '2022-09-13', 392986, '680bc59b31794aa53e04044c468028a467ea9a1b'),
-(21, '2022-09-13', 'f3c87548df71ba5019264bf5593c86ed9d2447dd', '2022-09-13 00:00:00', '2022-09-13', 137093, 'c00bab4288f370d5a11ada70f690de11c72ef332'),
-(22, '2022-09-13', 'd28e50ff08cda2c6893c99efcb63a3be034e0600', '2022-09-13 00:00:00', '2022-09-13', 764459, '17c5da2410404b9a9c134c92cea105bb54d47701'),
-(23, '2022-09-13', 'fd26fe34b9a1de7b4615a6c37c6713b3885518c1', '2022-09-13 00:00:00', '2022-09-13', 381272, 'e9020a4b3828465a27f236208e8122a986a11d33'),
-(24, '2022-09-16', '1ea743e92693f3d549b6b38486ae0c47b477f6c4', '2022-09-16 00:00:00', '2022-09-16', 474308, '0299f8ddc25551a1024121a5d1801984df959111'),
-(25, '2022-10-04', '8790676055', '2022-10-04 03:53:10', '2022-09-21', 994529, 'c32c381f237e72f3541c95816ff12375266b3fd9'),
-(26, '2022-10-11', '1f2fd77ba865d8ec335992af2277b2ac418f67f9', '2022-10-11 00:00:00', '2022-10-11', 200776, '863d02e4edd1da726e19fd74d473391f6874c1c6'),
-(27, '2022-11-06', 'b66d5ca1e4b5645133288bd93c0b63a005797ad1', '2022-11-06 00:00:00', '2022-11-06', 548706, 'b236a8701f53f36bcf836bcfcd01a9f07c5b7c09'),
-(28, '2023-03-06', '7d86f9fe95ae379b8635a30e0f14aad47412ff96', '2023-03-06 00:00:00', '2023-03-06', 898101, '0d1e5bc43ec3940edc3a936b7ee4c96cc9357836'),
-(29, '2023-04-23', '531653b41fa9bb2f66f72936090f986aa16c4360', '2023-04-23 00:00:00', '2023-04-23', 451923, '59cb8eea1526ced1a235dcdbfbba5430c5cd60e6'),
-(30, '2023-05-29', '17e0aa32a22677c9a0cedac2897ec8a4c058d74f', '2023-05-29 00:00:00', '2023-05-29', 473858, '692badd235a6d502d9c84dada0c0fb0876012543'),
-(31, '2023-06-05', '4a1c7a34e9b82dc03165968e86e75f6527ea68ba', '2023-06-05 00:00:00', '2023-06-05', 169954, '937442d3ce3ffb65c391039c936df9247aafb1c5'),
-(32, '2023-12-04', '613e5c688934e23255d0a0a00a2f86512dd9330f', '2023-12-04 00:00:00', '2023-12-04', 379999, '09381ffe03b307dc16eb04a0f507bffdf65068c6'),
-(33, '2024-04-25', '16ae438c5d535b79226378b53e1cbc5f25ee88c8', '2024-04-25 00:00:00', '2024-04-25', 340059, '0a069c2273d5803914889092bcf949bc58f34f15'),
-(34, '2024-06-03', 'fdfe962ad7eb55314e1ee1a76a75bc7cd6abe5d2', '2024-06-03 00:00:00', '2024-06-03', 197163, '2ec1fdcab22420344ff4963127500e55701dab43'),
-(35, '2024-08-15', '54a5339f84a0960d5779e41e335acfeace0c4378', '2024-07-21 22:32:51', '2024-07-21 22:31', 518163, 'c306750b776d7f6091018445484737231cfba31e'),
-(36, '2024-08-02', '11e918b522c00208e9743bf8000d7abc74203a50', '2024-07-21 23:56:14', '2024-07-21 23:56', 929764, 'a6afbb0d20604df06b3e192a9fceee2df800ed59'),
-(37, '2024-06-03', '3ae950b8fe50ea1839d2e96ac9ce155a516a3089', '2024-06-03 00:00:00', '2024-06-03', 267680, 'e509865deedbf0382f5e0a11c2a05d94b9500c85'),
-(38, '2024-06-03', 'e8a4cca91355084300b2140062bd5c5893e91481', '2024-06-03 00:00:00', '2024-06-03', 371265, '541d5c3f79a711f04dc143f5f73c2edc67e9070a'),
-(39, '2024-08-02', '832a288d91a69a38ca44d0834424afed5527589f', '2024-07-21 22:55:47', '2024-07-21 22:55', 933642, '15260ec01e80b3f9d0362a297bb96e31e6dba562'),
-(40, '2025-07-11', '3d73952ac8836fc6f3edc4f626bdc417ca0e5cff', '2024-07-21 23:01:48', '2024-07-21 23:01', 377586, 'c5281e0e3f26e1bae81175bf1a6ea271670f0da0'),
-(41, '2024-08-19', '4e75d11a23c5778b7a1cfdd3b9f72a857bd686b6', '2024-07-21 22:59:10', '2024-07-21 22:59', 961704, 'ac3fc849130bd5b6e477f02bf955a151c2e6280c'),
-(42, '2025-07-06', '101d899998e69e34470df7e934c1a6802a08ce11', '2024-07-22 11:10:39', '2024-07-22 11:10', 516448, '78962626a9e09a95351d7676461732c3c89e73d1'),
-(43, '2024-07-15', '8bf2328420f2f67d675998aa2eedb007e09bbd4c', '2024-07-15 00:00:00', '2024-07-15', 558404, '3d0fad7ccd4726bd8a9ed0ecad3de7e66e694a22'),
-(44, '2025-07-18', 'd3ba75a0d51e2125d873a4e41c5f8de3a0abcfc9', '2024-07-21 23:00:41', '2024-07-21 23:00', 499047, 'a0f502a0c1875b0bc42a2e0b1b3d273a664f9a76'),
-(45, '2025-01-20', '0f47dc94e5b9c5f54ecd01ee1aa21f374cb1c30e', '2024-07-24 23:01:13', '2024-07-24 23:01', 270530, 'e7f7c5e87545e89b71ce4ffaa8b120e142d85fdf'),
-(46, '2024-07-19', 'e7946fe992e63ce872bfbbd27c2e5f9c3256c8bf', '2024-07-19 00:00:00', '2024-07-19', 751991, '563519ef9e49f9a97b55dc5ce194111c363bd61c'),
-(47, '2025-07-23', '59310dd13a22b4a500737862b8f0450a8e97a677', '2024-07-23 12:19:05', '2024-07-23 12:19', 598200, '61a94b80c495d773d32dcafc76f8fe58fe4d137b'),
-(48, '2024-07-31', '8569ea86271b18dcb720bc7f649be5fc93598d2a', '2024-07-31 00:00:00', '2024-07-31', 352648, '1af8c889a27ffa96816c4d9873f0252ea9a6587c');
+(33, '2024-09-26', '16ae438c5d535b79226378b53e1cbc5f25ee88c8', '2024-09-26 11:31:49', '2024-09-26 11:31', 340059, '0a069c2273d5803914889092bcf949bc58f34f15');
 
 -- --------------------------------------------------------
 
@@ -221,7 +190,7 @@ INSERT INTO `activation_tb` (`ID`, `NEXT_DATE`, `USED_CODE`, `DATE_CREATED`, `DA
 --
 
 CREATE TABLE `activity_tb` (
-  `ID` int NOT NULL,
+  `ID` int(11) NOT NULL,
   `USERNAME` varchar(200) NOT NULL,
   `PASSWORD` varchar(100) NOT NULL,
   `ACTIVITY` varchar(100) NOT NULL,
@@ -230,9 +199,9 @@ CREATE TABLE `activity_tb` (
   `OS` varchar(200) NOT NULL,
   `DEVICE_TYPE` varchar(200) NOT NULL,
   `RESULT` varchar(50) NOT NULL,
-  `DATE_CREATED` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `CCODE` int NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb3;
+  `DATE_CREATED` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `CCODE` int(11) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
 
 --
 -- Dumping data for table `activity_tb`
@@ -246,12 +215,188 @@ INSERT INTO `activity_tb` (`ID`, `USERNAME`, `PASSWORD`, `ACTIVITY`, `IPADDRESS`
 (5, 'BERLYNDA', 'c67e7cb9079c8a21147e53293f9fa40d043a33ae', 'login', '154.161.12.125', '000, 000', 'LINUX', 'Desktop', 'success', '2024-08-05 17:40:01', 340059),
 (6, 'Linkseng', 'ec44cec0323bdbc41a3b62086a0f0cec591a371b', 'login', '154.161.168.157', '000, 000', 'LINUX', 'Desktop', 'success', '2024-08-05 19:42:03', 340059),
 (7, 'Linkseng', 'ec44cec0323bdbc41a3b62086a0f0cec591a371b', 'login', '154.161.168.157', '000, 000', 'LINUX', 'Desktop', 'success', '2024-08-05 19:42:03', 340059),
-(8, 'BERLYNDA', '962ec64022ac7838e7c01479b93a6bc6d984384a', 'login', '127.0.0.1', '000, 000', 'DARWIN', 'Desktop', 'failed', '2024-08-06 10:16:05', 0),
-(9, 'BERLYNDA', '962ec64022ac7838e7c01479b93a6bc6d984384a', 'login', '127.0.0.1', '000, 000', 'DARWIN', 'Desktop', 'failed', '2024-08-06 10:16:10', 0),
-(10, 'BERLYNDA', '962ec64022ac7838e7c01479b93a6bc6d984384a', 'login', '127.0.0.1', '000, 000', 'DARWIN', 'Desktop', 'failed', '2024-08-06 10:17:13', 0),
-(11, 'Linkseng', 'ec44cec0323bdbc41a3b62086a0f0cec591a371b', 'login', '127.0.0.1', '000, 000', 'DARWIN', 'Desktop', 'success', '2024-08-06 10:17:20', 340059),
-(12, 'BERLYNDA', '962ec64022ac7838e7c01479b93a6bc6d984384a', 'login', '127.0.0.1', '000, 000', 'DARWIN', 'Desktop', 'failed', '2024-08-06 11:10:43', 0),
-(13, 'Linkseng', 'ec44cec0323bdbc41a3b62086a0f0cec591a371b', 'login', '127.0.0.1', '000, 000', 'DARWIN', 'Desktop', 'success', '2024-08-06 11:10:50', 340059);
+(8, 'Linkseng', 'ec44cec0323bdbc41a3b62086a0f0cec591a371b', 'login', '154.161.168.157', '000, 000', 'LINUX', 'Desktop', 'success', '2024-08-05 21:57:51', 340059),
+(9, 'Linkseng', 'ec44cec0323bdbc41a3b62086a0f0cec591a371b', 'login', '154.161.168.157', '000, 000', 'LINUX', 'Desktop', 'success', '2024-08-05 21:59:19', 340059),
+(10, 'BERLYNDA', 'c67e7cb9079c8a21147e53293f9fa40d043a33ae', 'login', '154.161.173.136', '000, 000', 'LINUX', 'Desktop', 'success', '2024-08-06 03:19:30', 340059),
+(11, 'Linkseng', 'ec44cec0323bdbc41a3b62086a0f0cec591a371b', 'login', '154.161.173.214', '000, 000', 'LINUX', 'Desktop', 'success', '2024-08-06 08:40:33', 340059),
+(12, 'BERLYNDA', 'c67e7cb9079c8a21147e53293f9fa40d043a33ae', 'login', '154.161.143.46', '000, 000', 'LINUX', 'Desktop', 'success', '2024-08-06 08:56:18', 340059),
+(13, 'BERLYNDA', 'c67e7cb9079c8a21147e53293f9fa40d043a33ae', 'login', '154.161.143.46', '000, 000', 'LINUX', 'Desktop', 'success', '2024-08-06 09:13:27', 340059),
+(14, 'Linkseng', 'ec44cec0323bdbc41a3b62086a0f0cec591a371b', 'login', '154.161.129.36', '000, 000', 'LINUX', 'Desktop', 'success', '2024-08-06 09:58:23', 340059),
+(15, 'BERLYNDA', 'c67e7cb9079c8a21147e53293f9fa40d043a33ae', 'login', '154.161.143.46', '000, 000', 'LINUX', 'Desktop', 'success', '2024-08-06 10:02:21', 340059),
+(16, 'BERLYNDA', 'c67e7cb9079c8a21147e53293f9fa40d043a33ae', 'login', '154.161.143.46', '000, 000', 'LINUX', 'Desktop', 'success', '2024-08-06 10:07:32', 340059),
+(17, 'Linkseng', 'ec44cec0323bdbc41a3b62086a0f0cec591a371b', 'login', '154.161.175.202', '000, 000', 'LINUX', 'Desktop', 'success', '2024-08-06 10:14:40', 340059),
+(18, 'Linkseng', 'ec44cec0323bdbc41a3b62086a0f0cec591a371b', 'login', '154.161.175.202', '000, 000', 'LINUX', 'Desktop', 'success', '2024-08-06 10:28:42', 340059),
+(19, 'BERLYNDA', 'c67e7cb9079c8a21147e53293f9fa40d043a33ae', 'login', '154.161.173.243', '000, 000', 'LINUX', 'Desktop', 'success', '2024-08-06 10:34:22', 340059),
+(20, 'BERLYNDA', 'c67e7cb9079c8a21147e53293f9fa40d043a33ae', 'login', '154.161.151.99', '000, 000', 'LINUX', 'Desktop', 'success', '2024-08-06 11:22:07', 340059),
+(21, 'Linkseng', 'ec44cec0323bdbc41a3b62086a0f0cec591a371b', 'login', '102.222.172.47', '000, 000', 'LINUX', 'Desktop', 'success', '2024-08-06 11:43:15', 340059),
+(22, 'Linkseng', 'ec44cec0323bdbc41a3b62086a0f0cec591a371b', 'login', '102.222.172.47', '000, 000', 'LINUX', 'Desktop', 'success', '2024-08-06 12:43:01', 340059),
+(23, 'BERLYNDA', 'c67e7cb9079c8a21147e53293f9fa40d043a33ae', 'login', '154.161.151.99', '000, 000', 'LINUX', 'Desktop', 'success', '2024-08-06 13:41:42', 340059),
+(24, 'BERLYNDA', 'c67e7cb9079c8a21147e53293f9fa40d043a33ae', 'login', '154.161.151.99', '000, 000', 'LINUX', 'Desktop', 'success', '2024-08-06 14:39:54', 340059),
+(25, 'BERLYNDA', 'c67e7cb9079c8a21147e53293f9fa40d043a33ae', 'login', '154.161.151.99', '000, 000', 'LINUX', 'Desktop', 'success', '2024-08-06 14:50:56', 340059),
+(26, 'BERLYNDA', 'c67e7cb9079c8a21147e53293f9fa40d043a33ae', 'login', '154.161.151.99', '000, 000', 'LINUX', 'Desktop', 'success', '2024-08-06 15:15:21', 340059),
+(27, 'BERLYNDA', 'c67e7cb9079c8a21147e53293f9fa40d043a33ae', 'login', '154.161.151.99', '000, 000', 'LINUX', 'Desktop', 'success', '2024-08-06 15:25:33', 340059),
+(28, 'BERLYNDA', 'c67e7cb9079c8a21147e53293f9fa40d043a33ae', 'login', '154.161.151.99', '000, 000', 'LINUX', 'Desktop', 'success', '2024-08-06 15:36:40', 340059),
+(29, 'BERLYNDA', 'c67e7cb9079c8a21147e53293f9fa40d043a33ae', 'login', '154.161.151.99', '000, 000', 'LINUX', 'Desktop', 'success', '2024-08-06 16:44:19', 340059),
+(30, 'Linkseng', 'ec44cec0323bdbc41a3b62086a0f0cec591a371b', 'login', '154.161.130.147', '000, 000', 'LINUX', 'Desktop', 'success', '2024-08-06 17:27:10', 340059),
+(31, 'Linkseng', 'ec44cec0323bdbc41a3b62086a0f0cec591a371b', 'login', '154.161.129.36', '000, 000', 'LINUX', 'Mobile', 'success', '2024-08-06 17:31:57', 340059),
+(32, 'Linkseng', 'ec44cec0323bdbc41a3b62086a0f0cec591a371b', 'login', '154.161.129.36', '000, 000', 'LINUX', 'Mobile', 'success', '2024-08-06 18:11:08', 340059),
+(33, 'BERLYNDA', 'c67e7cb9079c8a21147e53293f9fa40d043a33ae', 'login', '154.161.13.50', '000, 000', 'LINUX', 'Desktop', 'success', '2024-08-07 03:36:43', 340059),
+(34, 'BERLYNDA', 'c67e7cb9079c8a21147e53293f9fa40d043a33ae', 'login', '154.161.13.50', '000, 000', 'LINUX', 'Desktop', 'success', '2024-08-07 09:31:35', 340059),
+(35, 'BERLYNDA', 'c67e7cb9079c8a21147e53293f9fa40d043a33ae', 'login', '154.161.13.50', '000, 000', 'LINUX', 'Desktop', 'success', '2024-08-07 13:14:05', 340059),
+(36, 'BERLYNDA', 'c67e7cb9079c8a21147e53293f9fa40d043a33ae', 'login', '154.161.13.50', '000, 000', 'LINUX', 'Desktop', 'success', '2024-08-07 14:36:43', 340059),
+(37, 'BERLYNDA', 'c67e7cb9079c8a21147e53293f9fa40d043a33ae', 'login', '154.161.13.50', '000, 000', 'LINUX', 'Desktop', 'success', '2024-08-07 14:59:13', 340059),
+(38, 'Linkseng', 'ec44cec0323bdbc41a3b62086a0f0cec591a371b', 'login', '154.160.16.107', '000, 000', 'LINUX', 'Desktop', 'success', '2024-08-07 16:21:16', 340059),
+(39, 'BERLYNDA', 'c67e7cb9079c8a21147e53293f9fa40d043a33ae', 'login', '154.161.13.50', '000, 000', 'LINUX', 'Desktop', 'success', '2024-08-07 16:26:56', 340059),
+(40, 'Linkseng', 'ec44cec0323bdbc41a3b62086a0f0cec591a371b', 'login', '154.160.16.107', '000, 000', 'LINUX', 'Desktop', 'success', '2024-08-07 16:28:09', 340059),
+(41, 'BERLYNDA', 'c67e7cb9079c8a21147e53293f9fa40d043a33ae', 'login', '154.161.13.50', '000, 000', 'LINUX', 'Desktop', 'success', '2024-08-07 17:03:11', 340059),
+(42, 'Linkseng', 'ec44cec0323bdbc41a3b62086a0f0cec591a371b', 'login', '154.160.16.107', '000, 000', 'LINUX', 'Desktop', 'success', '2024-08-07 17:15:48', 340059),
+(43, 'Linkseng', 'ec44cec0323bdbc41a3b62086a0f0cec591a371b', 'login', '154.161.180.1', '000, 000', 'LINUX', 'Mobile', 'success', '2024-08-07 17:18:29', 340059),
+(44, 'BERLYNDA', 'c67e7cb9079c8a21147e53293f9fa40d043a33ae', 'login', '154.161.43.70', '000, 000', 'LINUX', 'Desktop', 'success', '2024-08-08 12:26:38', 340059),
+(45, 'Linkseng', 'ec44cec0323bdbc41a3b62086a0f0cec591a371b', 'login', '154.160.26.145', '000, 000', 'LINUX', 'Desktop', 'success', '2024-08-08 12:57:37', 340059),
+(46, 'Linkseng', 'ec44cec0323bdbc41a3b62086a0f0cec591a371b', 'login', '154.160.26.145', '000, 000', 'LINUX', 'Desktop', 'success', '2024-08-08 13:35:53', 340059),
+(47, 'BERLYNDA', 'c67e7cb9079c8a21147e53293f9fa40d043a33ae', 'login', '154.161.43.70', '000, 000', 'LINUX', 'Desktop', 'success', '2024-08-08 13:45:28', 340059),
+(48, 'Linkseng', 'ec44cec0323bdbc41a3b62086a0f0cec591a371b', 'login', '154.160.26.145', '000, 000', 'LINUX', 'Desktop', 'success', '2024-08-08 13:56:32', 340059),
+(49, 'BERLYNDA', 'c67e7cb9079c8a21147e53293f9fa40d043a33ae', 'login', '154.160.10.141', '000, 000', 'LINUX', 'Desktop', 'success', '2024-08-09 11:42:52', 340059),
+(50, 'BERLYNDA', 'c67e7cb9079c8a21147e53293f9fa40d043a33ae', 'login', '154.160.10.141', '000, 000', 'LINUX', 'Desktop', 'success', '2024-08-09 17:12:15', 340059),
+(51, 'BERLYNDA', 'c67e7cb9079c8a21147e53293f9fa40d043a33ae', 'login', '154.161.166.154', '000, 000', 'LINUX', 'Desktop', 'success', '2024-08-12 09:34:11', 340059),
+(52, 'BERLYNDA', 'c67e7cb9079c8a21147e53293f9fa40d043a33ae', 'login', '154.161.166.154', '000, 000', 'LINUX', 'Desktop', 'success', '2024-08-12 09:34:11', 340059),
+(53, 'BERLYNDA', 'c67e7cb9079c8a21147e53293f9fa40d043a33ae', 'login', '154.161.166.154', '000, 000', 'LINUX', 'Desktop', 'success', '2024-08-12 10:38:04', 340059),
+(54, 'BERLYNDA', 'c67e7cb9079c8a21147e53293f9fa40d043a33ae', 'login', '154.161.166.154', '000, 000', 'LINUX', 'Desktop', 'success', '2024-08-12 11:35:49', 340059),
+(55, 'BERLYNDA', 'c67e7cb9079c8a21147e53293f9fa40d043a33ae', 'login', '154.161.166.154', '000, 000', 'LINUX', 'Desktop', 'success', '2024-08-12 13:15:12', 340059),
+(56, 'BERLYNDA', 'c67e7cb9079c8a21147e53293f9fa40d043a33ae', 'login', '154.161.166.154', '000, 000', 'LINUX', 'Desktop', 'success', '2024-08-12 13:40:30', 340059),
+(57, 'BERLYNDA', 'c67e7cb9079c8a21147e53293f9fa40d043a33ae', 'login', '154.161.166.154', '000, 000', 'LINUX', 'Desktop', 'success', '2024-08-12 13:44:06', 340059),
+(58, 'BERLYNDA', 'c67e7cb9079c8a21147e53293f9fa40d043a33ae', 'login', '154.161.166.154', '000, 000', 'LINUX', 'Desktop', 'success', '2024-08-12 13:45:24', 340059),
+(59, 'BERLYNDA', 'c67e7cb9079c8a21147e53293f9fa40d043a33ae', 'login', '154.161.166.154', '000, 000', 'LINUX', 'Desktop', 'success', '2024-08-12 14:01:41', 340059),
+(60, 'BERLYNDA', 'c67e7cb9079c8a21147e53293f9fa40d043a33ae', 'login', '154.161.166.154', '000, 000', 'LINUX', 'Desktop', 'success', '2024-08-12 15:39:51', 340059),
+(61, 'BERLYNDA', 'c67e7cb9079c8a21147e53293f9fa40d043a33ae', 'login', '154.161.164.12', '000, 000', 'LINUX', 'Desktop', 'success', '2024-08-13 10:31:54', 340059),
+(62, 'BERLYNDA', 'c67e7cb9079c8a21147e53293f9fa40d043a33ae', 'login', '154.161.164.12', '000, 000', 'LINUX', 'Desktop', 'success', '2024-08-13 11:41:12', 340059),
+(63, 'BERLYNDA', 'c67e7cb9079c8a21147e53293f9fa40d043a33ae', 'login', '154.161.164.12', '000, 000', 'LINUX', 'Desktop', 'success', '2024-08-13 11:41:12', 340059),
+(64, 'Linkseng', 'ec44cec0323bdbc41a3b62086a0f0cec591a371b', 'login', '154.161.137.9', '000, 000', 'LINUX', 'Desktop', 'success', '2024-08-13 11:50:45', 340059),
+(65, 'BERLYNDA', 'c67e7cb9079c8a21147e53293f9fa40d043a33ae', 'login', '154.161.164.12', '000, 000', 'LINUX', 'Desktop', 'success', '2024-08-13 12:49:13', 340059),
+(66, 'Linkseng', 'ec44cec0323bdbc41a3b62086a0f0cec591a371b', 'login', '154.161.137.9', '000, 000', 'LINUX', 'Desktop', 'success', '2024-08-13 12:49:48', 340059),
+(67, 'Linkseng', 'ec44cec0323bdbc41a3b62086a0f0cec591a371b', 'login', '154.161.137.9', '000, 000', 'LINUX', 'Desktop', 'success', '2024-08-13 12:51:51', 340059),
+(68, 'BERLYNDA', 'c67e7cb9079c8a21147e53293f9fa40d043a33ae', 'login', '154.161.164.12', '000, 000', 'LINUX', 'Desktop', 'success', '2024-08-13 12:57:54', 340059),
+(69, 'BERLYNDA', 'c67e7cb9079c8a21147e53293f9fa40d043a33ae', 'login', '154.161.164.12', '000, 000', 'LINUX', 'Desktop', 'success', '2024-08-13 13:24:39', 340059),
+(70, 'BERLYNDA', 'c67e7cb9079c8a21147e53293f9fa40d043a33ae', 'login', '154.161.58.191', '000, 000', 'LINUX', 'Desktop', 'success', '2024-08-14 10:32:28', 340059),
+(71, 'BERLYNDA', 'c67e7cb9079c8a21147e53293f9fa40d043a33ae', 'login', '154.161.58.191', '000, 000', 'LINUX', 'Desktop', 'success', '2024-08-14 15:34:11', 340059),
+(72, 'BERLYNDA', 'c67e7cb9079c8a21147e53293f9fa40d043a33ae', 'login', '154.161.5.27', '000, 000', 'LINUX', 'Desktop', 'success', '2024-08-15 10:42:28', 340059),
+(73, 'BERLYNDA', 'c67e7cb9079c8a21147e53293f9fa40d043a33ae', 'login', '154.161.5.27', '000, 000', 'LINUX', 'Desktop', 'success', '2024-08-15 13:13:57', 340059),
+(74, 'BERLYNDA', 'c67e7cb9079c8a21147e53293f9fa40d043a33ae', 'login', '154.161.42.117', '000, 000', 'LINUX', 'Desktop', 'success', '2024-08-16 10:14:14', 340059),
+(75, 'BERLYNDA', 'c67e7cb9079c8a21147e53293f9fa40d043a33ae', 'login', '154.161.42.117', '000, 000', 'LINUX', 'Desktop', 'success', '2024-08-16 15:37:36', 340059),
+(76, 'BERLYNDA', 'c67e7cb9079c8a21147e53293f9fa40d043a33ae', 'login', '154.161.42.117', '000, 000', 'LINUX', 'Desktop', 'success', '2024-08-16 15:37:36', 340059),
+(77, 'Linkseng', 'ec44cec0323bdbc41a3b62086a0f0cec591a371b', 'login', '154.161.18.98', '000, 000', 'LINUX', 'Desktop', 'success', '2024-08-16 15:56:26', 340059),
+(78, 'Ldevelop', 'ec44cec0323bdbc41a3b62086a0f0cec591a371b', 'login', '154.161.18.98', '000, 000', 'LINUX', 'Desktop', 'failed', '2024-08-16 15:56:39', 0),
+(79, 'Ldevelop', 'ec44cec0323bdbc41a3b62086a0f0cec591a371b', 'login', '154.161.18.98', '000, 000', 'LINUX', 'Desktop', 'failed', '2024-08-16 15:56:49', 0),
+(80, 'Ldevelop', 'cb4ae4787bfa701a930e5299fda6d89b98948c8f', 'login', '154.161.18.98', '000, 000', 'LINUX', 'Desktop', 'success', '2024-08-16 15:56:54', 516448),
+(81, 'Berlynda', 'ec44cec0323bdbc41a3b62086a0f0cec591a371b', 'login', '154.161.18.98', '000, 000', 'LINUX', 'Desktop', 'failed', '2024-08-16 15:57:19', 0),
+(82, 'Linkseng', 'ec44cec0323bdbc41a3b62086a0f0cec591a371b', 'login', '154.161.18.98', '000, 000', 'LINUX', 'Desktop', 'success', '2024-08-16 15:57:26', 340059),
+(83, 'Linkseng', 'ec44cec0323bdbc41a3b62086a0f0cec591a371b', 'login', '154.161.18.98', '000, 000', 'LINUX', 'Desktop', 'success', '2024-08-16 15:58:42', 340059),
+(84, 'BERLYNDA', 'c67e7cb9079c8a21147e53293f9fa40d043a33ae', 'login', '154.161.42.117', '000, 000', 'LINUX', 'Desktop', 'success', '2024-08-16 16:06:42', 340059),
+(85, 'BERLYNDA', 'c67e7cb9079c8a21147e53293f9fa40d043a33ae', 'login', '154.161.42.117', '000, 000', 'LINUX', 'Desktop', 'success', '2024-08-16 16:08:15', 340059),
+(86, 'Linkseng', 'ec44cec0323bdbc41a3b62086a0f0cec591a371b', 'login', '154.161.18.98', '000, 000', 'LINUX', 'Desktop', 'success', '2024-08-16 16:12:46', 340059),
+(87, 'Linkseng', 'ec44cec0323bdbc41a3b62086a0f0cec591a371b', 'login', '154.161.18.98', '000, 000', 'LINUX', 'Desktop', 'success', '2024-08-16 16:40:29', 340059),
+(88, 'BERLYNDA', 'c67e7cb9079c8a21147e53293f9fa40d043a33ae', 'login', '154.161.26.232', '000, 000', 'LINUX', 'Desktop', 'success', '2024-08-19 10:49:43', 340059),
+(89, 'BERLYNDA', 'c67e7cb9079c8a21147e53293f9fa40d043a33ae', 'login', '154.161.26.232', '000, 000', 'LINUX', 'Desktop', 'success', '2024-08-19 11:15:39', 340059),
+(90, 'BERLYNDA', 'c67e7cb9079c8a21147e53293f9fa40d043a33ae', 'login', '154.161.26.232', '000, 000', 'LINUX', 'Desktop', 'success', '2024-08-19 11:15:39', 340059),
+(91, 'BERLYNDA', 'c67e7cb9079c8a21147e53293f9fa40d043a33ae', 'login', '154.161.26.232', '000, 000', 'LINUX', 'Desktop', 'success', '2024-08-19 17:25:08', 340059),
+(92, 'BERLYNDA', 'c67e7cb9079c8a21147e53293f9fa40d043a33ae', 'login', '154.161.26.232', '000, 000', 'LINUX', 'Desktop', 'success', '2024-08-19 17:25:08', 340059),
+(93, 'BERLYNDA', 'c67e7cb9079c8a21147e53293f9fa40d043a33ae', 'login', '154.161.26.232', '000, 000', 'LINUX', 'Desktop', 'success', '2024-08-19 17:25:08', 340059),
+(94, 'BERLYNDA', 'c67e7cb9079c8a21147e53293f9fa40d043a33ae', 'login', '154.160.4.80', '000, 000', 'LINUX', 'Desktop', 'success', '2024-08-19 17:50:55', 340059),
+(95, 'BERLYNDA', 'c67e7cb9079c8a21147e53293f9fa40d043a33ae', 'login', '154.160.4.80', '000, 000', 'LINUX', 'Desktop', 'success', '2024-08-19 17:52:20', 340059),
+(96, 'BERLYNDA', 'c67e7cb9079c8a21147e53293f9fa40d043a33ae', 'login', '154.160.4.244', '000, 000', 'LINUX', 'Desktop', 'success', '2024-08-20 10:45:33', 340059),
+(97, 'BERLYNDA', 'c67e7cb9079c8a21147e53293f9fa40d043a33ae', 'login', '154.161.57.67', '000, 000', 'LINUX', 'Desktop', 'success', '2024-08-21 13:12:42', 340059),
+(98, 'BERLYNDA', 'c67e7cb9079c8a21147e53293f9fa40d043a33ae', 'login', '154.161.57.67', '000, 000', 'LINUX', 'Desktop', 'success', '2024-08-21 16:19:12', 340059),
+(99, 'BERLYNDA', 'c67e7cb9079c8a21147e53293f9fa40d043a33ae', 'login', '154.161.28.7', '000, 000', 'LINUX', 'Desktop', 'success', '2024-08-22 15:47:28', 340059),
+(100, 'BERLYNDA', 'c67e7cb9079c8a21147e53293f9fa40d043a33ae', 'login', '154.161.28.7', '000, 000', 'LINUX', 'Desktop', 'success', '2024-08-22 16:21:55', 340059),
+(101, 'BERLYNDA', 'c67e7cb9079c8a21147e53293f9fa40d043a33ae', 'login', '154.160.1.76', '000, 000', 'LINUX', 'Desktop', 'success', '2024-08-23 08:50:09', 340059),
+(102, 'BERLYNDA', 'c67e7cb9079c8a21147e53293f9fa40d043a33ae', 'login', '154.160.1.76', '000, 000', 'LINUX', 'Desktop', 'success', '2024-08-23 10:18:59', 340059),
+(103, 'BERLYNDA', 'c67e7cb9079c8a21147e53293f9fa40d043a33ae', 'login', '154.160.1.76', '000, 000', 'LINUX', 'Desktop', 'success', '2024-08-23 13:40:31', 340059),
+(104, 'BERLYNDA', 'c67e7cb9079c8a21147e53293f9fa40d043a33ae', 'login', '154.160.1.76', '000, 000', 'LINUX', 'Desktop', 'success', '2024-08-23 15:30:19', 340059),
+(105, 'BERLYNDA', 'c67e7cb9079c8a21147e53293f9fa40d043a33ae', 'login', '154.161.57.194', '000, 000', 'LINUX', 'Desktop', 'success', '2024-08-26 10:29:10', 340059),
+(106, 'MANAGER ', '5b1fe27fb882bc44ebbd5068ee4a3620a3267fef', 'login', '154.161.59.145', '000, 000', 'LINUX', 'Mobile', 'success', '2024-08-26 11:36:41', 340059),
+(107, 'MANAGER', '5b1fe27fb882bc44ebbd5068ee4a3620a3267fef', 'login', '154.161.59.145', '000, 000', 'LINUX', 'Mobile', 'success', '2024-08-26 11:51:23', 340059),
+(108, 'MANAGER', '5b1fe27fb882bc44ebbd5068ee4a3620a3267fef', 'login', '154.161.59.145', '000, 000', 'LINUX', 'Mobile', 'success', '2024-08-26 11:58:05', 340059),
+(109, 'BERLYNDA', 'c67e7cb9079c8a21147e53293f9fa40d043a33ae', 'login', '154.161.57.194', '000, 000', 'LINUX', 'Desktop', 'success', '2024-08-26 12:03:34', 340059),
+(110, 'MANAGER', '5b1fe27fb882bc44ebbd5068ee4a3620a3267fef', 'login', '154.161.59.145', '000, 000', 'LINUX', 'Mobile', 'success', '2024-08-26 14:43:08', 340059),
+(111, 'BERLYNDA', 'c67e7cb9079c8a21147e53293f9fa40d043a33ae', 'login', '154.161.57.194', '000, 000', 'LINUX', 'Desktop', 'success', '2024-08-26 16:43:26', 340059),
+(112, 'BERLYNDA', 'c67e7cb9079c8a21147e53293f9fa40d043a33ae', 'login', '154.161.57.194', '000, 000', 'LINUX', 'Desktop', 'success', '2024-08-26 16:43:26', 340059),
+(113, 'BERLYNDA', 'c67e7cb9079c8a21147e53293f9fa40d043a33ae', 'login', '154.161.57.194', '000, 000', 'LINUX', 'Desktop', 'success', '2024-08-26 16:43:33', 340059),
+(114, 'BERLYNDA', 'c67e7cb9079c8a21147e53293f9fa40d043a33ae', 'login', '154.161.57.194', '000, 000', 'LINUX', 'Desktop', 'success', '2024-08-26 16:44:30', 340059),
+(115, 'BERLYNDA', 'c67e7cb9079c8a21147e53293f9fa40d043a33ae', 'login', '154.160.1.187', '000, 000', 'LINUX', 'Desktop', 'success', '2024-08-27 10:57:38', 340059),
+(116, 'BERLYNDA', 'c67e7cb9079c8a21147e53293f9fa40d043a33ae', 'login', '154.160.1.187', '000, 000', 'LINUX', 'Desktop', 'success', '2024-08-27 12:39:24', 340059),
+(117, 'BERLYNDA', 'c67e7cb9079c8a21147e53293f9fa40d043a33ae', 'login', '154.160.1.187', '000, 000', 'LINUX', 'Desktop', 'success', '2024-08-27 17:09:32', 340059),
+(118, 'BERLYNDA', 'c67e7cb9079c8a21147e53293f9fa40d043a33ae', 'login', '154.161.25.5', '000, 000', 'LINUX', 'Desktop', 'success', '2024-08-28 08:24:51', 340059),
+(119, 'BERLYNDA', 'c67e7cb9079c8a21147e53293f9fa40d043a33ae', 'login', '154.161.34.33', '000, 000', 'LINUX', 'Desktop', 'success', '2024-08-30 10:17:01', 340059),
+(120, 'BERLYNDA', 'c67e7cb9079c8a21147e53293f9fa40d043a33ae', 'login', '154.161.34.33', '000, 000', 'LINUX', 'Desktop', 'success', '2024-08-30 10:17:01', 340059),
+(121, 'BERLYNDA', 'c67e7cb9079c8a21147e53293f9fa40d043a33ae', 'login', '154.161.34.33', '000, 000', 'LINUX', 'Desktop', 'success', '2024-08-30 11:06:17', 340059),
+(122, 'BERLYNDA', 'c67e7cb9079c8a21147e53293f9fa40d043a33ae', 'login', '154.161.34.33', '000, 000', 'LINUX', 'Desktop', 'success', '2024-08-30 14:59:09', 340059),
+(123, 'BERLYNDA', 'c67e7cb9079c8a21147e53293f9fa40d043a33ae', 'login', '154.161.34.33', '000, 000', 'LINUX', 'Desktop', 'success', '2024-08-30 14:59:09', 340059),
+(124, 'BERLYNDA', 'c67e7cb9079c8a21147e53293f9fa40d043a33ae', 'login', '154.161.34.33', '000, 000', 'LINUX', 'Desktop', 'success', '2024-08-30 17:00:13', 340059),
+(125, 'BERLYNDA', 'c67e7cb9079c8a21147e53293f9fa40d043a33ae', 'login', '154.161.39.15', '000, 000', 'LINUX', 'Desktop', 'success', '2024-09-02 11:00:03', 340059),
+(126, 'BERLYNDA', 'c67e7cb9079c8a21147e53293f9fa40d043a33ae', 'login', '154.161.39.15', '000, 000', 'LINUX', 'Desktop', 'success', '2024-09-02 11:29:07', 340059),
+(127, 'BERLYNDA', 'c67e7cb9079c8a21147e53293f9fa40d043a33ae', 'login', '154.161.39.15', '000, 000', 'LINUX', 'Desktop', 'success', '2024-09-02 12:37:36', 340059),
+(128, 'MANAGER', '5b1fe27fb882bc44ebbd5068ee4a3620a3267fef', 'login', '154.161.1.204', '000, 000', 'LINUX', 'Mobile', 'success', '2024-09-03 15:57:02', 340059),
+(129, 'MANAGER', '5b1fe27fb882bc44ebbd5068ee4a3620a3267fef', 'login', '154.161.1.204', '000, 000', 'LINUX', 'Mobile', 'success', '2024-09-03 15:59:09', 340059),
+(130, 'BERLYNDA', 'c67e7cb9079c8a21147e53293f9fa40d043a33ae', 'login', '154.161.51.22', '000, 000', 'LINUX', 'Desktop', 'success', '2024-09-04 13:31:28', 340059),
+(131, 'BERLYNDA', 'c67e7cb9079c8a21147e53293f9fa40d043a33ae', 'login', '154.161.51.22', '000, 000', 'LINUX', 'Desktop', 'success', '2024-09-04 13:31:30', 340059),
+(132, 'BERLYNDA', 'c67e7cb9079c8a21147e53293f9fa40d043a33ae', 'login', '154.161.51.22', '000, 000', 'LINUX', 'Desktop', 'success', '2024-09-04 13:31:30', 340059),
+(133, 'BERLYNDA', 'c67e7cb9079c8a21147e53293f9fa40d043a33ae', 'login', '154.161.51.22', '000, 000', 'LINUX', 'Desktop', 'success', '2024-09-04 13:31:30', 340059),
+(134, 'BERLYNDA', 'c67e7cb9079c8a21147e53293f9fa40d043a33ae', 'login', '154.161.51.22', '000, 000', 'LINUX', 'Desktop', 'success', '2024-09-04 13:31:30', 340059),
+(135, 'BERLYNDA', 'c67e7cb9079c8a21147e53293f9fa40d043a33ae', 'login', '154.160.1.177', '000, 000', 'LINUX', 'Desktop', 'success', '2024-09-05 15:09:28', 340059),
+(136, 'BERLYNDA', 'c67e7cb9079c8a21147e53293f9fa40d043a33ae', 'login', '154.161.133.1', '000, 000', 'LINUX', 'Desktop', 'success', '2024-09-06 10:03:42', 340059),
+(137, 'BERLYNDA', 'c67e7cb9079c8a21147e53293f9fa40d043a33ae', 'login', '154.161.133.1', '000, 000', 'LINUX', 'Desktop', 'success', '2024-09-06 10:03:44', 340059),
+(138, 'BERLYNDA', 'c67e7cb9079c8a21147e53293f9fa40d043a33ae', 'login', '154.161.133.1', '000, 000', 'LINUX', 'Desktop', 'success', '2024-09-06 10:18:16', 340059),
+(139, 'BERLYNDA', 'c67e7cb9079c8a21147e53293f9fa40d043a33ae', 'login', '154.161.133.1', '000, 000', 'LINUX', 'Desktop', 'success', '2024-09-06 13:52:14', 340059),
+(140, 'BERLYNDA', 'c67e7cb9079c8a21147e53293f9fa40d043a33ae', 'login', '154.161.133.1', '000, 000', 'LINUX', 'Desktop', 'success', '2024-09-06 17:03:48', 340059),
+(141, 'BERLYNDA', 'c67e7cb9079c8a21147e53293f9fa40d043a33ae', 'login', '154.161.155.55', '000, 000', 'LINUX', 'Desktop', 'success', '2024-09-09 10:07:56', 340059),
+(142, 'BERLYNDA', 'c67e7cb9079c8a21147e53293f9fa40d043a33ae', 'login', '154.161.155.55', '000, 000', 'LINUX', 'Desktop', 'success', '2024-09-09 10:34:47', 340059),
+(143, 'BERLYNDA', 'c67e7cb9079c8a21147e53293f9fa40d043a33ae', 'login', '154.161.155.55', '000, 000', 'LINUX', 'Desktop', 'success', '2024-09-09 12:42:48', 340059),
+(144, 'BERLYNDA', 'c67e7cb9079c8a21147e53293f9fa40d043a33ae', 'login', '154.161.155.55', '000, 000', 'LINUX', 'Desktop', 'success', '2024-09-09 16:09:03', 340059),
+(145, 'BERLYNDA', 'c67e7cb9079c8a21147e53293f9fa40d043a33ae', 'login', '154.161.155.55', '000, 000', 'LINUX', 'Desktop', 'success', '2024-09-09 18:22:43', 340059),
+(146, 'BERLYNDA', 'c67e7cb9079c8a21147e53293f9fa40d043a33ae', 'login', '154.161.161.103', '000, 000', 'LINUX', 'Desktop', 'success', '2024-09-10 06:13:27', 340059),
+(147, 'BERLYNDA', 'c67e7cb9079c8a21147e53293f9fa40d043a33ae', 'login', '154.161.161.103', '000, 000', 'LINUX', 'Desktop', 'success', '2024-09-10 06:29:13', 340059),
+(148, 'BERLYNDA', 'c67e7cb9079c8a21147e53293f9fa40d043a33ae', 'login', '154.161.132.120', '000, 000', 'LINUX', 'Desktop', 'success', '2024-09-13 09:26:13', 340059),
+(149, 'BERLYNDA', 'c67e7cb9079c8a21147e53293f9fa40d043a33ae', 'login', '154.161.132.120', '000, 000', 'LINUX', 'Desktop', 'success', '2024-09-13 12:27:13', 340059),
+(150, 'BERLYNDA', 'c67e7cb9079c8a21147e53293f9fa40d043a33ae', 'login', '154.161.132.120', '000, 000', 'LINUX', 'Desktop', 'success', '2024-09-13 14:54:06', 340059),
+(151, 'BERLYNDA', 'c67e7cb9079c8a21147e53293f9fa40d043a33ae', 'login', '154.161.132.120', '000, 000', 'LINUX', 'Desktop', 'success', '2024-09-13 15:49:22', 340059),
+(152, 'BERLYNDA', 'c67e7cb9079c8a21147e53293f9fa40d043a33ae', 'login', '154.161.132.120', '000, 000', 'LINUX', 'Desktop', 'success', '2024-09-13 17:04:35', 340059),
+(153, 'BERLYNDA', 'c67e7cb9079c8a21147e53293f9fa40d043a33ae', 'login', '154.161.155.205', '000, 000', 'LINUX', 'Desktop', 'success', '2024-09-16 12:06:07', 340059),
+(154, 'BERLYNDA', 'c67e7cb9079c8a21147e53293f9fa40d043a33ae', 'login', '154.161.155.205', '000, 000', 'LINUX', 'Desktop', 'success', '2024-09-16 17:44:34', 340059),
+(155, 'BERLYNDA', 'c67e7cb9079c8a21147e53293f9fa40d043a33ae', 'login', '154.161.145.28', '000, 000', 'LINUX', 'Desktop', 'success', '2024-09-17 17:19:49', 340059),
+(156, 'BERLYNDA', 'c67e7cb9079c8a21147e53293f9fa40d043a33ae', 'login', '154.161.147.131', '000, 000', 'LINUX', 'Desktop', 'success', '2024-09-19 15:07:25', 340059),
+(157, 'BERLYNDA', 'c67e7cb9079c8a21147e53293f9fa40d043a33ae', 'login', '154.161.131.180', '000, 000', 'LINUX', 'Desktop', 'success', '2024-09-20 08:25:40', 340059),
+(158, 'BERLYNDA', 'c67e7cb9079c8a21147e53293f9fa40d043a33ae', 'login', '154.161.131.180', '000, 000', 'LINUX', 'Desktop', 'success', '2024-09-20 11:05:49', 340059),
+(159, 'BERLYNDA', 'c67e7cb9079c8a21147e53293f9fa40d043a33ae', 'login', '154.161.146.49', '000, 000', 'LINUX', 'Desktop', 'success', '2024-09-20 16:07:48', 340059),
+(160, 'BERLYNDA', 'c67e7cb9079c8a21147e53293f9fa40d043a33ae', 'login', '154.161.146.49', '000, 000', 'LINUX', 'Desktop', 'success', '2024-09-20 16:31:10', 340059),
+(161, 'MANAGER', '5b1fe27fb882bc44ebbd5068ee4a3620a3267fef', 'login', '154.161.163.78', '000, 000', 'LINUX', 'Mobile', 'success', '2024-09-21 17:14:59', 340059),
+(162, 'MANAGER', '5b1fe27fb882bc44ebbd5068ee4a3620a3267fef', 'login', '154.161.163.78', '000, 000', 'LINUX', 'Mobile', 'success', '2024-09-21 17:15:21', 340059),
+(163, 'MANAGER', '5b1fe27fb882bc44ebbd5068ee4a3620a3267fef', 'login', '154.161.163.78', '000, 000', 'LINUX', 'Mobile', 'success', '2024-09-21 17:19:13', 340059),
+(164, 'MANAGER', '5b1fe27fb882bc44ebbd5068ee4a3620a3267fef', 'login', '154.161.163.78', '000, 000', 'LINUX', 'Mobile', 'success', '2024-09-21 17:24:55', 340059),
+(165, 'BERLYNDA', 'c67e7cb9079c8a21147e53293f9fa40d043a33ae', 'login', '154.161.18.174', '000, 000', 'LINUX', 'Desktop', 'success', '2024-09-24 09:35:22', 340059),
+(166, 'BERLYNDA', 'c67e7cb9079c8a21147e53293f9fa40d043a33ae', 'login', '154.161.172.11', '000, 000', 'LINUX', 'Desktop', 'success', '2024-09-25 11:32:42', 340059),
+(167, 'BERLYNDA', 'c67e7cb9079c8a21147e53293f9fa40d043a33ae', 'login', '154.161.172.11', '000, 000', 'LINUX', 'Desktop', 'success', '2024-09-25 13:06:11', 340059),
+(168, 'BERLYNDA', 'c67e7cb9079c8a21147e53293f9fa40d043a33ae', 'login', '154.161.172.11', '000, 000', 'LINUX', 'Desktop', 'success', '2024-09-25 14:26:39', 340059),
+(169, 'BERLYNDA', 'c67e7cb9079c8a21147e53293f9fa40d043a33ae', 'login', '154.161.172.11', '000, 000', 'LINUX', 'Desktop', 'success', '2024-09-25 14:30:45', 340059),
+(173, 'BERLYNDA', 'c67e7cb9079c8a21147e53293f9fa40d043a33ae', 'login', '154.161.164.23', '000, 000', 'LINUX', 'Desktop', 'success', '2024-09-27 09:18:37', 340059),
+(174, 'BERLYNDA', 'c67e7cb9079c8a21147e53293f9fa40d043a33ae', 'login', '154.161.164.23', '000, 000', 'LINUX', 'Desktop', 'success', '2024-09-27 09:18:37', 340059),
+(175, 'BERLYNDA', 'c67e7cb9079c8a21147e53293f9fa40d043a33ae', 'login', '154.161.164.23', '000, 000', 'LINUX', 'Desktop', 'success', '2024-09-27 16:17:55', 340059),
+(176, 'BERLYNDA', 'c67e7cb9079c8a21147e53293f9fa40d043a33ae', 'login', '154.161.164.23', '000, 000', 'LINUX', 'Desktop', 'success', '2024-09-27 17:02:35', 340059),
+(177, 'BERLYNDA', 'c67e7cb9079c8a21147e53293f9fa40d043a33ae', 'login', '154.161.164.23', '000, 000', 'LINUX', 'Desktop', 'success', '2024-09-27 17:28:20', 340059),
+(178, 'BERLYNDA', 'c67e7cb9079c8a21147e53293f9fa40d043a33ae', 'login', '154.161.160.91', '000, 000', 'LINUX', 'Desktop', 'success', '2024-09-30 12:15:13', 340059),
+(179, 'BERLYNDA', 'c67e7cb9079c8a21147e53293f9fa40d043a33ae', 'login', '154.161.179.62', '000, 000', 'LINUX', 'Desktop', 'success', '2024-10-03 11:41:28', 340059),
+(180, 'BERLYNDA', 'c67e7cb9079c8a21147e53293f9fa40d043a33ae', 'login', '154.161.185.202', '000, 000', 'LINUX', 'Desktop', 'success', '2024-10-04 09:53:51', 340059),
+(181, 'BERLYNDA', 'c67e7cb9079c8a21147e53293f9fa40d043a33ae', 'login', '154.161.185.202', '000, 000', 'LINUX', 'Desktop', 'success', '2024-10-04 10:40:32', 340059),
+(182, 'BERLYNDA', 'c67e7cb9079c8a21147e53293f9fa40d043a33ae', 'login', '154.161.185.202', '000, 000', 'LINUX', 'Desktop', 'success', '2024-10-04 13:00:57', 340059),
+(183, 'BERLYNDA', 'c67e7cb9079c8a21147e53293f9fa40d043a33ae', 'login', '154.161.185.202', '000, 000', 'LINUX', 'Desktop', 'success', '2024-10-04 16:21:21', 340059),
+(184, 'BERLYNDA', 'c67e7cb9079c8a21147e53293f9fa40d043a33ae', 'login', '154.161.185.202', '000, 000', 'LINUX', 'Desktop', 'success', '2024-10-04 17:46:09', 340059),
+(185, 'BERLYNDA', 'c67e7cb9079c8a21147e53293f9fa40d043a33ae', 'login', '154.161.143.249', '000, 000', 'LINUX', 'Desktop', 'success', '2024-10-07 11:22:50', 340059),
+(186, 'BERLYNDA', 'c67e7cb9079c8a21147e53293f9fa40d043a33ae', 'login', '154.161.143.249', '000, 000', 'LINUX', 'Desktop', 'success', '2024-10-07 11:22:50', 340059),
+(187, 'BERLYNDA', 'c67e7cb9079c8a21147e53293f9fa40d043a33ae', 'login', '154.161.143.249', '000, 000', 'LINUX', 'Desktop', 'success', '2024-10-07 16:19:52', 340059),
+(188, 'BERLYNDA', 'c67e7cb9079c8a21147e53293f9fa40d043a33ae', 'login', '154.161.128.108', '000, 000', 'LINUX', 'Desktop', 'success', '2024-10-08 13:01:56', 340059),
+(189, 'BERLYNDA', 'c67e7cb9079c8a21147e53293f9fa40d043a33ae', 'login', '154.161.128.108', '000, 000', 'LINUX', 'Desktop', 'success', '2024-10-08 14:52:02', 340059),
+(190, 'BERLYNDA', 'c67e7cb9079c8a21147e53293f9fa40d043a33ae', 'login', '154.161.136.16', '000, 000', 'LINUX', 'Desktop', 'success', '2024-10-08 15:33:49', 340059),
+(191, 'BERLYNDA', 'c67e7cb9079c8a21147e53293f9fa40d043a33ae', 'login', '154.161.136.16', '000, 000', 'LINUX', 'Desktop', 'success', '2024-10-08 16:59:07', 340059),
+(192, 'BERLYNDA', 'c67e7cb9079c8a21147e53293f9fa40d043a33ae', 'login', '154.161.173.97', '000, 000', 'LINUX', 'Desktop', 'success', '2024-10-11 10:35:43', 340059);
 
 -- --------------------------------------------------------
 
@@ -260,9 +405,9 @@ INSERT INTO `activity_tb` (`ID`, `USERNAME`, `PASSWORD`, `ACTIVITY`, `IPADDRESS`
 --
 
 CREATE TABLE `admin_tb` (
-  `ID` int NOT NULL,
-  `UID` int DEFAULT NULL,
-  `CODE` int NOT NULL,
+  `ID` int(11) NOT NULL,
+  `UID` int(11) DEFAULT NULL,
+  `CODE` int(11) NOT NULL,
   `USERNAME` varchar(200) NOT NULL,
   `PASSWORD` varchar(200) NOT NULL,
   `SURNAME` varchar(200) NOT NULL,
@@ -270,13 +415,13 @@ CREATE TABLE `admin_tb` (
   `CONTACT` varchar(255) NOT NULL,
   `COMPANY` varchar(200) DEFAULT NULL,
   `TYPE` varchar(200) DEFAULT NULL,
-  `USER_ROLE` int DEFAULT NULL,
+  `USER_ROLE` int(11) DEFAULT NULL,
   `STATUS_ID` varchar(10) DEFAULT NULL,
   `DATE_CREATED` varchar(50) NOT NULL DEFAULT 'CURRENT_TIMESTAMP',
   `DATE_MODIFIED` varchar(100) DEFAULT NULL,
-  `CCODE` int NOT NULL,
+  `CCODE` int(11) NOT NULL,
   `HCODE` longtext NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
 
 --
 -- Dumping data for table `admin_tb`
@@ -335,7 +480,7 @@ INSERT INTO `admin_tb` (`ID`, `UID`, `CODE`, `USERNAME`, `PASSWORD`, `SURNAME`, 
 (52, NULL, 368006, 'Admin', '17ded57f40e2b178981819aa0458e47b20bff469', 'Maxwell', 'Joe', '0247058668', NULL, '', 1, '1', '2022-09-13', '2022-09-13', 392986, '07f8ccebbf8de87aa6aa5c65c88ed78193bb6b33'),
 (53, NULL, 371706, 'Admin', '47c941e19424034d11f09d65deb26b05bd5276a9', 'Joe', 'Links', '0247058668', NULL, '', 1, '1', '2022-09-13', '2022-09-13', 137093, '2d66c1c9d148ac908a21637575e5149727187392'),
 (54, NULL, 884193, 'Admin', 'adb027c6c36a7954d8ef4a8ed10e62a12bb8fa3c', 'Joe', 'Maxwell', '0247058668', NULL, '', 1, '1', '2022-09-13', '2022-09-13', 764459, '8ee79b49b4c0713d1b456f86ec17f335f199fa39'),
-(55, NULL, 654346, 'Admin', '29dd6ab1d92f5540d0ea3920eebcd9581cd5d373', 'Otabil', 'Bievenim', '0243803348', NULL, '', 1, '1', '2022-09-13', '2022-09-13', 381272, 'bcf2d39455208ac08ecd24b2ee0358558f7ff52a'),
+(55, NULL, 654346, 'Admin', 'ec44cec0323bdbc41a3b62086a0f0cec591a371b', 'Otabil', 'Bievenim', '0243803348', NULL, '', 1, '1', '2022-09-13', '2022-09-13', 381272, 'bcf2d39455208ac08ecd24b2ee0358558f7ff52a'),
 (57, NULL, 906315, 'Admin', '30d26d133cc67edd3892a7aac4f99737d9e718cd', 'Nyarko', 'Joseph', '0247058668', NULL, '', 1, '1', '2022-09-16', '2022-09-16', 474308, '3b77214759bf8a0c64fd6ef8050c70e4e14ef35e'),
 (58, NULL, 945088, 'Admin', 'c42c83dd699525d6748f1df174d64d7f4a3450e1', 'Kofi', 'Andrew', '0201772311', NULL, '', 1, '1', '2022-09-21', '2022-09-21', 994529, '1d8a145aa9021198b51cdabf80e417e3bb945d4d'),
 (59, NULL, 264620, 'Admin', '40b935253e444150bcf80a2a01a6df5e7dc634b3', 'Romeo', 'Richard', '0559104640', NULL, '', 1, '1', '2022-10-11', '2022-10-11', 200776, '53657c8fe68c9b39f433aa650e4b768537a7c835'),
@@ -378,20 +523,35 @@ INSERT INTO `admin_tb` (`ID`, `UID`, `CODE`, `USERNAME`, `PASSWORD`, `SURNAME`, 
 --
 
 CREATE TABLE `balance_tb` (
-  `ID` bigint NOT NULL,
-  `CLIENT_ID` bigint DEFAULT NULL,
-  `PRODUCT_ID` bigint DEFAULT NULL,
+  `ID` bigint(11) NOT NULL,
+  `CLIENT_ID` bigint(11) DEFAULT NULL,
+  `PRODUCT_ID` bigint(11) DEFAULT NULL,
   `ACCOUNT_NUMBER` varchar(200) DEFAULT NULL,
   `FEES` double DEFAULT NULL,
   `DEPOSITS` double DEFAULT NULL,
   `INTERESTS` double DEFAULT NULL,
   `WITHDRAWALS` double DEFAULT NULL,
   `BALANCE` double DEFAULT NULL,
-  `DATE_CREATED` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `DATE_CREATED` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `DATE_MODIFIED` varchar(50) DEFAULT NULL,
-  `CCODE` int DEFAULT NULL,
-  `HCODE` longtext
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+  `CCODE` int(11) DEFAULT NULL,
+  `HCODE` longtext DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+--
+-- Dumping data for table `balance_tb`
+--
+
+INSERT INTO `balance_tb` (`ID`, `CLIENT_ID`, `PRODUCT_ID`, `ACCOUNT_NUMBER`, `FEES`, `DEPOSITS`, `INTERESTS`, `WITHDRAWALS`, `BALANCE`, `DATE_CREATED`, `DATE_MODIFIED`, `CCODE`, `HCODE`) VALUES
+(1, 165980726, 247344, 'GRE 0000000024', 20, 2020, 0, 0, 2000, '2024-10-11 10:53:39', '2024-10-11 10:53:39', 340059, '2aff207b6fe9d5695218d0cd93132ad9992f711a'),
+(2, 964216306, 247344, 'GRE 0000000025', 20, 3120, 0, 3050, 50, '2024-08-06 12:16:06', '2024-08-06 12:16:06', 340059, 'da60659b141a9cb6b4dc674aa69c491ada6c6006'),
+(3, 558365177, 247344, 'GRE 0000000026', 20, 420, 0, 260, 140, '2024-08-06 12:27:03', '2024-08-06 12:27:03', 340059, 'c028793f1a98c4099acc95e362ee027060defa7b'),
+(4, 417764857, 247344, 'GRE 0000000027', 20, 490, 0, 0, 470, '2024-08-06 12:41:12', '2024-08-06 12:41:12', 340059, '16e1cb67a6c21686c1b45d7d7f9ab90ae0411ca2'),
+(5, 502344178, 247344, 'GRE 0000000028', 20, 800, 0, 730, 50, '2024-08-06 13:04:03', '2024-08-06 13:04:03', 340059, 'abc5ef1998500c9136c90623cb31806bc7fb3f35'),
+(6, 118760168, 247344, 'GRE 0000000029', 20, 2770, 0, 2700, 50, '2024-08-06 13:28:21', '2024-08-06 13:28:21', 340059, '42a53d567d3b39c37423d78ec0d001c1f69bd445'),
+(7, 829181896, 247344, 'GRE 0000000030', 20, 2270, 0, 2150, 100, '2024-09-09 10:10:00', '2024-09-09 10:10:00', 340059, 'a4e465abc48bdf335d549507ed22a512ba134e4c'),
+(8, 576165856, 247344, 'GRE 0000000031', 20, 6530, 0, 4180, 2330, '2024-09-27 16:18:46', '2024-09-27 16:18:46', 340059, '9490236425e78a48a598b1d555a5b07ab0b666ba'),
+(9, 326252747, 247344, 'GRE 0000000032', 20, 9370, 0, 9270, 80, '2024-10-11 10:52:07', '2024-10-11 10:52:07', 340059, 'f20295e32eb3a9ecf6860756178fda772c21d6fe');
 
 -- --------------------------------------------------------
 
@@ -400,18 +560,104 @@ CREATE TABLE `balance_tb` (
 --
 
 CREATE TABLE `charge_tb` (
-  `ID` bigint NOT NULL,
-  `CLIENT_ID` bigint DEFAULT NULL,
+  `ID` bigint(11) NOT NULL,
+  `CLIENT_ID` bigint(11) DEFAULT NULL,
   `ACCOUNT_NUMBER` varchar(200) DEFAULT NULL,
-  `WITHDRAWAL_ID` int DEFAULT NULL,
+  `WITHDRAWAL_ID` int(11) DEFAULT NULL,
   `FEE_TYPE` varchar(200) DEFAULT NULL,
   `AMOUNT` double DEFAULT NULL,
   `DATE_CREATED` varchar(100) DEFAULT NULL,
   `DATE_MODIFIED` varchar(100) DEFAULT NULL,
   `DATE_NORMAL` varchar(200) DEFAULT NULL,
-  `CCODE` int DEFAULT NULL,
-  `HCODE` longtext
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+  `CCODE` int(11) DEFAULT NULL,
+  `HCODE` longtext DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+--
+-- Dumping data for table `charge_tb`
+--
+
+INSERT INTO `charge_tb` (`ID`, `CLIENT_ID`, `ACCOUNT_NUMBER`, `WITHDRAWAL_ID`, `FEE_TYPE`, `AMOUNT`, `DATE_CREATED`, `DATE_MODIFIED`, `DATE_NORMAL`, `CCODE`, `HCODE`) VALUES
+(1, 165980726, 'GRE 0000000024', NULL, 'ENTRY FEE', 20, '2024-08-06 11:31:06am', '2024-08-06 11:31:06', '2024-08-06 11:31:06', 340059, '05ad2ee339cf327df75aa7be16140849cab2e649'),
+(2, 964216306, 'GRE 0000000025', NULL, 'ENTRY FEE', 20, '2024-08-06 12:04:48pm', '2024-08-06 12:04:48', '2024-08-06 12:04:48', 340059, 'd34d3fdac01af035f62ec204350c6cb4094c8eb2'),
+(3, 964216306, 'GRE 0000000025', 1, 'WITHDRAWAL FEE', 0, '2022-12-22 12:15:31pm', NULL, '2022-12-22', 340059, 'adc1acb16a6f92526dd31833730d5ba58f0c7251'),
+(4, 964216306, 'GRE 0000000025', 2, 'WITHDRAWAL FEE', 0, '2023-01-10 12:16:06pm', NULL, '2023-01-10', 340059, 'db089d314bc713c940f18227c32ab8edc26a0d05'),
+(5, 558365177, 'GRE 0000000026', NULL, 'ENTRY FEE', 20, '2024-08-06 12:23:47pm', '2024-08-06 12:23:47', '2024-08-06 12:23:47', 340059, '36fe555fa0fcc8ae7812f67f4c142f659295a665'),
+(6, 558365177, 'GRE 0000000026', 3, 'WITHDRAWAL FEE', 0, '2022-12-22 12:27:03pm', NULL, '2022-12-22', 340059, 'f2245d74b60378cae0b4dc4f34eea5bc2ead6022'),
+(7, 417764857, 'GRE 0000000027', NULL, 'ENTRY FEE', 20, '2024-08-06 12:37:18pm', '2024-08-06 12:37:18', '2024-08-06 12:37:18', 340059, 'fd2120e43518fcf49172485498bb81a20aa93b49'),
+(8, 502344178, 'GRE 0000000028', NULL, 'ENTRY FEE', 20, '2024-08-06 12:56:54pm', '2024-08-06 12:56:54', '2024-08-06 12:56:54', 340059, '1cbbea89dc04232ea8e09dee8a1dc7c31e3103c1'),
+(9, 502344178, 'GRE 0000000028', 4, 'WITHDRAWAL FEE', 0, '2022-08-02 01:00:20pm', NULL, '2022-08-02', 340059, 'c2cf63cfe26e5b2f25b3835a0086703530b76f0c'),
+(10, 502344178, 'GRE 0000000028', 5, 'WITHDRAWAL FEE', 0, '2022-09-21 01:01:26pm', NULL, '2022-09-21', 340059, '3a1e02a6ff6be7b0f4e233d24165f7f5e5d6746b'),
+(11, 502344178, 'GRE 0000000028', 6, 'WITHDRAWAL FEE', 0, '2022-09-22 01:01:50pm', NULL, '2022-09-22', 340059, '37d916f93b9f742d382c8e24cf5f001e2ae68b5b'),
+(12, 502344178, 'GRE 0000000028', 7, 'WITHDRAWAL FEE', 0, '2022-10-18 01:02:06pm', NULL, '2022-10-18', 340059, '742c18c15fecd6a888d3a8e1e9c64b40b3ba3ca6'),
+(13, 502344178, 'GRE 0000000028', 8, 'WITHDRAWAL FEE', 0, '2022-12-09 01:02:36pm', NULL, '2022-12-09', 340059, '8c73db12b2927d78b423fb49aa246817e16f0e29'),
+(14, 502344178, 'GRE 0000000028', 9, 'WITHDRAWAL FEE', 0, '2023-02-15 01:04:03pm', NULL, '2023-02-15', 340059, 'e18a674f2a5f46a6a30b7ec701720a7fad2dd948'),
+(15, 118760168, 'GRE 0000000029', NULL, 'ENTRY FEE', 20, '2024-08-06 01:11:49pm', '2024-08-06 13:11:49', '2024-08-06 13:11:49', 340059, 'a423d93a9d4199467b60654c9d9fd9ea88fe3d29'),
+(16, 118760168, 'GRE 0000000029', 10, 'WITHDRAWAL FEE', 0, '2022-11-11 01:18:11pm', NULL, '2022-11-11', 340059, '1a1dc74f1a44ade408b308567151a077965b910d'),
+(17, 118760168, 'GRE 0000000029', 11, 'WITHDRAWAL FEE', 0, '2022-12-23 01:22:57pm', NULL, '2022-12-23', 340059, '74c09b21041782d0d7a4470b53116bbedc1a3239'),
+(18, 118760168, 'GRE 0000000029', 12, 'WITHDRAWAL FEE', 0, '2023-06-02 01:28:21pm', NULL, '2023-06-02', 340059, 'b948f2b32f07af7b256e597b8ff352b8d48e2820'),
+(19, 829181896, 'GRE 0000000030', NULL, 'ENTRY FEE', 20, '2024-08-06 05:42:48pm', '2024-08-06 17:42:48', '2024-08-06 17:42:48', 340059, 'c37a14c7dbced0a98fd5f08d32c12f8ce33b06f1'),
+(20, 829181896, 'GRE 0000000030', 13, 'WITHDRAWAL FEE', 0, '2024-06-18 05:47:09pm', NULL, '2024-06-18', 340059, '219864e37e545f896fb8b63ae7474c05d6383f27'),
+(21, 829181896, 'GRE 0000000030', 14, 'WITHDRAWAL FEE', 0, '2024-06-19 05:47:36pm', NULL, '2024-06-19', 340059, 'e012a59d6f9e2aeb7185afbbdc5abb5b2961a6eb'),
+(22, 829181896, 'GRE 0000000030', 15, 'WITHDRAWAL FEE', 0, '2024-08-01 05:48:08pm', NULL, '2024-08-01', 340059, 'bd23aa20bbe1892102f50d5e1fd209bf144ba64d'),
+(23, 576165856, 'GRE 0000000031', NULL, 'ENTRY FEE', 20, '2024-08-07 03:06:23pm', '2024-08-07 15:06:23', '2024-08-07 15:06:23', 340059, '7b8c26c61688c57f1d99cf520712bda3efb3e3f8'),
+(24, 576165856, 'GRE 0000000031', 16, 'WITHDRAWAL FEE', 0, '2023-07-20 03:07:24pm', NULL, '2023-07-20', 340059, 'c017981b00e483a93a46dd215ac50450835e7273'),
+(25, 576165856, 'GRE 0000000031', 17, 'WITHDRAWAL FEE', 0, '2023-07-24 03:07:39pm', NULL, '2023-07-24', 340059, '13ec6971f4a11c21c1f41a81e50ab756efa7c7be'),
+(26, 576165856, 'GRE 0000000031', 18, 'WITHDRAWAL FEE', 0, '2023-08-01 03:07:58pm', NULL, '2023-08-01', 340059, 'dacef367f8ce18d063e4d3f5b587fbbb87e64f9e'),
+(27, 576165856, 'GRE 0000000031', 19, 'WITHDRAWAL FEE', 0, '2023-09-11 03:08:19pm', NULL, '2023-09-11', 340059, '131984f217410760da3d9caa8158407806968117'),
+(28, 576165856, 'GRE 0000000031', 20, 'WITHDRAWAL FEE', 0, '2023-11-15 03:10:34pm', NULL, '2023-11-15', 340059, 'ac07c2734c61edde0541c94fd1cbdc81f7d7c1df'),
+(29, 576165856, 'GRE 0000000031', 21, 'WITHDRAWAL FEE', 0, '2023-11-29 03:11:22pm', NULL, '2023-11-29', 340059, 'b44a7dc05a4f44d7632f83e096c3d86d87fc459e'),
+(30, 576165856, 'GRE 0000000031', 22, 'WITHDRAWAL FEE', 0, '2023-12-05 03:11:48pm', NULL, '2023-12-05', 340059, 'a2407adc52a8ae1f1a1453f720ef2228cabb082d'),
+(31, 576165856, 'GRE 0000000031', 23, 'WITHDRAWAL FEE', 0, '2023-12-14 03:12:08pm', NULL, '2023-12-14', 340059, '68785a4718d34379520bd6470293866d850ff5e1'),
+(32, 576165856, 'GRE 0000000031', 24, 'WITHDRAWAL FEE', 0, '2024-03-12 03:12:34pm', NULL, '2024-03-12', 340059, '2947d09e423159e44eb818091f558c594784e593'),
+(33, 576165856, 'GRE 0000000031', 25, 'WITHDRAWAL FEE', 0, '2024-03-16 03:13:06pm', NULL, '2024-03-16', 340059, '4ecd365daeef725af29042dff5f7c1be9b16b119'),
+(34, 576165856, 'GRE 0000000031', 26, 'WITHDRAWAL FEE', 0, '2024-05-14 03:14:02pm', NULL, '2024-05-14', 340059, '1e129c677f5ac4cc173d919c043b95c30e6d0b7c'),
+(35, 576165856, 'GRE 0000000031', 27, 'WITHDRAWAL FEE', 0, '2024-06-03 03:14:31pm', NULL, '2024-06-03', 340059, 'e9cc90526966707a23ec3df2aad7dadc864e4571'),
+(36, 576165856, 'GRE 0000000031', 28, 'WITHDRAWAL FEE', 0, '2024-06-03 03:15:15pm', NULL, '2024-06-03', 340059, 'e15622f19ef23f4303f58f0880c8977ca1303892'),
+(37, 326252747, 'GRE 0000000032', NULL, 'ENTRY FEE', 20, '2024-08-07 03:55:38pm', '2024-08-07 15:55:38', '2024-08-07 15:55:38', 340059, 'c25836b20cb85400942462e0389b2bd8bfd01c43'),
+(38, 326252747, 'GRE 0000000032', 29, 'WITHDRAWAL FEE', 0, '2022-07-22 03:58:24pm', NULL, '2022-07-22', 340059, '2e49d36d2ff3ca2c8781284c9f88b8c93e267026'),
+(39, 326252747, 'GRE 0000000032', 30, 'WITHDRAWAL FEE', 0, '2022-07-25 03:58:46pm', NULL, '2022-07-25', 340059, '8da6cde6dfdcd93e41ea38c7416b3e28b4be8e62'),
+(40, 326252747, 'GRE 0000000032', 31, 'WITHDRAWAL FEE', 0, '2022-08-17 03:59:32pm', NULL, '2022-08-17', 340059, '5517f74a47488bded3fb03c3d49b6f7e1995aecd'),
+(41, 326252747, 'GRE 0000000032', 32, 'WITHDRAWAL FEE', 0, '2022-09-21 04:00:40pm', NULL, '2022-09-21', 340059, '5ab07ca5d33daa28b78237b0a9fff5107c504e3e'),
+(42, 326252747, 'GRE 0000000032', 33, 'WITHDRAWAL FEE', 0, '2022-10-12 04:01:47pm', NULL, '2022-10-12', 340059, '8e5c1d84fde4d20b39b2f6866bac0179e385a7c5'),
+(43, 326252747, 'GRE 0000000032', 34, 'WITHDRAWAL FEE', 0, '2022-10-19 04:02:47pm', NULL, '2022-10-19', 340059, 'c1e35c06eca116721e58e6dd1cc6a8c487ef11d4'),
+(44, 326252747, 'GRE 0000000032', 35, 'WITHDRAWAL FEE', 0, '2022-10-24 04:03:23pm', NULL, '2022-10-24', 340059, 'd07f11e33b36d651dea42c18a4af6dc08c3ff9a6'),
+(45, 326252747, 'GRE 0000000032', 36, 'WITHDRAWAL FEE', 0, '2022-10-28 04:04:31pm', NULL, '2022-10-28', 340059, '6a48c156ea44373ac5c45afb8534ca25756ce05b'),
+(46, 326252747, 'GRE 0000000032', 37, 'WITHDRAWAL FEE', 0, '2022-11-12 04:07:41pm', NULL, '2022-11-12', 340059, '5134a32afeef4cd27b550d593a5d4cc65ebd86f9'),
+(47, 326252747, 'GRE 0000000032', 38, 'WITHDRAWAL FEE', 0, '2022-11-19 04:08:15pm', NULL, '2022-11-19', 340059, '4282eb724f90d48e462d26e5cf9fea51779daeb6'),
+(48, 326252747, 'GRE 0000000032', 39, 'WITHDRAWAL FEE', 0, '2022-12-01 04:08:33pm', NULL, '2022-12-01', 340059, 'bd0da3d1d4c5bc90eb53bd89a5690cbea7156e7d'),
+(49, 326252747, 'GRE 0000000032', 40, 'WITHDRAWAL FEE', 0, '2022-12-08 04:08:50pm', NULL, '2022-12-08', 340059, '0c1c7dc7aba5d179b4a8283128fa1d23242408e4'),
+(50, 326252747, 'GRE 0000000032', 41, 'WITHDRAWAL FEE', 0, '2022-12-17 04:09:13pm', NULL, '2022-12-17', 340059, '366d4b5502009183cef75afddc06a4f8a6827740'),
+(51, 326252747, 'GRE 0000000032', 42, 'WITHDRAWAL FEE', 0, '2023-01-13 04:10:02pm', NULL, '2023-01-13', 340059, 'de50811bea44854229e380abaf4af5f364b2013d'),
+(52, 326252747, 'GRE 0000000032', 43, 'WITHDRAWAL FEE', 0, '2023-01-14 04:10:15pm', NULL, '2023-01-14', 340059, '04b9b17139b80431e252a0c4b8eb892d4e751872'),
+(53, 326252747, 'GRE 0000000032', 44, 'WITHDRAWAL FEE', 0, '2023-01-26 04:10:31pm', NULL, '2023-01-26', 340059, 'daeed3465a1d01fbf3f46830dc3c04b226171496'),
+(54, 326252747, 'GRE 0000000032', 45, 'WITHDRAWAL FEE', 0, '2023-04-11 04:11:23pm', NULL, '2023-04-11', 340059, 'fcdc20b0df2b3937625650a52a2b9f65a55aa8ea'),
+(55, 326252747, 'GRE 0000000032', 46, 'WITHDRAWAL FEE', 0, '2023-04-14 04:12:11pm', NULL, '2023-04-14', 340059, '5fa76d6074a7f8028fc7f3a9a438c319447c2eda'),
+(56, 326252747, 'GRE 0000000032', 47, 'WITHDRAWAL FEE', 0, '2023-05-31 04:14:01pm', NULL, '2023-05-31', 340059, 'a4940fa14e48c59fc784887b9d5b38294a021519'),
+(57, 326252747, 'GRE 0000000032', 48, 'WITHDRAWAL FEE', 0, '2023-11-10 04:16:40pm', NULL, '2023-11-10', 340059, 'e0ccdaf348c0911ef9df4d39aa6f2670f75eda15'),
+(58, 326252747, 'GRE 0000000032', 49, 'WITHDRAWAL FEE', 0, '2024-01-08 04:18:41pm', NULL, '2024-01-08', 340059, '83b8167b2de39f1567708528ee94bfc0448efb78'),
+(59, 326252747, 'GRE 0000000032', 50, 'WITHDRAWAL FEE', 0, '2024-02-09 04:19:22pm', NULL, '2024-02-09', 340059, 'f580468a21a0b380d7b4d135bbd53306f14cbcbf'),
+(60, 326252747, 'GRE 0000000032', 51, 'WITHDRAWAL FEE', 0, '2024-03-08 04:20:05pm', NULL, '2024-03-08', 340059, 'ae6b4c57d1f9db21dfef454a18ac458c985a64e2'),
+(61, 326252747, 'GRE 0000000032', 52, 'WITHDRAWAL FEE', 0, '2024-06-10 04:21:02pm', NULL, '2024-06-10', 340059, 'b5bf629a3be877af595c12523ef45f3c498571a0'),
+(62, 326252747, 'GRE 0000000032', 53, 'WITHDRAWAL FEE', 0, '2024-07-30 04:21:46pm', NULL, '2024-07-30', 340059, 'edd7429ed9143ecce9f20594cd8e81674779fd59'),
+(63, 326252747, 'GRE 0000000032', 54, 'WITHDRAWAL FEE', 0, '2024-08-08 12:29:28pm', NULL, '2024-08-08', 340059, '8eaec8051bba1c44321b74e4bab9d9158d2b44ca'),
+(64, 576165856, 'GRE 0000000031', 55, 'WITHDRAWAL FEE', 0, '2024-08-14 03:35:36pm', NULL, '2024-08-14', 340059, 'a82f6fe0fa4226f07a866541d34be684f611bc74'),
+(65, 326252747, 'GRE 0000000032', 56, 'WITHDRAWAL FEE', 0, '2024-08-14 01:15:58pm', NULL, '2024-08-14', 340059, '23bf9c9001be4f39b8ae05edac6e229a84aade80'),
+(66, 576165856, 'GRE 0000000031', 57, 'WITHDRAWAL FEE', 0, '2024-08-22 04:22:43pm', NULL, '2024-08-22', 340059, 'de398058858282addc4dec4e15c111ad79f0d893'),
+(67, 829181896, 'GRE 0000000030', 58, 'WITHDRAWAL FEE', 0, '2024-08-26 04:45:30pm', NULL, '2024-08-26', 340059, '17c62fc7c995edf7b81a92e0dd95bc530a8a0097'),
+(68, 829181896, 'GRE 0000000030', 59, 'WITHDRAWAL FEE', 0, '2024-08-28 08:27:17am', NULL, '2024-08-28', 340059, 'a25ccd6f5902ad36ecf2967f1659b53f4d3afeb1'),
+(69, 576165856, 'GRE 0000000031', 60, 'WITHDRAWAL FEE', 0, '2024-08-30 03:01:03pm', NULL, '2024-08-30', 340059, '148bf34791145dda0e0775d0de27b3a21bfed807'),
+(70, 829181896, 'GRE 0000000030', 61, 'WITHDRAWAL FEE', 0, '2024-09-09 10:10:00am', NULL, '2024-09-09', 340059, '1a9bf4509d6f93aab00a9604093a1d509bed883a'),
+(71, 576165856, 'GRE 0000000031', 62, 'WITHDRAWAL FEE', 0, '2024-09-09 12:44:03pm', NULL, '2024-09-09', 340059, 'd45ebeb16ec860c55aadb6aa28804f4c3618a6a5'),
+(72, 576165856, 'GRE 0000000031', 63, 'WITHDRAWAL FEE', 0, '2024-09-13 02:56:03pm', NULL, '2024-09-13', 340059, '88303fc71800b90412051b55eee7e74f57fa01aa'),
+(73, 576165856, 'GRE 0000000031', 64, 'WITHDRAWAL FEE', 0, '2024-09-17 05:20:43pm', NULL, '2024-09-17', 340059, '2f003b16b0b9faf19e064c8e515779e668f84ce1'),
+(74, 326252747, 'GRE 0000000032', 65, 'WITHDRAWAL FEE', 0, '2024-09-19 03:08:18pm', NULL, '2024-09-19', 340059, '42ce049826709401458aaf75a6f0118c917fb50f'),
+(75, 576165856, 'GRE 0000000031', 66, 'WITHDRAWAL FEE', 0, '2024-09-25 01:07:30pm', NULL, '2024-09-25', 340059, '00f8e4f32643a7fa7c00e9139903e47e5c623d8c'),
+(76, 326252747, 'GRE 0000000032', 67, 'WITHDRAWAL FEE', 0, '2024-09-26 09:19:46am', NULL, '2024-09-26', 340059, 'eeaba61b2ce8947c8d1f38de77a841ea9eded925'),
+(77, 576165856, 'GRE 0000000031', 68, 'WITHDRAWAL FEE', 0, '2024-09-27 04:18:46pm', NULL, '2024-09-27', 340059, '2f8ecd1b5aee136a5197fc67153fe0657ebc02e1'),
+(78, 326252747, 'GRE 0000000032', 69, 'WITHDRAWAL FEE', 0, '2024-09-30 12:16:09pm', NULL, '2024-09-30', 340059, '5e2ab66471937fb6f66fe67bb059879fd6eaa3e6'),
+(79, 326252747, 'GRE 0000000032', 70, 'WITHDRAWAL FEE', 0, '2024-10-08 01:02:53pm', NULL, '2024-10-08', 340059, '1f9631bd0d00451bd804d268b6b22a6ea88a68c6'),
+(80, 326252747, 'GRE 0000000032', 71, 'WITHDRAWAL FEE', 0, '2024-10-11 10:52:07am', NULL, '2024-10-11', 340059, '667b787e03cdcc0ba899d8ef99b0cfc387762fd6');
 
 -- --------------------------------------------------------
 
@@ -420,13 +666,28 @@ CREATE TABLE `charge_tb` (
 --
 
 CREATE TABLE `check_tb` (
-  `ID` int NOT NULL,
+  `ID` int(11) NOT NULL,
   `ACCOUNT_NUMBER` varchar(200) DEFAULT NULL,
   `ENTRY_FEE_STATUS` varchar(50) DEFAULT NULL,
-  `DATE_CREATED` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `CCODE` int NOT NULL,
+  `DATE_CREATED` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `CCODE` int(11) NOT NULL,
   `HCODE` longtext NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb3;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+
+--
+-- Dumping data for table `check_tb`
+--
+
+INSERT INTO `check_tb` (`ID`, `ACCOUNT_NUMBER`, `ENTRY_FEE_STATUS`, `DATE_CREATED`, `CCODE`, `HCODE`) VALUES
+(1, 'GRE 0000000024', '0', '2024-08-06 11:31:06', 340059, '785212a8981cd71874c9a31f5f607af2ef3ab3cb'),
+(2, 'GRE 0000000025', '0', '2024-08-06 12:04:48', 340059, '4d71829b5e32a61aeff87de619fc2117d52f0bd6'),
+(3, 'GRE 0000000026', '0', '2024-08-06 12:23:47', 340059, 'c4b0dd6d2014f4e343fe1697c108bd00e040ecba'),
+(4, 'GRE 0000000027', '0', '2024-08-06 12:37:18', 340059, 'aac564e8fc2e2a7fd879f57f2f34f11adce50bd4'),
+(5, 'GRE 0000000028', '0', '2024-08-06 12:56:54', 340059, '1a3241fe6c1a42bdc0995ec70830f420eaf7baf2'),
+(6, 'GRE 0000000029', '0', '2024-08-06 13:11:49', 340059, '39feeeb114717f326b42defa2bdb9b3beb441d8c'),
+(7, 'GRE 0000000030', '0', '2024-08-06 17:42:48', 340059, '6beec82a0b245bc3980e879002078e47ff262073'),
+(8, 'GRE 0000000031', '0', '2024-08-07 15:06:23', 340059, '636065b27e81475f2765dc553dfc1c6755cbe3c5'),
+(9, 'GRE 0000000032', '0', '2024-08-07 15:55:38', 340059, '61ded5f0ce9b8e02098cd77e4e7d0ea9351453d5');
 
 -- --------------------------------------------------------
 
@@ -435,8 +696,8 @@ CREATE TABLE `check_tb` (
 --
 
 CREATE TABLE `client_tb` (
-  `ID` bigint NOT NULL,
-  `CODE` bigint NOT NULL,
+  `ID` bigint(11) NOT NULL,
+  `CODE` bigint(11) NOT NULL,
   `FIRSTNAME` varchar(200) NOT NULL,
   `LASTNAME` varchar(200) NOT NULL,
   `OTHERNAME` varchar(200) DEFAULT NULL,
@@ -449,19 +710,39 @@ CREATE TABLE `client_tb` (
   `CITY` varchar(50) NOT NULL,
   `EMAIL` varchar(200) DEFAULT NULL,
   `EDUCATION` varchar(200) DEFAULT NULL,
-  `SESSIONID` int DEFAULT NULL COMMENT '1:Daily 2:Weekly 3:Monthly 4:Yearly',
+  `SESSIONID` int(11) DEFAULT NULL COMMENT '1:Daily 2:Weekly 3:Monthly 4:Yearly',
   `AREA` varchar(200) DEFAULT NULL,
   `OCCUPATION` varchar(100) DEFAULT NULL,
   `IDENTIFICATION` varchar(100) DEFAULT NULL,
   `IDNUMBER` varchar(100) DEFAULT NULL,
-  `DATE_CREATED` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `DATE_CREATED` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `DATE_MODIFIED` varchar(100) DEFAULT NULL,
-  `ACCOUNT_STATUS` int DEFAULT NULL,
+  `ACCOUNT_STATUS` int(11) DEFAULT NULL,
   `IMAGE_PATH` varchar(200) DEFAULT NULL,
-  `POST_BY` int DEFAULT NULL,
-  `CCODE` int DEFAULT NULL,
-  `HCODE` longtext
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+  `POST_BY` int(11) DEFAULT NULL,
+  `CCODE` int(11) DEFAULT NULL,
+  `HCODE` longtext DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+--
+-- Dumping data for table `client_tb`
+--
+
+INSERT INTO `client_tb` (`ID`, `CODE`, `FIRSTNAME`, `LASTNAME`, `OTHERNAME`, `DOB`, `GENDER`, `CONTACT_1`, `NEXT_OF_KIN`, `NEXT_OF_KIN_CONTACT`, `REGION`, `CITY`, `EMAIL`, `EDUCATION`, `SESSIONID`, `AREA`, `OCCUPATION`, `IDENTIFICATION`, `IDNUMBER`, `DATE_CREATED`, `DATE_MODIFIED`, `ACCOUNT_STATUS`, `IMAGE_PATH`, `POST_BY`, `CCODE`, `HCODE`) VALUES
+(1, 165980726, 'BRIGHT', 'HUMADO', 'KWAKU', '1997-04-30', 'male', '0551259828', 'NONE', 'NONE', 'volta', 'HO', 'humadobright010gmail.com', 'SHS', NULL, 'Kpone', 'Driver', 'Ecowas Card', 'GHA-713836785-8', '2024-08-06 11:31:06', '2024-08-06 11:29:07', 1, '1-S-ttZrnFVcuMlgMoFakDkxxyJb4J512', 680445, 340059, '847af6d86948f588af5d122924aac684fafcefea'),
+(2, 964216306, 'GEORGE', 'DANSO', 'ODURO', '1995-05-05', 'male', '0549782064', 'NONE', 'NONE', 'eastern', 'AKUAPIM AKROPONG', 'NONE', 'SHS', NULL, 'Kpone', 'Driver', 'Ecowas Card', 'GHA-729084122-3', '2024-08-06 12:04:48', '2024-08-06 12:03:38', 1, '1HcVVzrerAK7spJQMW7FWdpQPd9g9V9t6', 680445, 340059, 'c5e0298f2a8cb3990a1b0bc5ae5f2957aa74ed9d'),
+(3, 558365177, 'MATTHEW', 'AYIAH', 'ATO', '1969-02-02', 'male', '0243740694', 'NONE', 'NONE', 'central', 'TAKORADI', 'NONE', 'SHS', NULL, 'Kpone', 'Carpenter', 'Ecowas Card', 'GHA-001117925-6', '2024-08-06 12:23:47', '2024-08-06 12:23:01', 1, '1_vy1F5ATLiNtNBdodS4nd1hKcyNyI4Rz', 680445, 340059, '3e198cb17aca8630bd59689b0a7766c782bc9b69'),
+(4, 643587577, 'ABIGAIL', 'NUERTEY', 'NONE', '1992-06-24', 'female', '0248191196', 'NONE', 'NONE', 'greater accra', 'TEMA', 'NONE', 'Degree', NULL, 'Kpone', 'Seamstress', 'Ecowas Card', 'GHA-004893476-5', '2024-08-06 12:32:51', '2024-08-06 12:32:51', 2, '1YtzjxTVuupGC1wJgigAVYPxpxJ0CjlAo', 680445, 340059, '703949df871a0c8c5b4401efdf83aaa6f732e1ab'),
+(5, 849128507, 'ABIGAIL', 'NUERTEY', 'NONE', '1992-06-24', 'female', '0248191196', 'NONE', 'NONE', 'greater accra', 'TEMA', 'NONE', 'Degree', NULL, 'Kpone', 'Seamstress', 'Ecowas Card', 'GHA-004893476-5', '2024-08-06 12:34:22', '2024-08-06 12:34:22', 2, '1YtzjxTVuupGC1wJgigAVYPxpxJ0CjlAo', 680445, 340059, '47e25bb8a5aafd27fb8985228b4f731eaba81d03'),
+(6, 417764857, 'ABIGAIL', 'NUERTEY', 'NONE', '1992-06-24', 'female', '0248191196', 'NONE ', 'NONE', 'greater accra', 'TEMA', 'NONE', 'Degree', NULL, 'Kpone', 'Seamstress', 'Ecowas Card', 'GHA-004893476-5', '2024-08-06 12:37:18', '2024-08-06 12:36:31', 1, '1YtzjxTVuupGC1wJgigAVYPxpxJ0CjlAo', 680445, 340059, 'a8cc5db27fcc63a20ead011efaa05c37ae976c05'),
+(7, 334274349, 'BENJAMINE', 'NUERTEY', 'NONE', '1993-06-06', 'male', '0557447781', 'NONE', 'NONE', 'greater accra', 'TEMA', 'NONE', 'JHS', NULL, 'Kpone', 'Engineer', 'Ecowas Card', 'GHA-000995564-2', '2024-08-06 12:52:10', '2024-08-06 12:52:10', 2, '1R7SecuTdjmT3f8IUJx5iwJ8SqGTlcEdN', 680445, 340059, '825c2ee629e62a3eb30eac3ffb40a7903a33bfdc'),
+(8, 502344178, 'BENJAMIN', 'ANNA', 'NUERTEY', '1993-06-06', 'male', '0557447781', 'NONE', 'NONE', 'greater accra', 'TEMA', 'NONE', 'JHS', NULL, 'Kpone', 'Engineer', 'Ecowas Card', 'GHA-000995564-2', '2024-08-06 12:56:54', '2024-08-06 12:55:50', 1, '1R7SecuTdjmT3f8IUJx5iwJ8SqGTlcEdN', 680445, 340059, '25daa2df26372a6ec2d4d0bb6553794436849585'),
+(9, 118760168, 'EMMANUEL', 'TETTEH', 'NONE', '1990-11-26', 'male', '0549212710', 'NONE', 'NONE', 'greater accra', 'KPONE', 'NONE', 'Degree', NULL, 'Kpone', 'Nurse', 'Ecowas Card', 'GHA-71914180-5', '2024-08-06 13:11:49', '2024-08-06 13:10:28', 1, '15_Nj1xkryA6bMBxJ6fJZqaUarbtZpgsy', 680445, 340059, 'ff69a5a89f1aada5f3808d66c05b9535e99dcf60'),
+(10, 508473286, 'KWADWO', 'OFFEI', 'PRINCE', '1997-03-10', 'male', '0598685824', 'NONE', 'NONE', 'eastern', 'AKUAPEM AKROPONG', 'NONE', 'SHS', NULL, 'Kpone', 'Driver', 'Ecowas Card', 'GHA-729084122-3', '2024-08-06 17:38:36', '2024-08-06 17:38:36', 2, '19N46rPDWZ_z5ppgmqKJ2G4oaXh5hkWiq', 680445, 340059, '9ff688d65b8987d87f0584ba282af0d726c65557'),
+(11, 829181896, 'KWADWO', 'OFFEI', 'PRINCE', '1997-03-10', 'male', '0598685824', 'NONE', 'NONE', 'eastern', 'AKUAPEM AKROPONG', 'NONE', 'SHS', NULL, 'Kpone', 'Driver', 'Ecowas Card', 'GHA-729084122-3', '2024-08-06 17:42:48', '2024-08-06 17:41:26', 1, '19N46rPDWZ_z5ppgmqKJ2G4oaXh5hkWiq', 680445, 340059, '7ba3bbd220934285f5344e14fe38a66241553587'),
+(12, 539631706, 'WISDOM', 'OTITSUAMI', 'NONE', '1999-06-26', 'male', '0246517261', 'NONE', 'NONE', 'greater accra', 'ADAA', 'NONE', 'SHS', NULL, 'Kpone', 'null', 'Ecowas Card', 'GHA-713465516-6', '2024-08-07 14:54:24', '2024-08-07 14:54:24', 2, '1M7XJxUXekiFmqqtur3MjjxsO2ISKmmTU', 680445, 340059, 'd359e95f49f82939f6c93bc709ce00dc1098b966'),
+(13, 576165856, 'TETTEH', 'ANNAG', 'SIMON', '1997-05-05', 'male', '0555476346', 'NONE', 'NONE', 'greater accra', 'KPONE', 'simonannang77gmail.com', 'SHS', NULL, 'Kpone', 'Engineer', 'Voters Id', '4734020703', '2024-08-07 15:06:23', '2024-08-07 15:05:16', 1, '1Z8Qn_hg-MZl14ZTcBCso1L27e5GuAJfo', 680445, 340059, '41993e106a0e5e91a76bb4ee1352504758ad21e6'),
+(14, 326252747, 'RICHARD', 'AKORLI', 'NONE', '1998-02-07', 'male', '0265136422', 'NONE', 'NONE', 'volta', 'HO', 'NONE', 'SHS', NULL, 'Kpone', 'null', 'Ecowas Card', 'GHA-727495980-5', '2024-08-07 15:55:38', '2024-08-07 15:54:08', 1, '1_t-cXm9hfhPjeOInBcOhlBAAazIej4Qt', 680445, 340059, '0e41f275e6b26b74252a4ca5a9922193008daa02');
 
 -- --------------------------------------------------------
 
@@ -470,7 +751,7 @@ CREATE TABLE `client_tb` (
 --
 
 CREATE TABLE `client_temp_tb` (
-  `ID` bigint NOT NULL,
+  `ID` bigint(20) NOT NULL,
   `FIRSTNAME` varchar(200) NOT NULL,
   `LASTNAME` varchar(200) NOT NULL,
   `OTHERNAME` varchar(200) DEFAULT NULL,
@@ -485,14 +766,14 @@ CREATE TABLE `client_temp_tb` (
   `OCCUPATION` varchar(100) NOT NULL,
   `IDENTIFICATION` varchar(100) DEFAULT NULL,
   `IDNUMBER` varchar(100) DEFAULT NULL,
-  `DATE_CREATED` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `DATE_CREATED` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `DATE_MODIFIED` varchar(100) DEFAULT NULL,
-  `ACCOUNT_STATUS` int DEFAULT NULL,
+  `ACCOUNT_STATUS` int(11) DEFAULT NULL,
   `IMAGE_PATH` varchar(200) DEFAULT NULL,
-  `POST_BY` int DEFAULT NULL,
-  `CCODE` int DEFAULT NULL,
-  `HCODE` longtext
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `POST_BY` int(11) DEFAULT NULL,
+  `CCODE` int(11) DEFAULT NULL,
+  `HCODE` longtext DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 -- --------------------------------------------------------
 
@@ -501,8 +782,8 @@ CREATE TABLE `client_temp_tb` (
 --
 
 CREATE TABLE `company_tb` (
-  `ID` int NOT NULL,
-  `UNIQ` int NOT NULL,
+  `ID` int(11) NOT NULL,
+  `UNIQ` int(11) NOT NULL,
   `COMPANY` varchar(200) NOT NULL,
   `PHONE` varchar(20) NOT NULL,
   `EMAIL` varchar(100) NOT NULL,
@@ -510,39 +791,14 @@ CREATE TABLE `company_tb` (
   `DATE_CREATED` varchar(100) NOT NULL,
   `DATE_MODIFIED` varchar(100) DEFAULT NULL,
   `HCODE` longtext NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
 
 --
 -- Dumping data for table `company_tb`
 --
 
 INSERT INTO `company_tb` (`ID`, `UNIQ`, `COMPANY`, `PHONE`, `EMAIL`, `BUSINESS`, `DATE_CREATED`, `DATE_MODIFIED`, `HCODE`) VALUES
-(7, 822796, 'BARRY SAVINGS & LOANS', '+233541397813', 'barrigahjnr@gmail.com', 'Savings & Loans', '2022-07-02', '2022-07-09 11:22:32am', '8bf6c6d9d396c1dc9bf77480a4048085963ff39e'),
-(8, 519574, 'DC TECHNOLOGY', '+233247586435', 'dctechnolo@gmail.com', 'Savings & Loans', '2022-07-03', '2022-07-03', '8ba75afb4678fb5196c5504c3adf70d288f41ec9'),
-(16, 726670, 'RYAN SUSU', '0541397813', 'barrigahjnr@gmail.com', 'Savings & Loans', '2022-07-13', '2022-07-13', 'bb976e92e1f252720471bde2b952c3e3b9ac666f'),
-(17, 292381, 'Asured trust limited', '0507969859', 'okeley1@gmail.como', 'Savings & Loans', '2022-07-14', '2022-07-14', 'fde802b7bb9bff453f5756c94c4241ceab9579da'),
-(18, 283198, 'Might trust limited', '0507969859', 'okeley1@gmail.como', 'Savings & Loans', '2022-07-14', '2022-07-14', 'd540a503b79617370b7d0557ba07de6f59f5a800'),
-(26, 618608, 'Mcbrain Media', '0559633463', 'mcbrain63asare@gmail.com', 'Credit Union', '2022-07-15', '2022-07-15', '971765be70ffadc7e1f92d7da0ddbb1b84740d18'),
-(34, 233211, 'STEP BY STEP TELECOM', '0244228530', 'stepbysteptelecomdirector@gmail.com', 'SUSU', '2022-07-15', '2022-07-16 08:26:31am', '3a5eb836b73be2a2260a8eae49fd2a2fc1a5b3ba'),
-(37, 603921, 'Odwen', '0554261930', 'danflorence2020@gmail.com', 'MicroFinance', '2022-07-19', '2022-07-19', '734ed72c5dc302b205737def181d4460c80e62b8'),
-(38, 715676, 'QueenDebbie Collections', '0556961312', 'adepaadjoa24@gmail.com', 'Savings & Loans', '2022-08-09', '2022-08-09', '34643e8ee5b2d85037984f1988badbe6a046f92e'),
-(39, 610240, 'Dalex finance', '0557199309', 'samagor63@gmail.com', 'Savings & Loans', '2022-08-23', '2022-08-23', '4c3a617a1a4d60207dc2b5f0372e8cd97e4a5576'),
-(40, 570826, 'PRIME MEDIA', '0247201042', 'direkta44@gmail.com', 'SUSU', '2022-08-29', '2022-08-31 07:35:42am', 'f164c08c8d6f558888041831934f7ef4c3339655'),
-(44, 381272, 'Softpayy GHANA', '0243803348', 'softpayyghana96@gmail.com', 'Hire', '2022-09-13', '2022-09-13', '26b2cdc34e34600f72004b8e3daae4313b40d2eb'),
-(47, 200776, 'Staliro Technology', '0559104640', 'rrstetteh@gmail.com', 'Savings & Loans', '2022-10-11', '2022-10-11', '07fe7409381f971ef51418004b4b2ff5a4faa130'),
-(48, 548706, 'Trust Union Ltd', '0208332233', 'projectfund111@gmail.com', 'Savings & Loans', '2022-11-06', '2022-11-06', '63c4d039c580b1b39471ac0bfdbf0f18880d9f84'),
-(50, 898101, 'Candyman publication', '0540172716', 'atangafoster48@gmail.com', 'Hire', '2023-03-06', '2023-03-06', 'b3433302f7b44642bdcc07343996b865b75cbf82'),
-(51, 451923, 'Cashstep Ventures', '0551780523', 'stepbysteptelecom@gmail.com', 'SUSU', '2023-04-23', '2023-04-23', '7005e0aa1f7f2ff79095a74d392d3238cbde0f0e'),
-(52, 473858, 'MP1 SUSU ENTERPRISE', '0504311362', 'mp1susu.org@gmail.com', 'SUSU', '2023-05-29', '2023-05-29 10:46:06am', '3a6c7e2f7e23eed5691ab649f09e96d62013db64'),
-(56, 340059, 'GREATERS GREEN STAR LIMITED', '0541502290', 'greatersgreeenstar@gmail.com', 'Savings & Loans', '2024-04-25', '2024-04-26 11:55:03am', '437a2e04336b91108db2c14705edbfc41cd553b2'),
-(62, 929764, 'Links Hire', '0247058661', 'josef.nyarko@gmail.com', 'Savings & Loans', '2024-06-03', '2024-06-03', 'd17d2355fbaaead9de10f48237eba2112082edc0'),
-(63, 267680, 'Stan Homes', '0247884488', 'staykwame@gmail.comm', 'SUSU', '2024-06-03', '2024-06-03', '403e9d0119aefe2aa577ca7aa02d6c9ddd04ea19'),
-(66, 377586, 'Ephod Tech Limited ', '0209460537', 'richardamoakoh1@gmail.com', 'Savings & Loans', '2024-07-11', '2024-07-11', '79073b9fbaed7edd0ee1b1a9cabf7babc299c091'),
-(67, 961704, 'Effie Ventures', '0209083006', 'imbeahfelicia@gmail.com', 'SUSU', '2024-07-14', '2024-07-14', '2597511c1c670107b1ae14f0295104f489adcbfa'),
-(68, 516448, 'Brempong & Kwasi', '0245898899', 'proflinksgh@gmail.com', 'Savings & Loans', '2024-07-15', '2024-07-15', 'b2118371fcb999c5e67eb9873dbe2ae88d383595'),
-(70, 499047, 'Barry Savings ', '0541397813', 'barrigahjnr@gmail.com', 'Savings & Loans', '2024-07-18', '2024-07-18', 'c947fdb63460dd368ccafd08befe26ce84c180e5'),
-(71, 270530, 'U-NICE SUSU ENTERPRISE ', '0274449300', 'eunice124@gmail.com', 'SUSU', '2024-07-19', '2024-07-19', '1fca9a6051cea6088f33561be7661b0c32c9dc87'),
-(73, 598200, 'iTech Solution', '0556296422', 'kofiatiefah@gmail.com', 'Hire', '2024-07-23', '2024-07-23', '3319b7711211e9e3c57051344c08b6e2e21c4548');
+(56, 340059, 'GREATERS GREEN STAR LIMITED', '0541502290', 'greatersgreeenstar@gmail.com', 'Savings & Loans', '2024-04-25', '2024-04-26 11:55:03am', '437a2e04336b91108db2c14705edbfc41cd553b2');
 
 -- --------------------------------------------------------
 
@@ -551,12 +807,12 @@ INSERT INTO `company_tb` (`ID`, `UNIQ`, `COMPANY`, `PHONE`, `EMAIL`, `BUSINESS`,
 --
 
 CREATE TABLE `delist_tb` (
-  `ID` bigint NOT NULL,
-  `CCODE` int DEFAULT NULL,
+  `ID` bigint(11) NOT NULL,
+  `CCODE` int(11) DEFAULT NULL,
   `HCODE` longtext NOT NULL,
   `DTABLE` varchar(50) NOT NULL,
   `DATE_CREATED` varchar(100) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
 
 -- --------------------------------------------------------
 
@@ -565,18 +821,167 @@ CREATE TABLE `delist_tb` (
 --
 
 CREATE TABLE `deposit_tb` (
-  `ID` bigint NOT NULL,
+  `ID` bigint(11) NOT NULL,
   `AMOUNT` varchar(200) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
-  `CLIENT_ID` bigint DEFAULT NULL,
+  `CLIENT_ID` bigint(11) DEFAULT NULL,
   `ACCOUNT_NUMBER` varchar(200) CHARACTER SET latin1 COLLATE latin1_swedish_ci DEFAULT NULL,
   `DATE_CREATED` varchar(100) CHARACTER SET latin1 COLLATE latin1_swedish_ci DEFAULT NULL,
   `DATE_NORMAL` varchar(200) DEFAULT NULL,
   `DATE_MODIFIED` varchar(50) CHARACTER SET latin1 COLLATE latin1_swedish_ci DEFAULT NULL,
-  `CREATED_BY` bigint DEFAULT NULL,
-  `TAG` int NOT NULL COMMENT '1:Deposit 2:Withdrawal',
-  `CCODE` int DEFAULT NULL,
-  `HCODE` longtext
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+  `CREATED_BY` bigint(11) DEFAULT NULL,
+  `TAG` int(11) NOT NULL COMMENT '1:Deposit 2:Withdrawal',
+  `CCODE` int(11) DEFAULT NULL,
+  `HCODE` longtext DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+
+--
+-- Dumping data for table `deposit_tb`
+--
+
+INSERT INTO `deposit_tb` (`ID`, `AMOUNT`, `CLIENT_ID`, `ACCOUNT_NUMBER`, `DATE_CREATED`, `DATE_NORMAL`, `DATE_MODIFIED`, `CREATED_BY`, `TAG`, `CCODE`, `HCODE`) VALUES
+(1, '1000', 165980726, 'GRE 0000000024', '2024-07-22 11:31:45am', '2024-07-22 11:31:45am', '2024-07-22 11:31:45am', 680445, 1, 340059, '0b9444820bc07ac84b5a1ffcad23f8d04feb672b'),
+(2, '120', 165980726, 'GRE 0000000024', '2024-07-26 11:51:44am', '2024-07-26 11:51:44am', '2024-07-26 11:51:44am', 680445, 1, 340059, '78da9e55b7df78d6463f3eea9d83561acc0f6559'),
+(3, '200', 165980726, 'GRE 0000000024', '2024-07-29 11:52:03am', '2024-07-29 11:52:03am', '2024-07-29 11:52:03am', 680445, 1, 340059, '908d2fd559baa360f376433fb3bd555e3cc90ecc'),
+(4, '100', 165980726, 'GRE 0000000024', '2024-08-05 11:52:30am', '2024-08-05 11:52:30am', '2024-08-05 11:52:30am', 680445, 1, 340059, '9919b25519a528ba6e341fb8f8815e31cf2af47a'),
+(5, '420', 964216306, 'GRE 0000000025', '2022-04-28 12:13:01pm', '2022-04-28 12:13:01pm', '2022-04-28 12:13:01pm', 680445, 1, 340059, 'c4c87f44da5b10d19bdaf1b6d22f04f1f458328b'),
+(6, '400', 964216306, 'GRE 0000000025', '2022-05-27 12:13:21pm', '2022-05-27 12:13:21pm', '2022-05-27 12:13:21pm', 680445, 1, 340059, '0314d4e4d4ad90b14e2703f1d84bc54b8b0f5d63'),
+(7, '400', 964216306, 'GRE 0000000025', '2022-07-22 12:13:46pm', '2022-07-22 12:13:46pm', '2022-07-22 12:13:46pm', 680445, 1, 340059, 'bd7e07c8eda8c37623951974bfbc5d115c87a71b'),
+(8, '200', 964216306, 'GRE 0000000025', '2022-08-08 12:14:07pm', '2022-08-08 12:14:07pm', '2022-08-08 12:14:07pm', 680445, 1, 340059, '45a94bc84ba5d7ecbf47d3e7fe55c93d3027dce9'),
+(9, '900', 964216306, 'GRE 0000000025', '2022-10-13 12:14:26pm', '2022-10-13 12:14:26pm', '2022-10-13 12:14:26pm', 680445, 1, 340059, 'c3b98381a3b9983cc25257c32c97762b94b73787'),
+(10, '800', 964216306, 'GRE 0000000025', '2022-12-12 12:14:55pm', '2022-12-12 12:14:55pm', '2022-12-12 12:14:55pm', 680445, 1, 340059, 'ccc89bcf2927bfa3e585c9f721804f799bfec62a'),
+(11, '420', 558365177, 'GRE 0000000026', '2022-12-19 12:24:09pm', '2022-12-19 12:24:09pm', '2022-12-19 12:24:09pm', 680445, 1, 340059, '6baa0fb3d95927178800db1769ef7340410b2e53'),
+(12, '40', 417764857, 'GRE 0000000027', '2023-09-28 12:37:43pm', '2023-09-28 12:37:43pm', '2023-09-28 12:37:43pm', 680445, 1, 340059, '3441e8468ddbe2076c64125333c50c53e929a4aa'),
+(13, '10', 417764857, 'GRE 0000000027', '2023-10-02 12:38:07pm', '2023-10-02 12:38:07pm', '2023-10-02 12:38:07pm', 680445, 1, 340059, 'ce44559e9655d0d872c5c05f746e099b3662aca3'),
+(14, '30', 417764857, 'GRE 0000000027', '2023-10-04 12:38:23pm', '2023-10-04 12:38:23pm', '2023-10-04 12:38:23pm', 680445, 1, 340059, 'e23c3b90ccb8c39ab197aa05ba324819ba4dc1b8'),
+(15, '10', 417764857, 'GRE 0000000027', '2023-10-10 12:38:44pm', '2023-10-10 12:38:44pm', '2023-10-10 12:38:44pm', 680445, 1, 340059, '5b1ddfdc75496d5d0175abd21b6a6d9c90ad1f30'),
+(16, '20', 417764857, 'GRE 0000000027', '2023-10-18 12:39:14pm', '2023-10-18 12:39:14pm', '2023-10-18 12:39:14pm', 680445, 1, 340059, 'b8cb8e2f27d989304d4c2822d2c90865a848027e'),
+(17, '30', 417764857, 'GRE 0000000027', '2023-10-19 12:39:33pm', '2023-10-19 12:39:33pm', '2023-10-19 12:39:33pm', 680445, 1, 340059, '3bd08c23b2eeb10f3d6b3100488b1cb79d5f00f3'),
+(18, '50', 417764857, 'GRE 0000000027', '2023-10-25 12:39:48pm', '2023-10-25 12:39:48pm', '2023-10-25 12:39:48pm', 680445, 1, 340059, 'e055d865552b26a75028dfc846d0157fc0e87432'),
+(19, '50', 417764857, 'GRE 0000000027', '2023-11-14 12:40:05pm', '2023-11-14 12:40:05pm', '2023-11-14 12:40:05pm', 680445, 1, 340059, 'f64d631e54959b10e2d5f2590e0f996281c59f49'),
+(20, '50', 417764857, 'GRE 0000000027', '2023-12-04 12:40:26pm', '2023-12-04 12:40:26pm', '2023-12-04 12:40:26pm', 680445, 1, 340059, 'ad2ba18ab55d07d4c2daec04cf19fb799a31ddec'),
+(21, '100', 417764857, 'GRE 0000000027', '2024-01-08 12:40:53pm', '2024-01-08 12:40:53pm', '2024-01-08 12:40:53pm', 680445, 1, 340059, 'ec75edd18abec98e8ce78b40071ab8cf25cfdd01'),
+(22, '100', 417764857, 'GRE 0000000027', '2024-05-20 12:41:12pm', '2024-05-20 12:41:12pm', '2024-05-20 12:41:12pm', 680445, 1, 340059, 'f3070543b97f059f54e7a914f0982c9cb3b79b20'),
+(23, '200', 502344178, 'GRE 0000000028', '2022-06-22 12:57:16pm', '2022-06-22 12:57:16pm', '2022-06-22 12:57:16pm', 680445, 1, 340059, '0de61a98defcfc1a5b25721cf1cf7197f56400c1'),
+(24, '600', 502344178, 'GRE 0000000028', '2022-09-13 01:00:49pm', '2022-09-13 01:00:49pm', '2022-09-13 01:00:49pm', 680445, 1, 340059, 'f83927a44b989ee9087240694fc891802aa013e8'),
+(25, '70', 118760168, 'GRE 0000000029', '2022-10-07 01:12:09pm', '2022-10-07 01:12:09pm', '2022-10-07 01:12:09pm', 680445, 1, 340059, '9e52caf497f9485c6a2d91a3f7e8bad429f87830'),
+(26, '50', 118760168, 'GRE 0000000029', '2022-10-10 01:12:29pm', '2022-10-10 01:12:29pm', '2022-10-10 01:12:29pm', 680445, 1, 340059, 'fb869620cb8f2385915588a5cb2e1c7dbe5d93da'),
+(27, '50', 118760168, 'GRE 0000000029', '2022-10-11 01:12:48pm', '2022-10-11 01:12:48pm', '2022-10-11 01:12:48pm', 680445, 1, 340059, '4990bfdd259a7de34ce053337404a0c33001df65'),
+(28, '50', 118760168, 'GRE 0000000029', '2022-10-12 01:13:01pm', '2022-10-12 01:13:01pm', '2022-10-12 01:13:01pm', 680445, 1, 340059, '3ae0050c847811fc6ef964b3f673fecad578f719'),
+(29, '50', 118760168, 'GRE 0000000029', '2022-10-13 01:13:13pm', '2022-10-13 01:13:13pm', '2022-10-13 01:13:13pm', 680445, 1, 340059, '1109fd86b99c6d8e8f3fa24a9ddb3ec6cb4f4413'),
+(30, '50', 118760168, 'GRE 0000000029', '2022-10-14 01:13:23pm', '2022-10-14 01:13:23pm', '2022-10-14 01:13:23pm', 680445, 1, 340059, '7992a194619d3a6c2a73c7124641ab625f271f01'),
+(31, '50', 118760168, 'GRE 0000000029', '2022-10-15 01:13:35pm', '2022-10-15 01:13:35pm', '2022-10-15 01:13:35pm', 680445, 1, 340059, '0a8819f2bf8d2b3b78b7f1cb83a974e3c5e32136'),
+(32, '50', 118760168, 'GRE 0000000029', '2022-10-17 01:13:49pm', '2022-10-17 01:13:49pm', '2022-10-17 01:13:49pm', 680445, 1, 340059, 'ccd76bb01bb818a98f9d601ebb728293fbaa3892'),
+(33, '50', 118760168, 'GRE 0000000029', '2022-10-19 01:13:59pm', '2022-10-19 01:13:59pm', '2022-10-19 01:13:59pm', 680445, 1, 340059, '23aa163037d0532017aef7c62c929b2b13ebce26'),
+(34, '50', 118760168, 'GRE 0000000029', '2022-10-20 01:14:12pm', '2022-10-20 01:14:12pm', '2022-10-20 01:14:12pm', 680445, 1, 340059, '504004c66baf49ef17c898eebfb344350dc8aab1'),
+(35, '50', 118760168, 'GRE 0000000029', '2022-10-24 01:14:25pm', '2022-10-24 01:14:25pm', '2022-10-24 01:14:25pm', 680445, 1, 340059, 'ec7b0b19f4cbaacdec4628d79325fd9624a27a80'),
+(36, '50', 118760168, 'GRE 0000000029', '2022-10-26 01:14:38pm', '2022-10-26 01:14:38pm', '2022-10-26 01:14:38pm', 680445, 1, 340059, '8451a41a7c782d41f1551116af3bbc312bf0ef94'),
+(37, '100', 118760168, 'GRE 0000000029', '2022-10-27 01:15:10pm', '2022-10-27 01:15:10pm', '2022-10-27 01:15:10pm', 680445, 1, 340059, 'dd5b51cfc934c1834af53d2dfc897622220cbc65'),
+(38, '50', 118760168, 'GRE 0000000029', '2022-10-28 01:15:27pm', '2022-10-28 01:15:27pm', '2022-10-28 01:15:27pm', 680445, 1, 340059, 'f4766deb122d4b3f7a94c730f1cfc561b233c502'),
+(39, '50', 118760168, 'GRE 0000000029', '2022-10-29 01:16:21pm', '2022-10-29 01:16:21pm', '2022-10-29 01:16:21pm', 680445, 1, 340059, '42886592ce1cc6e0d3364f51c571ecdea46c394e'),
+(40, '150', 118760168, 'GRE 0000000029', '2022-11-05 01:17:16pm', '2022-11-05 01:17:16pm', '2022-11-05 01:17:16pm', 680445, 1, 340059, '3ee5a5c6adb61fe1d24e802471c07835298866bc'),
+(41, '100', 118760168, 'GRE 0000000029', '2022-11-09 01:17:37pm', '2022-11-09 01:17:37pm', '2022-11-09 01:17:37pm', 680445, 1, 340059, 'd3cfa73ed7f822148e350f54007346c3b7de8798'),
+(42, '100', 118760168, 'GRE 0000000029', '2022-11-17 01:18:39pm', '2022-11-17 01:18:39pm', '2022-11-17 01:18:39pm', 680445, 1, 340059, '5d10a58c3b7d1927c69da5950e51d5193153cf6f'),
+(43, '100', 118760168, 'GRE 0000000029', '2022-11-21 01:18:51pm', '2022-11-21 01:18:51pm', '2022-11-21 01:18:51pm', 680445, 1, 340059, 'c42a2854d23002bee54482dd41a199e37a893659'),
+(44, '100', 118760168, 'GRE 0000000029', '2022-11-23 01:19:03pm', '2022-11-23 01:19:03pm', '2022-11-23 01:19:03pm', 680445, 1, 340059, 'de499544c98fc06dd0b06d43e321a45d73a90512'),
+(45, '100', 118760168, 'GRE 0000000029', '2022-11-28 01:19:30pm', '2022-11-28 01:19:30pm', '2022-11-28 01:19:30pm', 680445, 1, 340059, 'a30907f98a6c5dfb93723914af718fd630ab2e1b'),
+(46, '100', 118760168, 'GRE 0000000029', '2022-11-30 01:19:48pm', '2022-11-30 01:19:48pm', '2022-11-30 01:19:48pm', 680445, 1, 340059, '8262fd8b76e890240aa4d1bddb7bf5a312b21930'),
+(47, '50', 118760168, 'GRE 0000000029', '2022-12-01 01:20:13pm', '2022-12-01 01:20:13pm', '2022-12-01 01:20:13pm', 680445, 1, 340059, '5d8572c8e703e182bc0fe866a87793a38fd69e56'),
+(48, '100', 118760168, 'GRE 0000000029', '2022-12-19 01:20:30pm', '2022-12-19 01:20:30pm', '2022-12-19 01:20:30pm', 680445, 1, 340059, '661975d61841842d737c89d349b2fedd0140a77c'),
+(49, '100', 118760168, 'GRE 0000000029', '2022-12-21 01:20:57pm', '2022-12-21 01:20:57pm', '2022-12-21 01:20:57pm', 680445, 1, 340059, 'b68d4aa89e10e3c9e8fcfe653f71eb7efb161078'),
+(50, '50', 118760168, 'GRE 0000000029', '2022-12-22 01:22:18pm', '2022-12-22 01:22:18pm', '2022-12-22 01:22:18pm', 680445, 1, 340059, 'b5f9b69b521eca82b76f8913aa5ab1ff07a3115b'),
+(51, '100', 118760168, 'GRE 0000000029', '2023-04-14 01:23:19pm', '2023-04-14 01:23:19pm', '2023-04-14 01:23:19pm', 680445, 1, 340059, 'c74fa5aa3262810781d8746de709b82a6edab5c7'),
+(52, '100', 118760168, 'GRE 0000000029', '2023-04-20 01:23:34pm', '2023-04-20 01:23:34pm', '2023-04-20 01:23:34pm', 680445, 1, 340059, '780a173c051f969c572309c19f3c8b470f0acda5'),
+(53, '50', 118760168, 'GRE 0000000029', '2023-04-21 01:23:46pm', '2023-04-21 01:23:46pm', '2023-04-21 01:23:46pm', 680445, 1, 340059, '5f68b8aca01a229c90f2ee16196f1c6e7849ea2f'),
+(54, '50', 118760168, 'GRE 0000000029', '2023-03-31 01:24:36pm', '2023-03-31 01:24:36pm', '2023-03-31 01:24:36pm', 680445, 1, 340059, '691bf4340157db772161d128029017e97ffb5261'),
+(55, '50', 118760168, 'GRE 0000000029', '2023-04-03 01:24:55pm', '2023-04-03 01:24:55pm', '2023-04-03 01:24:55pm', 680445, 1, 340059, 'b406c49fda4fe68596b83e4da12006e45f11e31e'),
+(56, '50', 118760168, 'GRE 0000000029', '2023-04-04 01:25:09pm', '2023-04-04 01:25:09pm', '2023-04-04 01:25:09pm', 680445, 1, 340059, '1ca3f780c7ff033c0efe16c19a257c6bf51e3df2'),
+(57, '50', 118760168, 'GRE 0000000029', '2023-04-05 01:25:24pm', '2023-04-05 01:25:24pm', '2023-04-05 01:25:24pm', 680445, 1, 340059, '9db655be60ba5cf6ece99a382f96b92b014cbdb3'),
+(58, '50', 118760168, 'GRE 0000000029', '2023-04-11 01:25:35pm', '2023-04-11 01:25:35pm', '2023-04-11 01:25:35pm', 680445, 1, 340059, '7e7ca934e4536c8341c8211128d992239479e5bd'),
+(59, '50', 118760168, 'GRE 0000000029', '2023-04-16 01:26:03pm', '2023-04-16 01:26:03pm', '2023-04-16 01:26:03pm', 680445, 1, 340059, 'e54279189d8221f877cfb758176f72eda5b3bd49'),
+(60, '50', 118760168, 'GRE 0000000029', '2023-04-17 01:26:16pm', '2023-04-17 01:26:16pm', '2023-04-17 01:26:16pm', 680445, 1, 340059, '677a881dff53da6af60dd19a59884263a8be8ee1'),
+(61, '50', 118760168, 'GRE 0000000029', '2023-04-18 01:26:30pm', '2023-04-18 01:26:30pm', '2023-04-18 01:26:30pm', 680445, 1, 340059, 'a15af0148b6fbfe0a82f52ad9136d165d53c005b'),
+(62, '150', 118760168, 'GRE 0000000029', '2023-05-02 01:27:15pm', '2023-05-02 01:27:15pm', '2023-05-02 01:27:15pm', 680445, 1, 340059, '68aab10dd8b6cf8384d8839667413be16105c591'),
+(63, '50', 118760168, 'GRE 0000000029', '2023-05-10 01:27:35pm', '2023-05-10 01:27:35pm', '2023-05-10 01:27:35pm', 680445, 1, 340059, '6865f2b71655f422eff169dc75a9fbf5b5311280'),
+(64, '50', 118760168, 'GRE 0000000029', '2023-05-31 01:27:51pm', '2023-05-31 01:27:51pm', '2023-05-31 01:27:51pm', 680445, 1, 340059, '6308353ec2d7215e26dc865d3a6a8db076e1c0e4'),
+(65, '70', 829181896, 'GRE 0000000030', '2024-06-01 05:43:11pm', '2024-06-01 05:43:11pm', '2024-06-01 05:43:11pm', 680445, 1, 340059, '388f9195322b43a9d620627822e3969254dfb0dd'),
+(66, '50', 829181896, 'GRE 0000000030', '2024-06-02 05:43:28pm', '2024-06-02 05:43:28pm', '2024-06-02 05:43:28pm', 680445, 1, 340059, '9e800fff0ff48d62082030bbc200171ac5d42f74'),
+(67, '50', 829181896, 'GRE 0000000030', '2024-06-02 05:43:41pm', '2024-06-02 05:43:41pm', '2024-06-02 05:43:41pm', 680445, 1, 340059, '319cc2b0faf7c176057be69586c8052fb5bbf441'),
+(68, '50', 829181896, 'GRE 0000000030', '2024-06-04 05:44:10pm', '2024-06-04 05:44:10pm', '2024-06-04 05:44:10pm', 680445, 1, 340059, '79906fa6447c90a81dd3e450cf43e7d2da17042a'),
+(69, '50', 829181896, 'GRE 0000000030', '2024-06-05 05:44:25pm', '2024-06-05 05:44:25pm', '2024-06-05 05:44:25pm', 680445, 1, 340059, 'a7bb3d2c5616a9f1fa50a4916b9258a9da6b9c7a'),
+(70, '50', 829181896, 'GRE 0000000030', '2024-06-06 05:44:38pm', '2024-06-06 05:44:38pm', '2024-06-06 05:44:38pm', 680445, 1, 340059, '73ec8fe8ee5cc55ab96a411a97228fade53860bc'),
+(71, '50', 829181896, 'GRE 0000000030', '2024-06-07 05:44:53pm', '2024-06-07 05:44:53pm', '2024-06-07 05:44:53pm', 680445, 1, 340059, 'ab97624b2c886e40cf36da45a6bf370a3a6022fa'),
+(72, '50', 829181896, 'GRE 0000000030', '2024-06-08 05:45:06pm', '2024-06-08 05:45:06pm', '2024-06-08 05:45:06pm', 680445, 1, 340059, 'aba557775b97ad0cf04ad0cdc0f20a892941267a'),
+(73, '50', 829181896, 'GRE 0000000030', '2024-06-09 05:45:18pm', '2024-06-09 05:45:18pm', '2024-06-09 05:45:18pm', 680445, 1, 340059, '7a7bb270198b5566dcd28b4172ac3a4d8e526fb6'),
+(74, '50', 829181896, 'GRE 0000000030', '2024-06-10 05:45:34pm', '2024-06-10 05:45:34pm', '2024-06-10 05:45:34pm', 680445, 1, 340059, '9b25d63c217873b37200d5489eba08978f96a726'),
+(75, '50', 829181896, 'GRE 0000000030', '2024-06-11 05:45:46pm', '2024-06-11 05:45:46pm', '2024-06-11 05:45:46pm', 680445, 1, 340059, '6369563e0f3586a4e8e767d6dc26d85c0ed7f56b'),
+(76, '50', 829181896, 'GRE 0000000030', '2024-06-12 05:45:59pm', '2024-06-12 05:45:59pm', '2024-06-12 05:45:59pm', 680445, 1, 340059, '7c4d56ded8a89d32fd8fcdf9249ca29a4d4c8568'),
+(77, '50', 829181896, 'GRE 0000000030', '2024-06-13 05:46:12pm', '2024-06-13 05:46:12pm', '2024-06-13 05:46:12pm', 680445, 1, 340059, '8c48f48bd34423014a9fa8f83036c4c6bfc06b8e'),
+(78, '50', 829181896, 'GRE 0000000030', '2024-06-14 05:46:27pm', '2024-06-14 05:46:27pm', '2024-06-14 05:46:27pm', 680445, 1, 340059, '6913c7ab33190a523f40079141a76ce7bb85c77e'),
+(79, '50', 829181896, 'GRE 0000000030', '2024-06-15 05:46:42pm', '2024-06-15 05:46:42pm', '2024-06-15 05:46:42pm', 680445, 1, 340059, 'a695ffd76b5a11a8d238a26b4b90d553dd1850f7'),
+(80, '100', 829181896, 'GRE 0000000030', '2024-08-01 05:48:38pm', '2024-08-01 05:48:38pm', '2024-08-01 05:48:38pm', 680445, 1, 340059, 'f0bc0ca55ea2d0caaaeb6221130c177a97f2b63e'),
+(81, '100', 829181896, 'GRE 0000000030', '2024-08-02 05:48:52pm', '2024-08-02 05:48:52pm', '2024-08-02 05:48:52pm', 680445, 1, 340059, 'ffade1d53ae3e91f69ca0c252773c5eca5771c7c'),
+(82, '100', 829181896, 'GRE 0000000030', '2024-08-03 05:49:02pm', '2024-08-03 05:49:02pm', '2024-08-03 05:49:02pm', 680445, 1, 340059, 'cce1496ebbe2bd8984c3e547db3d675103353a19'),
+(83, '100', 829181896, 'GRE 0000000030', '2024-08-04 05:49:15pm', '2024-08-04 05:49:15pm', '2024-08-04 05:49:15pm', 680445, 1, 340059, '22354e244e33d78f28e9c67da98dbb05f02c44e4'),
+(84, '420', 576165856, 'GRE 0000000031', '2023-06-23 03:06:46pm', '2023-06-23 03:06:46pm', '2023-06-23 03:06:46pm', 680445, 1, 340059, 'ac1d607239e688ae45db0846f313c5715c00c60d'),
+(85, '200', 576165856, 'GRE 0000000031', '2023-10-12 03:08:38pm', '2023-10-12 03:08:38pm', '2023-10-12 03:08:38pm', 680445, 1, 340059, '6a514a9ca9d44bad315bd4ac8fc2899c9d6bbd00'),
+(86, '1110', 576165856, 'GRE 0000000031', '2023-10-24 03:09:00pm', '2023-10-24 03:09:00pm', '2023-10-24 03:09:00pm', 680445, 1, 340059, '250880799ce628cad6f6ca2e2675a026b5049f6e'),
+(87, '500', 576165856, 'GRE 0000000031', '2023-10-25 03:09:48pm', '2023-10-25 03:09:48pm', '2023-10-25 03:09:48pm', 680445, 1, 340059, '24031ebaf745acafb2ed63200d3137c361ba19a1'),
+(88, '500', 576165856, 'GRE 0000000031', '2023-11-09 03:10:10pm', '2023-11-09 03:10:10pm', '2023-11-09 03:10:10pm', 680445, 1, 340059, '5ffb6196caf3f530cbf2ba8b5a84236a4244e7a5'),
+(89, '300', 576165856, 'GRE 0000000031', '2023-11-20 03:10:56pm', '2023-11-20 03:10:56pm', '2023-11-20 03:10:56pm', 680445, 1, 340059, '815a552801f03268d5cf0fae6aaa8e0a9317be6f'),
+(90, '700', 576165856, 'GRE 0000000031', '2024-05-10 03:13:38pm', '2024-05-10 03:13:38pm', '2024-05-10 03:13:38pm', 680445, 1, 340059, '5fe75256402ad9a4f2b2eacfd5761a7cc5538e61'),
+(91, '1200', 576165856, 'GRE 0000000031', '2024-07-09 03:14:55pm', '2024-07-09 03:14:55pm', '2024-07-09 03:14:55pm', 680445, 1, 340059, '812277e1e88fb0abae8616dfbd99e86f86de2c96'),
+(92, '70', 326252747, 'GRE 0000000032', '2022-06-07 03:56:05pm', '2022-06-07 03:56:05pm', '2022-06-07 03:56:05pm', 680445, 1, 340059, 'c608a75ef5a6073372eadf97c84dceaa6286f15b'),
+(93, '100', 326252747, 'GRE 0000000032', '2022-06-10 03:56:19pm', '2022-06-10 03:56:19pm', '2022-06-10 03:56:19pm', 680445, 1, 340059, '4801d03b2359821f668c3a7c7e70ac31ed95ac8c'),
+(94, '200', 326252747, 'GRE 0000000032', '2022-06-13 03:56:36pm', '2022-06-13 03:56:36pm', '2022-06-13 03:56:36pm', 680445, 1, 340059, '05169a3e07e8c1e0c45a0d53621a1c6f8a35dbc4'),
+(95, '210', 326252747, 'GRE 0000000032', '2022-07-07 03:56:53pm', '2022-07-07 03:56:53pm', '2022-07-07 03:56:53pm', 680445, 1, 340059, '53f7982c59764b1dc36652abb3d85d7ec37bf3a9'),
+(96, '250', 326252747, 'GRE 0000000032', '2022-08-08 03:59:07pm', '2022-08-08 03:59:07pm', '2022-08-08 03:59:07pm', 680445, 1, 340059, '828fdffce9d6a9b22917b53d03925836fbb438a5'),
+(97, '300', 326252747, 'GRE 0000000032', '2022-09-05 03:59:56pm', '2022-09-05 03:59:56pm', '2022-09-05 03:59:56pm', 680445, 1, 340059, 'dce65d5289c8bc2f4376761684528f929a0e2469'),
+(98, '90', 326252747, 'GRE 0000000032', '2022-09-08 04:00:16pm', '2022-09-08 04:00:16pm', '2022-09-08 04:00:16pm', 680445, 1, 340059, 'cda4d1da6bffd3859722b242a3c645edcf2c5d60'),
+(99, '400', 326252747, 'GRE 0000000032', '2022-09-26 04:01:01pm', '2022-09-26 04:01:01pm', '2022-09-26 04:01:01pm', 680445, 1, 340059, '2fe49497923b7187d6b055f64397d3b98aa2c5d0'),
+(100, '100', 326252747, 'GRE 0000000032', '2022-10-03 04:01:17pm', '2022-10-03 04:01:17pm', '2022-10-03 04:01:17pm', 680445, 1, 340059, 'a4882e770c97dde2176d63b1029b6dc029553d6f'),
+(101, '80', 326252747, 'GRE 0000000032', '2022-10-10 04:01:29pm', '2022-10-10 04:01:29pm', '2022-10-10 04:01:29pm', 680445, 1, 340059, 'e0190e7b6f944f2b7fbe0aeb9aba3192d697e15f'),
+(102, '195', 326252747, 'GRE 0000000032', '2022-10-17 04:02:06pm', '2022-10-17 04:02:06pm', '2022-10-17 04:02:06pm', 680445, 1, 340059, '820a4b239a1b23b0903b6840d9a3a831edc5c7e8'),
+(103, '165', 326252747, 'GRE 0000000032', '2022-10-18 04:02:27pm', '2022-10-18 04:02:27pm', '2022-10-18 04:02:27pm', 680445, 1, 340059, '35b2ea6594e242754d5c39ecd4216a4152673607'),
+(104, '90', 326252747, 'GRE 0000000032', '2022-10-21 04:03:06pm', '2022-10-21 04:03:06pm', '2022-10-21 04:03:06pm', 680445, 1, 340059, '256c9ef939c6150cc57b730f6f7218502d70f44d'),
+(105, '100', 326252747, 'GRE 0000000032', '2022-10-24 04:03:45pm', '2022-10-24 04:03:45pm', '2022-10-24 04:03:45pm', 680445, 1, 340059, '09d832e5dc7ce92fc1392b3cf8905aaacd5a59fe'),
+(106, '480', 326252747, 'GRE 0000000032', '2022-10-31 04:07:00pm', '2022-10-31 04:07:00pm', '2022-10-31 04:07:00pm', 680445, 1, 340059, '219742f2a1934e462b89dbc6c770e778f93e7178'),
+(107, '300', 326252747, 'GRE 0000000032', '2022-11-01 04:07:22pm', '2022-11-01 04:07:22pm', '2022-11-01 04:07:22pm', 680445, 1, 340059, '2300d851c064ee707b94e3ec8bbbbf9cb5743ea2'),
+(108, '120', 326252747, 'GRE 0000000032', '2022-11-14 04:07:56pm', '2022-11-14 04:07:56pm', '2022-11-14 04:07:56pm', 680445, 1, 340059, '8f387f14b5c2c622244a1cb6403533afbcc41733'),
+(109, '500', 326252747, 'GRE 0000000032', '2023-01-10 04:09:39pm', '2023-01-10 04:09:39pm', '2023-01-10 04:09:39pm', 680445, 1, 340059, 'de28c2e5e6971cc7b68d6020f533f1c7f77b23d0'),
+(110, '700', 326252747, 'GRE 0000000032', '2023-03-04 04:10:54pm', '2023-03-04 04:10:54pm', '2023-03-04 04:10:54pm', 680445, 1, 340059, '434b5eac74202d1ef122c8892a214ddaa7b05801'),
+(111, '380', 326252747, 'GRE 0000000032', '2023-04-13 04:11:43pm', '2023-04-13 04:11:43pm', '2023-04-13 04:11:43pm', 680445, 1, 340059, 'facbd027be0d755addf4e0e62e4d563fb00c111e'),
+(112, '90', 326252747, 'GRE 0000000032', '2023-05-22 04:12:32pm', '2023-05-22 04:12:32pm', '2023-05-22 04:12:32pm', 680445, 1, 340059, '252e1cca033aed48a2dd50e9a8efb219227af788'),
+(113, '100', 326252747, 'GRE 0000000032', '2023-08-03 04:13:41pm', '2023-08-03 04:13:41pm', '2023-08-03 04:13:41pm', 680445, 1, 340059, 'dc62323427414796df0c3e85567ce03aa1671fa8'),
+(114, '500', 326252747, 'GRE 0000000032', '2023-08-07 04:14:28pm', '2023-08-07 04:14:28pm', '2023-08-07 04:14:28pm', 680445, 1, 340059, '4d24a5802721bb2ce80dfaa2d5f116734e0d7d2a'),
+(115, '120', 326252747, 'GRE 0000000032', '2023-11-20 04:16:17pm', '2023-11-20 04:16:17pm', '2023-11-20 04:16:17pm', 680445, 1, 340059, 'c83b1bb2fba0b13d47c9ff18174f026a6f1c8b16'),
+(116, '100', 326252747, 'GRE 0000000032', '2023-11-21 04:17:04pm', '2023-11-21 04:17:04pm', '2023-11-21 04:17:04pm', 680445, 1, 340059, '2850925da94b09aeb89516a130f4e596356b00dc'),
+(117, '70', 326252747, 'GRE 0000000032', '2023-11-27 04:17:16pm', '2023-11-27 04:17:16pm', '2023-11-27 04:17:16pm', 680445, 1, 340059, '06cff5e9e336ee668e46cd944432adbc24bb88b3'),
+(118, '100', 326252747, 'GRE 0000000032', '2023-11-28 04:17:32pm', '2023-11-28 04:17:32pm', '2023-11-28 04:17:32pm', 680445, 1, 340059, '1bc4a2cf6646ec210d9daa2cb8265a9acd87f292'),
+(119, '100', 326252747, 'GRE 0000000032', '2023-11-30 04:17:44pm', '2023-11-30 04:17:44pm', '2023-11-30 04:17:44pm', 680445, 1, 340059, 'b307077c4ed9413e9dba57a9c55abb7f96bf159b'),
+(120, '40', 326252747, 'GRE 0000000032', '2023-12-22 04:18:06pm', '2023-12-22 04:18:06pm', '2023-12-22 04:18:06pm', 680445, 1, 340059, '5adf644086e14696e773d20aebf084030c7a1d4e'),
+(121, '1290', 326252747, 'GRE 0000000032', '2024-02-05 04:19:00pm', '2024-02-05 04:19:00pm', '2024-02-05 04:19:00pm', 680445, 1, 340059, '15713bb02b855d85fb1ab57c0f49cdc3bb6f4794'),
+(122, '150', 326252747, 'GRE 0000000032', '2024-02-23 04:19:40pm', '2024-02-23 04:19:40pm', '2024-02-23 04:19:40pm', 680445, 1, 340059, 'cf8ba6ea60af87ad6133b75b88ce6515a34b9bb4'),
+(123, '200', 326252747, 'GRE 0000000032', '2024-05-20 04:20:23pm', '2024-05-20 04:20:23pm', '2024-05-20 04:20:23pm', 680445, 1, 340059, '0c4911f6bbdd22e68b7677461ca4d4761442405e'),
+(124, '200', 326252747, 'GRE 0000000032', '2024-07-25 04:21:27pm', '2024-07-25 04:21:27pm', '2024-07-25 04:21:27pm', 680445, 1, 340059, '34b8777fe22cfbe48eca82eada92e4f1f18837fb'),
+(125, '100', 829181896, 'GRE 0000000030', '2024-08-05 12:28:13pm', '2024-08-05 12:28:13pm', '2024-08-05 12:28:13pm', 680445, 1, 340059, 'ceabb2cc6e0707e17902c90989d66bc2186f3de0'),
+(126, '100', 829181896, 'GRE 0000000030', '2024-08-06 12:28:28pm', '2024-08-06 12:28:28pm', '2024-08-06 12:28:28pm', 680445, 1, 340059, '30e221fd7a6f68b20473cb0f5db12d364dfaab16'),
+(127, '100', 829181896, 'GRE 0000000030', '2024-08-07 11:46:02am', '2024-08-07 11:46:02am', '2024-08-07 11:46:02am', 680445, 1, 340059, '7d7d8740f811acc63f09ee4d0ab302c4c8158adb'),
+(128, '100', 829181896, 'GRE 0000000030', '2024-08-08 11:46:15am', '2024-08-08 11:46:15am', '2024-08-08 11:46:15am', 680445, 1, 340059, 'dd6ed595222a24fa7110ec81898c0cbd9288f919'),
+(129, '1600', 576165856, 'GRE 0000000031', '2024-08-12 01:21:53pm', '2024-08-12 01:21:53pm', '2024-08-12 01:21:53pm', 680445, 1, 340059, 'b0a1e40d224aee15796d1c4d93e3079204af9dce'),
+(130, '100', 829181896, 'GRE 0000000030', '2024-08-12 10:38:18am', '2024-08-12 10:38:18am', '2024-08-12 10:38:18am', 680445, 1, 340059, '92ecf5a6b04a9bb5f210265cf4f6a25c20de9e06'),
+(131, '100', 829181896, 'GRE 0000000030', '2024-08-13 10:33:33am', '2024-08-13 10:33:33am', '2024-08-13 10:33:33am', 680445, 1, 340059, '9e2e4c37a5bf8cf8f7a012b1170181bc878d6d82'),
+(132, '100', 829181896, 'GRE 0000000030', '2024-08-15 10:44:59am', '2024-08-15 10:44:59am', '2024-08-15 10:44:59am', 680445, 1, 340059, 'f0866a7dd3478ca7d49dd10dee117ff8ccd84ac0'),
+(133, '100', 165980726, 'GRE 0000000024', '2024-08-14 01:17:09pm', '2024-08-14 01:17:09pm', '2024-08-14 01:17:09pm', 680445, 1, 340059, '6dd44c8e5977e09792e46e9edecc54479c47bd77'),
+(134, '100', 829181896, 'GRE 0000000030', '2024-08-15 05:56:01pm', '2024-08-15 05:56:01pm', '2024-08-15 05:56:01pm', 680445, 1, 340059, 'a78ba986a481eb8197ac7c6d20753d39f4313799'),
+(135, '100', 829181896, 'GRE 0000000030', '2024-08-16 05:56:14pm', '2024-08-16 05:56:14pm', '2024-08-16 05:56:14pm', 680445, 1, 340059, '7adc5dfbb90feb290ed9a50de3dc7ec09e745c80'),
+(136, '100', 829181896, 'GRE 0000000030', '2024-08-17 03:48:52pm', '2024-08-17 03:48:52pm', '2024-08-17 03:48:52pm', 680445, 1, 340059, '32342ba5ced48c69fe098f86365ef4ef1b1ecdd5'),
+(137, '100', 829181896, 'GRE 0000000030', '2024-08-18 03:49:05pm', '2024-08-18 03:49:05pm', '2024-08-18 03:49:05pm', 680445, 1, 340059, 'bf1257b944ba1ea7657e85bc57951756f3d39fd2'),
+(138, '80', 326252747, 'GRE 0000000032', '2024-08-27 12:40:46pm', '2024-08-27 12:40:46pm', '2024-08-27 12:40:46pm', 680445, 1, 340059, 'd530f4aad930af3c20f403ae633fcf7b9ade4557'),
+(139, '200', 165980726, 'GRE 0000000024', '2024-09-02 11:01:08am', '2024-09-02 11:01:08am', '2024-09-02 11:01:08am', 680445, 1, 340059, 'f59b033b3bf0d45af7fb28912f732a3e3fc9f202'),
+(140, '1400', 326252747, 'GRE 0000000032', '2024-09-16 12:13:57pm', '2024-09-16 12:13:57pm', '2024-09-16 12:13:57pm', 680445, 1, 340059, '16fe715ce74a6b34f95318def00f97d5309aa8bc'),
+(141, '100', 165980726, 'GRE 0000000024', '2024-09-17 05:24:18pm', '2024-09-17 05:24:18pm', '2024-09-17 05:24:18pm', 680445, 1, 340059, 'f093fcb28d95f19641e9f734384d8f97680d5197'),
+(142, '100', 165980726, 'GRE 0000000024', '2024-09-24 09:35:59am', '2024-09-24 09:35:59am', '2024-09-24 09:35:59am', 680445, 1, 340059, '8b70beb26cbb3ff7e1421c097703801379f6d61d'),
+(143, '100', 165980726, 'GRE 0000000024', '2024-10-11 10:53:39am', '2024-10-11 10:53:39am', '2024-10-11 10:53:39am', 680445, 1, 340059, 'd8247ce248d02fe2b3462a5ea5fa789a5e48c40f');
 
 -- --------------------------------------------------------
 
@@ -585,15 +990,15 @@ CREATE TABLE `deposit_tb` (
 --
 
 CREATE TABLE `dept_tb` (
-  `id` bigint NOT NULL,
-  `name` varchar(200) COLLATE utf8mb4_general_ci NOT NULL,
-  `code` bigint NOT NULL,
-  `description` longtext COLLATE utf8mb4_general_ci,
-  `posted_by` int NOT NULL,
-  `date_created` varchar(100) COLLATE utf8mb4_general_ci NOT NULL,
-  `date_modified` varchar(100) COLLATE utf8mb4_general_ci NOT NULL,
-  `companyid` bigint DEFAULT NULL,
-  `hcode` longtext COLLATE utf8mb4_general_ci NOT NULL
+  `id` bigint(20) NOT NULL,
+  `name` varchar(200) NOT NULL,
+  `code` bigint(20) NOT NULL,
+  `description` longtext DEFAULT NULL,
+  `posted_by` int(11) NOT NULL,
+  `date_created` varchar(100) NOT NULL,
+  `date_modified` varchar(100) NOT NULL,
+  `companyid` bigint(20) DEFAULT NULL,
+  `hcode` longtext NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -626,7 +1031,7 @@ INSERT INTO `dept_tb` (`id`, `name`, `code`, `description`, `posted_by`, `date_c
 --
 
 CREATE TABLE `fees_tb` (
-  `ID` int NOT NULL,
+  `ID` int(11) NOT NULL,
   `ENTRY_MIN_FEE` varchar(200) NOT NULL,
   `ENTRY_MAX_FEE` varchar(200) DEFAULT NULL,
   `WITHDRAWAL_FEE` varchar(200) DEFAULT NULL,
@@ -636,11 +1041,11 @@ CREATE TABLE `fees_tb` (
   `CLOSING_MAX_FEE` varchar(200) DEFAULT NULL,
   `MANAGEMENT_MIN_FEE` varchar(200) DEFAULT NULL,
   `MANAGEMENT_MAX_FEE` varchar(200) DEFAULT NULL,
-  `PRODUCT_ID` int DEFAULT NULL,
-  `DATE_CREATED` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `CCODE` int NOT NULL,
+  `PRODUCT_ID` int(11) DEFAULT NULL,
+  `DATE_CREATED` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `CCODE` int(11) NOT NULL,
   `HCODE` longtext NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
 
 -- --------------------------------------------------------
 
@@ -649,15 +1054,15 @@ CREATE TABLE `fees_tb` (
 --
 
 CREATE TABLE `fee_tb` (
-  `ID` int NOT NULL,
+  `ID` int(11) NOT NULL,
   `ENTRY_FEE` varchar(200) DEFAULT NULL,
   `WITHDRAWAL_FEE` varchar(255) DEFAULT NULL,
-  `PRODUCT_ID` int DEFAULT NULL,
-  `DATE_CREATED` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `PRODUCT_ID` int(11) DEFAULT NULL,
+  `DATE_CREATED` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `DATE_MODIFIED` varchar(50) DEFAULT NULL,
-  `CCODE` int DEFAULT NULL,
-  `HCODE` longtext
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+  `CCODE` int(11) DEFAULT NULL,
+  `HCODE` longtext DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Dumping data for table `fee_tb`
@@ -684,17 +1089,17 @@ INSERT INTO `fee_tb` (`ID`, `ENTRY_FEE`, `WITHDRAWAL_FEE`, `PRODUCT_ID`, `DATE_C
 --
 
 CREATE TABLE `formfee_tb` (
-  `id` bigint NOT NULL,
+  `id` bigint(20) NOT NULL,
   `loanid` varchar(200) NOT NULL,
-  `customerid` bigint NOT NULL,
+  `customerid` bigint(20) NOT NULL,
   `amount` double NOT NULL,
-  `posted_by` int NOT NULL,
+  `posted_by` int(11) NOT NULL,
   `date_normal` varchar(100) NOT NULL,
   `date_created` varchar(100) NOT NULL,
   `date_modified` varchar(100) DEFAULT NULL,
-  `ccode` int NOT NULL,
+  `ccode` int(11) NOT NULL,
   `hcode` longtext NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Dumping data for table `formfee_tb`
@@ -713,7 +1118,44 @@ INSERT INTO `formfee_tb` (`id`, `loanid`, `customerid`, `amount`, `posted_by`, `
 (10, 'GRE/BUS/2024/000005', 5, 250, 680445, '2022-12-05 16:46', '2022-12-05 16:46', '2022-12-05 16:46', 340059, 'e2d83f03531bfddd43b5c7f7a17a7dcb9e781785'),
 (11, 'GRE/BUS/2024/000005', 5, 250, 680445, '2023-07-13 16:56', '2023-07-13 16:56', '2023-07-13 16:56', 340059, 'd69749ae52f48ad8b6b6fc63cc397ae7b08434e2'),
 (12, 'GRE/BUS/2024/000006', 6, 250, 680445, '2024-02-22 17:19', '2024-02-22 17:19', '2024-02-22 17:19', 340059, '4265c422ad6951f79842a98901fe685182cc70e5'),
-(13, 'GRE/BUS/2024/000003', 3, 250, 660546, '2024-08-06 10:23', '2024-08-06 10:23', '2024-08-06 10:23', 340059, 'ae8069eef591ff3b2c9360a73b65de3051f6e4fe');
+(13, 'GRE/BUS/2024/000007', 7, 250, 680445, '2022-09-01 03:31', '2022-09-01 03:31', '2022-09-01 03:31', 340059, '782f61e2b1468e604d45e6a6ccacb6fb53610c47'),
+(14, 'GRE/BUS/2024/000009', 9, 250, 680445, '2024-01-18 04:12', '2024-01-18 04:12', '2024-01-18 04:12', 340059, 'd265a7166fc2110f8e280eed4eb2d1da6d7a08d3'),
+(15, 'GRE/BUS/2024/0000010', 10, 250, 680445, '2023-06-12 04:31', '2023-06-12 04:31', '2023-06-12 04:31', 340059, '7a525d3095b7c0b51f33c5f537f8034437019ab0'),
+(16, 'GRE/BUS/2024/0000011', 11, 250, 680445, '2023-05-16 16:49', '2023-05-16 16:49', '2023-05-16 16:49', 340059, '257ace86328c3d6929347ca2cc0fadd7f5bffa54'),
+(17, 'GRE/BUS/2024/0000012', 12, 250, 680445, '2023-10-18 16:54', '2023-10-18 16:54', '2023-10-18 16:54', 340059, '7d77a708f9ba9ac3aa8f35ece3bc65efcfcf6d3d'),
+(18, 'GRE/BUS/2024/0000014', 14, 250, 680445, '2023-12-11 17:09', '2023-12-11 17:09', '2023-12-11 17:09', 340059, '2ff222b6b04f566c588ae934b02677df605bb71e'),
+(19, 'GRE/BUS/2024/0000015', 15, 250, 680445, '2024-03-26 18:00', '2024-03-26 18:00', '2024-03-26 18:00', 340059, 'fb382d9791402bcecc4f3c69041e2afb211d00b0'),
+(20, 'GRE/BUS/2024/0000013', 13, 250, 680445, '2024-02-01 03:42', '2024-02-01 03:42', '2024-02-01 03:42', 340059, '3c57923f6058f7c6f562b7eccb2463f0efef86e5'),
+(21, 'GRE/BUS/2024/0000016', 16, 250, 680445, '2024-02-19 04:13', '2024-02-19 04:13', '2024-02-19 04:13', 340059, '908bd93029817eb7d22e648164963471cac4ccce'),
+(22, 'GRE/BUS/2024/0000017', 17, 250, 680445, '2024-03-11 04:23', '2024-03-11 04:23', '2024-03-11 04:23', 340059, '787f4ed3ee64aec3f544d07e0166d61fc56ab357'),
+(23, 'GRE/BUS/2024/0000018', 18, 250, 680445, '2023-05-29 04:47', '2023-05-29 04:47', '2023-05-29 04:47', 340059, 'ca4e5ec7e24a4ab881bb06655db599622552b666'),
+(24, 'GRE/BUS/2024/0000019', 19, 250, 680445, '2024-02-12 05:05', '2024-02-12 05:05', '2024-02-12 05:05', 340059, '3d0973536481591bb38ef98ea91bda7fd382df1b'),
+(25, 'GRE/BUS/2024/0000019', 19, 250, 680445, '2024-06-05 05:13', '2024-06-05 05:13', '2024-06-05 05:13', 340059, '4a356b3105a18976921940e730bb556ae6853650'),
+(26, 'GRE/BUS/2024/0000020', 20, 250, 680445, '2024-02-15 05:26', '2024-02-15 05:26', '2024-02-15 05:26', 340059, '16232e3e0fa68993024612775335b8216bdb805d'),
+(27, 'GRE/BUS/2024/0000020', 20, 250, 680445, '2024-04-15 05:35', '2024-04-15 05:35', '2024-04-15 05:35', 340059, '57ce0622fe5517e254bacbc15dbb9781059b5b38'),
+(28, 'GRE/BUS/2024/0000021', 21, 250, 680445, '2024-02-14 05:49', '2024-02-14 05:49', '2024-02-14 05:49', 340059, '6c5a342c2863d30faf63280cf34bd602bd15176e'),
+(29, 'GRE/BUS/2024/0000021', 21, 250, 680445, '2024-05-24 06:00', '2024-05-24 06:00', '2024-05-24 06:00', 340059, 'c1d985382f3a62b304009e7890619a678726fd87'),
+(30, 'GRE/BUS/2024/0000022', 22, 250, 680445, '2024-03-05 06:13', '2024-03-05 06:13', '2024-03-05 06:13', 340059, 'f98c1a5ce093b9b6a70621e94cd1c7fbeef9c7c8'),
+(31, 'GRE/BUS/2024/0000023', 23, 250, 680445, '2023-05-11 06:32', '2023-05-11 06:32', '2023-05-11 06:32', 340059, 'c84577b566361392c11abd28576bab65c2802036'),
+(32, 'GRE/BUS/2024/0000018', 18, 250, 680445, '2023-12-09 06:38', '2023-12-09 06:38', '2023-12-09 06:38', 340059, '96fcaa03f58865378449c71aef5393fc2db0de56'),
+(33, 'GRE/BUS/2024/0000016', 16, 250, 680445, '2024-06-24 07:04', '2024-06-24 07:04', '2024-06-24 07:04', 340059, 'd9a37d418fb48e57a220ba32ac5670581c23b6e3'),
+(34, 'GRE/BUS/2024/0000014', 14, 250, 680445, '2024-05-20 07:11', '2024-05-20 07:11', '2024-05-20 07:11', 340059, '7c59bed8f66160fd5e0484cbaa3816662da95639'),
+(35, 'GRE/BUS/2024/0000015', 15, 250, 680445, '2024-08-11 07:16', '2024-08-11 07:16', '2024-08-11 07:16', 340059, 'f1d5aefdb6f7713b550e1d800d403d5d661b6d20'),
+(36, 'GRE/BUS/2024/0000024', 24, 250, 680445, '2024-05-13 07:39', '2024-05-13 07:39', '2024-05-13 07:39', 340059, 'adcd6b4a870ffaa29d94ec26924b7bff2e8f32f9'),
+(37, 'GRE/BUS/2024/0000025', 25, 250, 680445, '2023-01-27 08:12', '2023-01-27 08:12', '2023-01-27 08:12', 340059, '5c778654ed0b0a44b9649bde78267a750ddf0c48'),
+(38, 'GRE/BUS/2024/0000026', 26, 250, 680445, '2023-03-07 08:28', '2023-03-07 08:28', '2023-03-07 08:28', 340059, 'c0368f58a03320e6a41969650679a74030f7967d'),
+(39, 'GRE/BUS/2024/0000026', 26, 250, 680445, '2023-11-20 08:35', '2023-11-20 08:35', '2023-11-20 08:35', 340059, 'a0998b0ed0ae1f8728bbd5c31902661fd2ac03d6'),
+(40, 'GRE/BUS/2024/0000026', 26, 250, 680445, '2023-07-13 09:33', '2023-07-13 09:33', '2023-07-13 09:33', 340059, 'a9b339dc63d9f7a4c8a687bc1b466f9f100a9f4f'),
+(41, 'GRE/BUS/2024/0000027', 27, 250, 680445, '2024-04-22 09:57', '2024-04-22 09:57', '2024-04-22 09:57', 340059, '0d28aa4e9e0447b4ba4c8485cc1f88ce9677fc93'),
+(42, 'GRE/BUS/2024/000008', 8, 250, 680445, '2023-01-28 10:08', '2023-01-28 10:08', '2023-01-28 10:08', 340059, '12f3bfad6ca52682f4be9dd10840f5c00a27905d'),
+(43, 'GRE/BUS/2024/000008', 8, 250, 680445, '2023-04-11 10:15', '2023-04-11 10:15', '2023-04-11 10:15', 340059, '477980763e662091cf146d1d2314ed00fcf62ea2'),
+(44, 'GRE/BUS/2024/0000017', 17, 250, 680445, '2024-06-10 12:41', '2024-06-10 12:41', '2024-06-10 12:41', 340059, 'a6ad1f3a59c89e5b2f594751dedf0d7903b44445'),
+(45, 'GRE/BUS/2024/0000018', 18, 250, 680445, '2024-08-12 10:40', '2024-08-12 10:40', '2024-08-12 10:40', 340059, '6fd46773e2e03901439eaaae682e98c48fadc7fd'),
+(46, 'GRE/BUS/2024/0000028', 28, 250, 680445, '2024-08-12 12:00', '2024-08-12 12:00', '2024-08-12 12:00', 340059, '8cbbe159c521e34605d5efbaf68afaa5f9d2c83e'),
+(47, 'GRE/BUS/2024/0000029', 29, 250, 680445, '2024-08-12 13:59', '2024-08-12 13:59', '2024-08-12 13:59', 340059, 'e36c98e882f61f181173f1dcefa0cb4c34c34065'),
+(48, 'GRE/BUS/2024/0000030', 30, 250, 680445, '2024-08-23 10:45', '2024-08-23 10:45', '2024-08-23 10:45', 340059, '51d84b532b25ce431454f984dfeceed7cc4225b2'),
+(49, 'GRE/BUS/2024/000006', 6, 250, 680445, '2024-09-02 11:06', '2024-09-02 11:06', '2024-09-02 11:06', 340059, '247de5d857d87422da6360847c74de393d47d282'),
+(50, 'GRE/BUS/2024/0000010', 10, 250, 680445, '2024-09-04 13:36', '2024-09-04 13:36', '2024-09-04 13:36', 340059, '01a9c51509fa6e88f52f656b96f8b258c3dc68c5');
 
 -- --------------------------------------------------------
 
@@ -722,13 +1164,13 @@ INSERT INTO `formfee_tb` (`id`, `loanid`, `customerid`, `amount`, `posted_by`, `
 --
 
 CREATE TABLE `form_tb` (
-  `ID` bigint NOT NULL,
-  `CUSTOMERID` bigint NOT NULL,
-  `LOANID` int NOT NULL,
-  `AFILE` varchar(200) COLLATE utf8mb4_general_ci NOT NULL,
-  `POSTED_BY` int NOT NULL,
-  `DATE_CREATED` varchar(100) COLLATE utf8mb4_general_ci NOT NULL,
-  `DATE_MODIFIED` varchar(100) COLLATE utf8mb4_general_ci DEFAULT NULL
+  `ID` bigint(20) NOT NULL,
+  `CUSTOMERID` bigint(20) NOT NULL,
+  `LOANID` int(11) NOT NULL,
+  `AFILE` varchar(200) NOT NULL,
+  `POSTED_BY` int(11) NOT NULL,
+  `DATE_CREATED` varchar(100) NOT NULL,
+  `DATE_MODIFIED` varchar(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -743,7 +1185,45 @@ INSERT INTO `form_tb` (`ID`, `CUSTOMERID`, `LOANID`, `AFILE`, `POSTED_BY`, `DATE
 (5, 4, 5, 'img695849.jpg', 680445, '2024-08-05 16:24', '2024-08-05 16:24'),
 (6, 5, 6, 'img262220.jpg', 680445, '2024-08-05 16:47', '2024-08-05 16:47'),
 (7, 5, 7, 'img782388.jpg', 680445, '2024-08-05 16:57', '2024-08-05 16:57'),
-(8, 6, 8, 'img183551.jpg', 680445, '2024-08-05 17:20', '2024-08-05 17:20');
+(8, 6, 8, 'img183551.jpg', 680445, '2024-08-05 17:20', '2024-08-05 17:20'),
+(9, 7, 9, 'img788175.jpg', 680445, '2024-08-06 03:32', '2024-08-06 03:32'),
+(10, 9, 10, 'img261654.jpg', 680445, '2024-08-06 04:14', '2024-08-06 04:14'),
+(11, 10, 11, 'img408260.jpg', 680445, '2024-08-06 04:32', '2024-08-06 04:32'),
+(12, 11, 12, 'img192222.jpg', 680445, '2024-08-06 16:51', '2024-08-06 16:51'),
+(13, 12, 13, 'img739996.jpg', 680445, '2024-08-06 16:58', '2024-08-06 16:58'),
+(14, 13, 16, 'img472374.jpg', 680445, '2024-08-07 03:46', '2024-08-07 03:46'),
+(15, 14, 14, 'img326958.jpg', 680445, '2024-08-07 03:57', '2024-08-07 03:57'),
+(16, 15, 15, 'img995299.jpg', 680445, '2024-08-07 04:04', '2024-08-07 04:04'),
+(17, 16, 17, 'img326315.jpg', 680445, '2024-08-07 04:15', '2024-08-07 04:15'),
+(18, 18, 19, 'img200895.jpg', 680445, '2024-08-07 04:48', '2024-08-07 04:48'),
+(19, 19, 20, 'img718039.jpg', 680445, '2024-08-07 05:06', '2024-08-07 05:06'),
+(20, 19, 21, 'img882419.jpg', 680445, '2024-08-07 05:15', '2024-08-07 05:15'),
+(21, 20, 22, 'img795290.jpg', 680445, '2024-08-07 05:28', '2024-08-07 05:28'),
+(22, 20, 23, 'img107280.jpg', 680445, '2024-08-07 05:37', '2024-08-07 05:37'),
+(23, 21, 24, 'img714718.jpg', 680445, '2024-08-07 05:50', '2024-08-07 05:50'),
+(24, 21, 25, 'img501640.jpg', 680445, '2024-08-07 06:01', '2024-08-07 06:01'),
+(25, 22, 26, 'img814814.jpg', 680445, '2024-08-07 06:15', '2024-08-07 06:15'),
+(26, 23, 27, 'img490038.jpg', 680445, '2024-08-07 06:33', '2024-08-07 06:33'),
+(27, 18, 28, 'img713552.jpg', 680445, '2024-08-07 06:57', '2024-08-07 06:57'),
+(28, 16, 29, 'img476377.jpg', 680445, '2024-08-07 07:06', '2024-08-07 07:06'),
+(29, 14, 30, 'img251370.jpg', 680445, '2024-08-07 07:12', '2024-08-07 07:12'),
+(30, 15, 31, 'img140993.jpg', 680445, '2024-08-07 07:18', '2024-08-07 07:18'),
+(31, 24, 32, 'img724212.jpg', 680445, '2024-08-07 07:58', '2024-08-07 07:58'),
+(32, 25, 33, 'img193232.jpg', 680445, '2024-08-07 08:13', '2024-08-07 08:13'),
+(33, 26, 34, 'img345110.jpg', 680445, '2024-08-07 08:30', '2024-08-07 08:30'),
+(34, 26, 35, 'img717083.jpg', 680445, '2024-08-07 08:36', '2024-08-07 08:36'),
+(35, 26, 36, 'img280360.jpg', 680445, '2024-08-07 09:35', '2024-08-07 09:35'),
+(36, 27, 37, 'img129994.jpg', 680445, '2024-08-07 09:58', '2024-08-07 09:58'),
+(37, 8, 38, 'img653745.jpg', 680445, '2024-08-07 10:09', '2024-08-07 10:09'),
+(38, 8, 39, 'img219277.jpg', 680445, '2024-08-07 10:17', '2024-08-07 10:17'),
+(39, 17, 18, 'img617500.jpg', 680445, '2024-08-08 12:35', '2024-08-08 12:35'),
+(40, 17, 40, 'img731979.jpg', 680445, '2024-08-08 12:44', '2024-08-08 12:44'),
+(41, 18, 41, 'img222214.jpg', 680445, '2024-08-12 10:52', '2024-08-12 10:52'),
+(42, 28, 42, 'img195308.jpg', 680445, '2024-08-12 12:02', '2024-08-12 12:02'),
+(43, 29, 43, 'img987011.jpg', 680445, '2024-08-12 14:02', '2024-08-12 14:02'),
+(44, 30, 44, 'img412049.jpg', 680445, '2024-08-23 10:46', '2024-08-23 10:46'),
+(45, 6, 45, 'img748974.jpg', 680445, '2024-09-02 11:31', '2024-09-02 11:31'),
+(46, 10, 46, 'img579247.jpg', 680445, '2024-09-04 13:39', '2024-09-04 13:39');
 
 -- --------------------------------------------------------
 
@@ -752,15 +1232,15 @@ INSERT INTO `form_tb` (`ID`, `CUSTOMERID`, `LOANID`, `AFILE`, `POSTED_BY`, `DATE
 --
 
 CREATE TABLE `guarantor_tb` (
-  `ID` int NOT NULL,
+  `ID` int(11) NOT NULL,
   `ACCOUNT_NO` varchar(200) NOT NULL,
   `GUARANTOR1` varchar(200) NOT NULL,
   `GUARANTOR2` varchar(200) NOT NULL,
-  `DATE_CREATED` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `DATE_CREATED` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `DATE_MODIFIED` varchar(200) DEFAULT NULL,
-  `CCODE` int NOT NULL,
+  `CCODE` int(11) NOT NULL,
   `HCODE` longtext NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
 
 -- --------------------------------------------------------
 
@@ -769,20 +1249,20 @@ CREATE TABLE `guarantor_tb` (
 --
 
 CREATE TABLE `haccount_tb` (
-  `ID` int NOT NULL,
-  `PRODUCT_ID` int DEFAULT NULL,
-  `CLIENT_ID` int DEFAULT NULL,
+  `ID` int(11) NOT NULL,
+  `PRODUCT_ID` int(11) DEFAULT NULL,
+  `CLIENT_ID` int(11) DEFAULT NULL,
   `ACCOUNT_NO` varchar(255) DEFAULT NULL,
   `SUBSCRIPTION` varchar(200) DEFAULT NULL,
-  `RATE` int DEFAULT NULL,
-  `ACC_STATUS` int DEFAULT NULL COMMENT '0:Active 1:Inactive',
-  `SMS_STATUS` int DEFAULT NULL COMMENT '0:Active 1:Inactive',
+  `RATE` int(11) DEFAULT NULL,
+  `ACC_STATUS` int(11) DEFAULT NULL COMMENT '0:Active 1:Inactive',
+  `SMS_STATUS` int(11) DEFAULT NULL COMMENT '0:Active 1:Inactive',
   `DESCRIPTION` varchar(255) NOT NULL,
   `DATE_CREATED` varchar(100) DEFAULT NULL,
   `DATE_MODIFIED` varchar(50) DEFAULT NULL,
-  `CCODE` int NOT NULL,
+  `CCODE` int(11) NOT NULL,
   `HCODE` longtext NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
 
 --
 -- Dumping data for table `haccount_tb`
@@ -803,21 +1283,21 @@ INSERT INTO `haccount_tb` (`ID`, `PRODUCT_ID`, `CLIENT_ID`, `ACCOUNT_NO`, `SUBSC
 --
 
 CREATE TABLE `hcharge_tb` (
-  `ID` bigint NOT NULL,
+  `ID` bigint(20) NOT NULL,
   `HCODE` longtext NOT NULL,
-  `CLIENT_ID` int NOT NULL,
+  `CLIENT_ID` int(11) NOT NULL,
   `ACCOUNT_NUMBER` varchar(200) NOT NULL,
-  `WITHDRAWAL_ID` int DEFAULT NULL,
-  `PRODUCT_ID` int DEFAULT NULL,
+  `WITHDRAWAL_ID` int(11) DEFAULT NULL,
+  `PRODUCT_ID` int(11) DEFAULT NULL,
   `FEE_TYPE` varchar(200) DEFAULT NULL,
-  `QUANTITY` int DEFAULT NULL,
+  `QUANTITY` int(11) DEFAULT NULL,
   `AMOUNT` double NOT NULL,
-  `CSTATUS` int DEFAULT NULL COMMENT '1: Collected 2: Not Collected',
+  `CSTATUS` int(11) DEFAULT NULL COMMENT '1: Collected 2: Not Collected',
   `DATE_CREATED` varchar(50) NOT NULL,
   `DATE_MODIFIED` varchar(50) DEFAULT NULL,
   `DATE_NORMAL` varchar(50) NOT NULL,
-  `CCODE` int NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+  `CCODE` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
 
 -- --------------------------------------------------------
 
@@ -826,10 +1306,10 @@ CREATE TABLE `hcharge_tb` (
 --
 
 CREATE TABLE `hproduct_tb` (
-  `ID` int NOT NULL,
-  `CODE` int NOT NULL,
+  `ID` int(11) NOT NULL,
+  `CODE` int(11) NOT NULL,
   `PRODUCT` varchar(100) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
-  `CATEGORY` int DEFAULT NULL,
+  `CATEGORY` int(11) DEFAULT NULL,
   `COG` varchar(200) CHARACTER SET latin1 COLLATE latin1_swedish_ci DEFAULT '0',
   `UNIT` varchar(100) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
   `QUANTITY` varchar(200) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
@@ -837,11 +1317,11 @@ CREATE TABLE `hproduct_tb` (
   `RESTOCK_LEVEL` varchar(100) CHARACTER SET latin1 COLLATE latin1_swedish_ci DEFAULT NULL,
   `EXP_DATE` varchar(50) DEFAULT NULL,
   `IMAGE` varchar(200) CHARACTER SET latin1 COLLATE latin1_swedish_ci DEFAULT NULL,
-  `DATE_CREATED` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `DATE_CREATED` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `DATE_MODIFIED` varchar(100) CHARACTER SET latin1 COLLATE latin1_swedish_ci DEFAULT NULL,
-  `CCODE` int NOT NULL,
+  `CCODE` int(11) NOT NULL,
   `HCODE` longtext NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
 
 -- --------------------------------------------------------
 
@@ -850,8 +1330,8 @@ CREATE TABLE `hproduct_tb` (
 --
 
 CREATE TABLE `interest_tb` (
-  `ID` int NOT NULL,
-  `PRODUCT_ID` int DEFAULT NULL,
+  `ID` int(11) NOT NULL,
+  `PRODUCT_ID` int(11) DEFAULT NULL,
   `ACCOUNT_NUMBER` varchar(255) NOT NULL,
   `ACCRUE_STATUS` varchar(200) DEFAULT NULL,
   `YEAR` varchar(100) DEFAULT NULL,
@@ -860,9 +1340,9 @@ CREATE TABLE `interest_tb` (
   `DATE_CREATED` varchar(50) DEFAULT NULL,
   `DATE_NORMAL` varchar(100) DEFAULT NULL,
   `DATE_MODIFIED` varchar(50) DEFAULT NULL,
-  `CCODE` int DEFAULT NULL,
-  `HCODE` longtext
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+  `CCODE` int(11) DEFAULT NULL,
+  `HCODE` longtext DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 -- --------------------------------------------------------
 
@@ -871,38 +1351,38 @@ CREATE TABLE `interest_tb` (
 --
 
 CREATE TABLE `loanreg_tb` (
-  `id` bigint NOT NULL,
-  `code` varchar(200) COLLATE utf8mb4_general_ci NOT NULL,
-  `regtype` int NOT NULL COMMENT '1:Business 2:Group',
-  `image` varchar(200) COLLATE utf8mb4_general_ci NOT NULL,
-  `title` varchar(200) COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `surname` varchar(200) COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `othername` varchar(200) COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `phone` varchar(200) COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `gender` varchar(200) COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `dob` varchar(200) COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `dependant` varchar(200) COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `idtype` varchar(200) COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `idno` varchar(200) COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `dateissue` varchar(200) COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `dateexpire` varchar(200) COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `busname` varchar(200) COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `address` varchar(200) COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `location` varchar(200) COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `btel` varchar(200) COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `byears` varchar(200) COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `emptype` int DEFAULT NULL COMMENT '1:Employed 2: Unemployed 3:Self Employed',
-  `empname` varchar(200) COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `position` varchar(200) COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `empno` varchar(200) COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `netsal` varchar(200) COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `bdirection` varchar(200) COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `rdirection` varchar(200) COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `posted_by` int NOT NULL,
-  `date_created` varchar(100) COLLATE utf8mb4_general_ci NOT NULL,
-  `date_modified` varchar(100) COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `CCODE` int NOT NULL,
-  `HCODE` longtext COLLATE utf8mb4_general_ci NOT NULL
+  `id` bigint(20) NOT NULL,
+  `code` varchar(255) NOT NULL,
+  `regtype` int(11) NOT NULL COMMENT '1:Business 2:Group',
+  `image` varchar(200) NOT NULL,
+  `title` varchar(200) DEFAULT NULL,
+  `surname` varchar(200) DEFAULT NULL,
+  `othername` varchar(200) DEFAULT NULL,
+  `phone` varchar(200) DEFAULT NULL,
+  `gender` varchar(200) DEFAULT NULL,
+  `dob` varchar(200) DEFAULT NULL,
+  `dependant` varchar(200) DEFAULT NULL,
+  `idtype` varchar(200) DEFAULT NULL,
+  `idno` varchar(200) DEFAULT NULL,
+  `dateissue` varchar(200) DEFAULT NULL,
+  `dateexpire` varchar(200) DEFAULT NULL,
+  `busname` varchar(200) DEFAULT NULL,
+  `address` varchar(200) DEFAULT NULL,
+  `location` varchar(200) DEFAULT NULL,
+  `btel` varchar(200) DEFAULT NULL,
+  `byears` varchar(200) DEFAULT NULL,
+  `emptype` int(11) DEFAULT NULL COMMENT '1:Employed 2: Unemployed 3:Self Employed',
+  `empname` varchar(200) DEFAULT NULL,
+  `position` varchar(200) DEFAULT NULL,
+  `empno` varchar(200) DEFAULT NULL,
+  `netsal` varchar(200) DEFAULT NULL,
+  `bdirection` varchar(200) DEFAULT NULL,
+  `rdirection` varchar(200) DEFAULT NULL,
+  `posted_by` int(11) NOT NULL,
+  `date_created` varchar(100) NOT NULL,
+  `date_modified` varchar(100) DEFAULT NULL,
+  `CCODE` int(11) NOT NULL,
+  `HCODE` longtext NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -916,7 +1396,30 @@ INSERT INTO `loanreg_tb` (`id`, `code`, `regtype`, `image`, `title`, `surname`, 
 (4, 'GRE/BUS/2024/000004', 1, '1ZJgmJ59dq7uJhDRe8f0lj8Q6I9sopUCD', 'Mr', 'KWAKU', 'JOSEPH', '0558474307', 'Male', '1976-07-02', '5', 'Ecowas Card', 'GHA-7274485334-2', '2021-11-18', '2031-11-17', 'BUILDING CONTRTACTOR', 'K10', 'KPONE', '0558474307', '30 YEARS', 3, 'None', 'None', 'None', 'None', 'KKMA TO KINGDOM STAR', 'SAME ROUTINE', 680445, '2022-09-02 16:14', '2022-09-02 16:14', 340059, '2e8839a6dc6c7593002e45b60caae707bdc3629d'),
 (5, 'GRE/BUS/2024/000005', 1, '15tWvh2aDKLl_CzxJCiifspnfouoo4zwi', 'Mr', 'AYIAH', 'MATTHEW', '0243740694', 'Male', '1969-02-02', '4', 'Drivers License', '7458964510', '2020-10-15', '2022-10-14', 'TRADER', 'K8', 'KPONE SHANGHAI', '0243740694', '10 YEARS', 3, 'None', 'None', 'None', 'None', 'SHANGHAI JUNCTION', 'SAME ROUTINE', 680445, '2022-12-05 16:45', '2022-12-05 16:45', 340059, '602360a646f55f57e6ee91dfeaaed37a44c4aaac'),
 (6, 'GRE/BUS/2024/000006', 1, '14BhishkLUx1B4mVKZt35PN7z_KmcIL02', 'Ms', 'SIKA', 'DEBORAH', '0556400714', 'Female', '1996-06-13', '1', 'Ecowas Card', 'GHA-713418456-3', '2019-07-15', '2029-06-26', 'CATHERING', 'LA10', 'ACCRA LA', '0556400714', '1 YEAR', 3, 'None', 'None', 'None', 'None', 'APAPA TO LA TENU', 'SAME ROUTINE', 680445, '2024-02-22 17:18', '2024-02-22 17:18', 340059, '07bd48a0647b97364835b8a339bb38368b879660'),
-(7, 'GRE/BUS/2024/000007', 1, 'none', 'Mr', 'Asare', 'Kwame', '024002200', 'Male', '2001-01-01', '2', 'Passport', 'PS00220', '2004-01-01', '2024-08-16', 'KADKAF', 'AKFDFAKD', 'ADSFADS', '024404044', '3', 3, 'None', 'None', 'None', 'None', 'None', 'AFADSF', 660546, '2024-08-06 11:12', '2024-08-06 11:12', 340059, '5937a6373f6506237f0bb37f6e66fc978a8be2dd');
+(7, 'GRE/BUS/2024/000007', 1, '1z0d0zP6deGqJSdIQaNzLkkufT5iqpb9C', 'Mr', 'AHADO', 'ABEL', '0550821785', 'Male', '1977-09-11', '5', 'Ecowas Card', 'GHA-727503065-1', '2021-02-12', '2031-01-12', 'TRADER', 'D/20', 'KPONE FARMS', '0201374567', '10 YEARS', 3, 'None', 'None', 'None', 'None', 'NEAR KKMA KPONE', 'ADJACENT KKMA', 680445, '2022-09-01 03:30', '2022-09-01 03:30', 340059, 'a57d0b12d5bafd0ac7bdeaa3d613ad2a1371e28e'),
+(8, 'GRE/BUS/2024/000008', 1, '15oITSSccWjqBlgAA-y8OVW7cVMq1EI5o', 'Ms', 'ESHUN', 'FOSUA VIVIAN', '0558249913', 'Female', '1992-07-31', '4', 'Ecowas Card', 'GHA-727320060-1', '2021-07-12', '2031-07-11', 'MOBILE MONEY VENDOR', 'M/10', 'KPONE SHANGHAI', '0549678811', '6 YEARS', 3, 'None', 'None', 'None', 'None', 'SHANGHAI HOTEL ', 'SAME ROUTINE', 680445, '2023-10-28 04:01', '2023-10-28 04:01', 340059, '504ab144e72efb91d4c9e5e4edd87d7082482db1'),
+(9, 'GRE/BUS/2024/000009', 1, '1Lwwu4jSWmSC1DaBhQGUTuh7JDB5CcToD', 'Ms', 'BAIDOO', 'SARAH', '0531612354', 'Female', '1991-10-14', '3', 'Ecowas Card', 'GHA-723791140-0', '2020-07-11', '2030-07-10', 'TRADER', 'K20', 'KONKOMPE CAR PARK', '0531612354', '1 YEAR', 3, 'None', 'None', 'None', 'None', 'KONKOMPE CAR PARK ', 'SAME ROUTINE', 680445, '2024-01-18 04:11', '2024-01-18 04:11', 340059, '9ddfd69dc9c8ffad4e1aa09a6523e73ef27e43c5'),
+(10, 'GRE/BUS/2024/0000010', 1, '19C7vd3h738RMaJt_7fSc7FVhhVA6pRKZ', 'Ms', 'FUDZI', 'ERNESTINA', '0557447781', 'Female', '1985-01-07', '3', 'Ecowas Card', 'GHA-00099564-2', '2022-10-05', '2032-09-05', 'TRADER', 'T/1', 'TESHIE', '0208602231', '10 YEARS', 3, 'None', 'None', 'None', 'None', 'KATAMANSO TO TESHIE', 'SAME ROUTINE', 680445, '2023-06-12 04:30', '2023-06-12 04:30', 340059, '6703c6e3182aa788909606f7e9d4f6862e9dae23'),
+(11, 'GRE/BUS/2024/0000011', 1, '1WBlA0PcFhR0izJJVe0psA8W-Q0yb8JOV', 'Ms', 'AMOAH', 'LAWRENCIA', '0553970058', 'Female', '1989-03-03', '5', 'Ecowas Card', 'GHA-726300667-9', '2020-03-09', '2030-02-09', 'TRADER', 'GK005948', 'KPONE GOSPEL', '0553970058', '1 YEAR', 3, 'None', 'None', 'None', 'None', '                  BEHIND GOSPEL DEEPER LIFE CHURCH', 'SAME ROUTINE', 680445, '2023-05-16 04:49', '2023-05-16 04:49', 340059, '5eb9d60b8ca45086665f599a09a565e12dd0f93f'),
+(12, 'GRE/BUS/2024/0000012', 1, '1GjSmvwYq2kCCet8RTI6WvreT5sGgGUGS', 'Mr', 'DANSO ODURO', 'GEORGE', '0533489137', 'Male', '1995-05-05', '2', 'Ecowas Card', 'GHA-729084122-3', '2022-10-21', '2032-10-20', 'DRIVING', 'F1', 'KPONE ', '0598685824', '3 YEARS', 3, 'None', 'None', 'None', 'None', 'KPONE FAIRE POINT', 'SAME ROUTINE', 680445, '2023-10-18 05:10', '2023-10-18 05:10', 340059, 'bcd84fae15e2dd470eaac2fcfb6c7d7801af172e'),
+(13, 'GRE/BUS/2024/0000013', 1, '19KRt3PTpbGwzSbD_f_S5H-QDoAYZ5jbi', 'Ms', 'ASANTE', 'BERNICE', '0248281909', 'Female', '1987-01-01', '2', 'Ecowas Card', 'GHA-722465210-9', '2020-03-20', '2030-03-19', 'TRADER', 'NONE', 'KPONE', '0248281909', '6 MONTH', 3, 'None', 'None', 'None', 'None', 'KPONE LEONALDO ROAD OPPOSITE ROYAL SCHOOL', 'SAME ROUTINE', 680445, '2024-02-01 05:21', '2024-02-01 05:21', 340059, '36184018643c53e943b326845267654341ca894e'),
+(14, 'GRE/BUS/2024/0000014', 1, '10zc43gNNASLqVeXGPqbUf5gPWFTAobpp', 'Mr', 'ESHUN', 'BENJAMIN', '0243442911', 'Male', '1984-05-06', '5', 'Ecowas Card', 'GHA-726132335-4', '2020-09-02', '2030-09-01', 'DRIVING', 'GPRTU', 'TEMA', '0278877169', '14 YEARS', 3, 'None', 'None', 'None', 'None', 'KPONE TO TEMA ', 'TEMA TO KPONE', 680445, '2023-12-11 05:39', '2023-12-11 05:39', 340059, 'cd1d14c03200eb67fc677f4e771d3cddbf66b338'),
+(15, 'GRE/BUS/2024/0000015', 1, '1Oj-X1PH_Gb7kfQY1W1gDKx1zvC-0Mqwr', 'Mrs', 'ADDO', 'VIVIAN', '0256569746', 'Female', '1989-08-11', '5', 'Ecowas Card', 'GHA-001163059-7', '2021-12-23', '2031-12-22', 'TRADER', 'GK0012-7910', 'KPONE SHANGHAI JUNCTION', '0256569746', '7 YEARS', 3, 'None', 'None', 'None', 'None', 'KPON SHANGHAI FIRST WASHING BAY', 'SAME ROUTINE', 680445, '2024-03-26 05:53', '2024-03-26 05:53', 340059, 'b99ea45d237227ded419ac4e158d05d1eb5d5e3d'),
+(16, 'GRE/BUS/2024/0000016', 1, '1P03qEiDOytHwn7Zh5lPl0CvQwKATx93M', 'Ms', 'DZIVENU', 'GLORIA', '0534832378', 'Female', '1995-05-14', '5', 'Ecowas Card', 'GHA-729724983-5', '2024-02-16', '2034-02-15', 'TRADER', 'GK0021804', 'KPONE', '0257622579', '5 YEARS', 3, 'None', 'None', 'None', 'None', 'SHANGHAI TO KPONE', 'SAME ROUTINE', 680445, '2024-02-19 06:04', '2024-02-19 06:04', 340059, '5d6fe3e5cc84a551ea792bd29c29a75ec318f79c'),
+(17, 'GRE/BUS/2024/0000017', 1, '1Q53rC97U4YWxqHt7xEgkmw5AhP0K496F', 'Ms', 'MENSAH', 'COMFORT', '0556901694', 'Female', '1980-05-20', '2', 'Ecowas Card', 'GHA-726537383-2', '2020-09-06', '2030-09-05', 'TRADER', 'GK0011-0151', 'KPONE', '0556901694', '14 YEARS', 3, 'None', 'None', 'None', 'None', ' ADJACENT KPONE KKMA', 'SAME ROUTINE', 680445, '2024-03-11 09:23', '2024-03-11 09:23', 340059, 'fb78739ed20bc27591baa9ab34620b9cfce49495'),
+(18, 'GRE/BUS/2024/0000018', 1, '1j9HUY6SQ-qXt4UwniZmCLfRNkddtiSf-', 'Ms', 'NYARKOA', 'AMA DORIS', '0540863299', 'Female', '1988-05-05', '5', 'Ecowas Card', 'GHA-001159911-5', '2019-06-28', '2029-06-24', 'TRADER', 'NONE', 'KPONE', '0540863299', '2 YEARS', 3, 'None', 'None', 'None', 'None', 'OPPOSITE THE CHIEF\"S HOUSE (SHANGHAI TOUCH SKIES)', 'SAME ROUTINE', 680445, '2023-05-29 04:45', '2023-05-29 04:45', 340059, '42e635cb50dc7a12da4cdaefd58d114308c08e9c'),
+(19, 'GRE/BUS/2024/0000019', 1, '1vWMEs0XMBBK1u1kvcmLBOflLEw-Gwxuq', 'Mrs', 'ALHASSAN', 'ABIBA', '0242334689', 'Female', '1978-08-10', '3', 'Ecowas Card', 'GHA-001169475-5', '2022-09-12', '2032-09-11', 'TRADER', 'NONE', 'KOKOMPE CAR PARK', '0542445922', '12 YEARS', 3, 'None', 'None', 'None', 'None', 'ALHAJI SARIA CAR PARK (KOKOMPE', 'SAME ROUTINE', 680445, '2024-02-12 05:04', '2024-02-12 05:04', 340059, '91adc7db4d9959989f932a861de5a788b330668a'),
+(20, 'GRE/BUS/2024/0000020', 1, '1QHhO9qThr2MgHKrvdYlBGTbvdRNBx7YI', 'Ms', 'OSABUTEY', 'VERONICA TAWIAH', '0598988571', 'Female', '1989-01-01', '3', 'Ecowas Card', 'GHA-713499233-9', '2019-07-03', '2029-07-02', 'TRADER', 'A/123', 'KPONE LEONALDO ROAD', '0531409912', 'TWO YEARS', 3, 'None', 'None', 'None', 'None', 'KPONE FAIR POINT JUNCTION', 'SAME ROUTINE', 680445, '2024-02-15 05:25', '2024-02-15 05:25', 340059, '3d82a1dd62ecaba9029b6f08fac71d5913c73779'),
+(21, 'GRE/BUS/2024/0000021', 1, '1zr3sUUSpsrWKl_7PdIm6dGeE_HLrP9Xx', 'Ms', 'AFENTSI', 'FAUSTINA', '0256901842', 'Female', '1993-06-12', '1', 'Ecowas Card', 'GHA-722021437-2', '2020-03-14', '2030-03-13', 'TRADER', 'NONE', 'KPONE SHANGHAI STATION', '0207925605', '3 YEARS', 3, 'None', 'None', 'None', 'None', 'KOKOMPE TO KPONE SHANGHAI', 'SAME ROUTINE', 680445, '2024-02-14 05:47', '2024-02-14 05:47', 340059, '6fc2ce78b7520f38cc32a2a51d8dcaff3b2d7105'),
+(22, 'GRE/BUS/2024/0000022', 1, '1ukVMEZ7FEixbpRlFqOtVJeNZ90LvL59c', 'Mrs', 'TETTEH', 'JOYCE', '0596008705', 'Female', '1982-04-10', '7', 'Ecowas Card', 'GHA-729552849-3', '2023-11-14', '2033-11-13', 'TRADER', 'NONE', 'KPONE MARKET', '0596008705', '30 YEARS', 3, 'None', 'None', 'None', 'None', ' FROM SHANGHAI THE CHIEF\"S HOUSE TO KPONE MARKET', 'SAME ROUTINE', 680445, '2024-03-05 06:12', '2024-03-05 06:12', 340059, '670aaa4052c960b0c993bf34f9ca016b607e8617'),
+(23, 'GRE/BUS/2024/0000023', 1, '16A-2v8BdxhDNl1jqxwN3LawFDo6OKEPw', 'Ms', 'OWUSU', 'MARY', '0545390478', 'Female', '1990-06-06', '6', 'Voters Id', '4733041558', '2016-07-21', '2024-07-20', 'TRADER', 'BL73', 'KPONE APOLLO', '054590478', '2 YEARS', 3, 'None', 'None', 'None', 'None', 'KPONE MARKET TO APOLLO', 'APOLLO TO KPONE MARKET', 680445, '2023-05-11 06:30', '2023-05-11 06:30', 340059, 'c6fa81678dad8fedd5bbf28ee16b5cfe8094b3f3'),
+(24, 'GRE/BUS/2024/0000024', 1, '1odrxH3tppoQ0eU_CMw0iOMQ5FjLUwVTJ', 'Mr', 'BAAH', 'EVANS', '0257543088', 'Male', '1993-04-10', '4', 'Ecowas Card', 'GHA-729331145-9', '2023-09-12', '2033-09-11', 'TAILOR', 'NONE', 'KPONE SHALOM HOTEL', '0554676199', '7 YEARS', 3, 'None', 'None', 'None', 'None', 'None', 'NONE', 680445, '2024-05-13 07:33', '2024-05-13 07:33', 340059, 'f0cae8b9e9d002c5c8fe87042db63e8dd2c22c84'),
+(25, 'GRE/BUS/2024/0000025', 1, '1T2kD3NXBMq2D7DPSUr0Azl5noYSHW2hp', 'Mr', 'ATTAH', 'KWEKU SAMUEL', '0248578084', 'Male', '1990-07-10', '10', 'Voters Id', '4731030525', '2020-07-28', '2024-07-27', 'WELDING ', 'NONE', 'KPONE SHANGHAI', '0248578084', '10 YEARS', 3, 'None', 'None', 'None', 'None', 'ADJACENT SHANGHAI HOTEL', 'SAME ROUTINE', 680445, '2023-01-27 08:10', '2023-01-27 08:10', 340059, '769a1c09ebafbee3fc3a758e22267a2956eaad8c'),
+(26, 'GRE/BUS/2024/0000026', 1, '1nl5L15yTb0qY-IQx0th3INZhs6VIVA22', 'Mr', 'DWAMENA KOFI', 'ALFRED', '0551196260', 'Male', '1980-06-15', '5', 'Ecowas Card', 'GHA-001658363-4', '2020-09-11', '2030-09-07', 'UBER DRIVER', 'D18', 'KPONE', '0551196260', '12 YEARS', 3, 'None', 'None', 'None', 'None', 'None', 'NONE', 680445, '2023-03-07 08:25', '2023-03-07 08:25', 340059, 'b56bd46d3607c5e3f630afb2d86870adf3efe804'),
+(27, 'GRE/BUS/2024/0000027', 1, '14fAPX9DoUW6L7SNs7C2bz2PeE9lETe_p', 'Mr', 'HUMADO', 'KWAKU BRIGHT', '0551259828', 'Male', '1997-04-30', '3', 'Ecowas Card', 'GHA-713836785-8', '2021-07-20', '2031-07-17', 'DRIVING', 'NONE', 'KPONE BARRIER', '0551259828', '4 YEARS', 3, 'None', 'None', 'None', 'None', 'KPONE TO BARRIER', 'BARRIER TO KPONE', 680445, '2024-04-22 09:55', '2024-04-22 09:55', 340059, '9d5a562eb00df4fe9f0b7567d8f7bddfa698c5c3'),
+(28, 'GRE/BUS/2024/0000028', 1, '1snYyabyd1AYaVafmqMGa3WLacrARYeM0', 'Ms', 'OFORI', 'REGINA', '0552123239', 'Female', '1994-07-01', '3', 'Ecowas Card', 'GHA-722441607-9', '2020-03-20', '2030-03-19', 'TRADER ', 'NONE', 'TEMA COMMUNITY 5', '0535715303', '2 YEARS', 3, 'None', 'None', 'None', 'None', 'KPONE SCHOOL JUNCTION TO TEMA COM.1  FROM COM.1 TO TEMA COM5', 'SAME ROUNTINE', 680445, '2024-08-12 11:58', '2024-08-12 11:58', 340059, 'a6df742b451bbe8f2845b2165ea19ff4a53e5334'),
+(29, 'GRE/BUS/2024/0000029', 1, '1qSFj3y-m1Qk2kqDRHufVxcN8Z4euP8uC', 'Ms', 'TETTEH', 'BERNICE', '0549433804', 'Female', '1986-02-12', '6', 'Ecowas Card', 'GHA-001160053-4', '2020-08-27', '2030-08-26', 'TRADER', 'A/123', 'KPONE SHANGHAI ', '0549433804', '10 YEARS', 3, 'None', 'None', 'None', 'None', 'KPONE  SHANGHAI TOUCH SKIES', 'SAME ROUTIN', 680445, '2024-08-12 13:51', '2024-08-12 13:51', 340059, 'db365e28e57e111f30ff705fd97ac7dff9eda3ae'),
+(30, 'GRE/BUS/2024/0000030', 1, '1MChfl5-DFDOgLIl6j8A8pMcabN0WA5RN', 'Ms', 'FOSUA', 'AKOSUA PRISCILLA', '0558122675', 'Female', '1991-11-01', '1', 'Ecowas Card', 'GHA-713410056-8', '2019-06-26', '2029-06-25', 'ADEPA CLOTHES', 'NONE', 'NEW TOWN (BEIKRO BARACKS', '0558122675', 'ONE YEAR', 3, 'None', 'None', 'None', 'None', 'FROM BANKUMA AUTIE KATE TO BEIKRO BARACKS', 'SAME ROUNTIN', 680445, '2024-08-23 10:43', '2024-08-23 10:43', 340059, '996b66c9107cb0e1fb07184cf942e21a629530ab');
 
 -- --------------------------------------------------------
 
@@ -925,16 +1428,16 @@ INSERT INTO `loanreg_tb` (`id`, `code`, `regtype`, `image`, `title`, `surname`, 
 --
 
 CREATE TABLE `loan_payment` (
-  `ID` bigint NOT NULL,
-  `CUSTOMERID` bigint DEFAULT NULL,
-  `LOANID` bigint DEFAULT NULL,
+  `ID` bigint(20) NOT NULL,
+  `CUSTOMERID` bigint(20) DEFAULT NULL,
+  `LOANID` bigint(20) DEFAULT NULL,
   `AMOUNT` double NOT NULL,
-  `POSTED_BY` int NOT NULL,
-  `DATE_NORMAL` varchar(200) COLLATE utf8mb4_general_ci NOT NULL,
-  `DATE_CREATED` varchar(100) COLLATE utf8mb4_general_ci NOT NULL,
-  `DATE_MODIFIED` varchar(100) COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `CCODE` int NOT NULL,
-  `HCODE` longtext COLLATE utf8mb4_general_ci NOT NULL
+  `POSTED_BY` int(11) NOT NULL,
+  `DATE_NORMAL` varchar(200) NOT NULL,
+  `DATE_CREATED` varchar(100) NOT NULL,
+  `DATE_MODIFIED` varchar(100) DEFAULT NULL,
+  `CCODE` int(11) NOT NULL,
+  `HCODE` longtext NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -944,24 +1447,35 @@ CREATE TABLE `loan_payment` (
 INSERT INTO `loan_payment` (`ID`, `CUSTOMERID`, `LOANID`, `AMOUNT`, `POSTED_BY`, `DATE_NORMAL`, `DATE_CREATED`, `DATE_MODIFIED`, `CCODE`, `HCODE`) VALUES
 (1, 1, 1, 207, 680445, '2022-09-01 13:59', '2022-09-01 13:59', '2022-09-01 13:59', 340059, '14d9b8807267f613564c78dbc97cf54b7929e935'),
 (2, 1, 1, 207, 680445, '2022-09-09 14:01', '2022-09-09 14:01', '2022-09-09 14:01', 340059, '6277e179a6ed0865e5dc803999dec0527b39c199'),
-(3, 1, 1, 206.67, 680445, '2022-09-17 14:02', '2022-09-17 14:02', '2022-09-17 14:02', 340059, 'c200c14726066d640bf15cf3684aac63113c7dc6'),
-(4, 1, 1, 206.67, 680445, '2022-09-26 14:02', '2022-09-26 14:02', '2022-09-26 14:02', 340059, 'd46a870eb3a27e098295161547c7f939c0432255'),
+(3, 1, 1, 207, 680445, '2022-09-17 14:02', '2022-09-17 14:02', '2022-09-17 14:02', 340059, 'c200c14726066d640bf15cf3684aac63113c7dc6'),
+(4, 1, 1, 207, 680445, '2022-09-26 14:02', '2022-09-26 14:02', '2022-09-26 14:02', 340059, 'd46a870eb3a27e098295161547c7f939c0432255'),
 (5, 1, 1, 207, 680445, '2022-10-04 14:03', '2022-10-04 14:03', '2022-10-04 14:03', 340059, 'b032fe9bc4663e3bcdf6e44b923c4602deb1cf3e'),
 (6, 1, 1, 207, 680445, '2022-10-10 14:04', '2022-10-10 14:04', '2022-10-10 14:04', 340059, '57b5bed020a45cd3efa9eb86a5735018b5018e60'),
-(7, 1, 1, 212, 680445, '2022-10-18 14:05', '2022-10-18 14:05', '2022-10-18 14:05', 340059, '247990918abf32b242ee07bc4ae2be677fa7d907'),
+(7, 1, 1, 213, 680445, '2022-10-18 14:05', '2022-10-18 14:05', '2022-10-18 14:05', 340059, '247990918abf32b242ee07bc4ae2be677fa7d907'),
 (8, 1, 1, 400, 680445, '2022-10-28 14:05', '2022-10-28 14:05', '2022-10-28 14:05', 340059, '7c26c6e5a6ea46d684e3eafeabe0d888e049e1b2'),
 (9, 1, 1, 625, 680445, '2022-11-03 14:06', '2022-11-03 14:06', '2022-11-03 14:06', 340059, '02d1eaec4669ceb02dc93b3583673eae62e4525f'),
 (10, 2, 2, 105, 680445, '2023-03-24 15:16', '2023-03-24 15:16', '2023-03-24 15:16', 340059, '0e00953fd38a4c101472d18beb58f42df9924085'),
 (11, 2, 2, 104, 680445, '2023-03-31 15:19', '2023-03-31 15:19', '2023-03-31 15:19', 340059, '9a0238e5b006d58cca70342ee5ac4fae97872b66'),
-(12, 2, 2, 103.34, 680445, '2023-04-07 15:20', '2023-04-07 15:20', '2023-04-07 15:20', 340059, '57e7aa9d21e72a82e15ae51fec6258571657b62e'),
-(13, 2, 2, 103.34, 680445, '2023-04-17 15:20', '2023-04-17 15:20', '2023-04-17 15:20', 340059, '6a3280d8b8cc744234627a372cb8552494742660'),
-(14, 2, 2, 103.34, 680445, '2023-04-26 15:21', '2023-04-26 15:21', '2023-04-26 15:21', 340059, 'cb3cdfb14e690c4e52e99c56a92b35ac5d2706bd'),
-(15, 2, 2, 103.34, 680445, '2023-05-05 15:21', '2023-05-05 15:21', '2023-05-05 15:21', 340059, '47df8c28793fff44098de20b2fe8b3d4791bc941'),
-(16, 2, 2, 103.34, 680445, '2023-05-17 15:22', '2023-05-17 15:22', '2023-05-17 15:22', 340059, '27685fda9778a88480faadf5b4334e39b8ea34da'),
-(17, 2, 2, 103.34, 680445, '2023-06-02 15:22', '2023-06-02 15:22', '2023-06-02 15:22', 340059, '1f5c70335b8737fcbb8bbcc56d366ab3f69e1028'),
-(18, 2, 2, 103.34, 680445, '2023-06-13 15:23', '2023-06-13 15:23', '2023-06-13 15:23', 340059, '3a65abfa6344b6acba32dfe0c3f38d9be9a8ef14'),
-(19, 2, 2, 103.34, 680445, '2023-06-26 15:23', '2023-06-26 15:23', '2023-06-26 15:23', 340059, 'db480747a8586a78b16043884881795c53ba2e26'),
-(20, 2, 2, 103.34, 680445, '2023-07-10 15:25', '2023-07-10 15:25', '2023-07-10 15:25', 340059, 'c5deb666ce9d2972ef988e7a5d3d6e445c65ddef'),
+(12, 2, 2, 103, 680445, '2023-04-07 15:20', '2023-04-07 15:20', '2023-04-07 15:20', 340059, '57e7aa9d21e72a82e15ae51fec6258571657b62e'),
+(13, 2, 2, 103, 680445, '2023-04-17 15:20', '2023-04-17 15:20', '2023-04-17 15:20', 340059, '6a3280d8b8cc744234627a372cb8552494742660'),
+(14, 2, 2, 103, 680445, '2023-04-26 15:21', '2023-04-26 15:21', '2023-04-26 15:21', 340059, 'cb3cdfb14e690c4e52e99c56a92b35ac5d2706bd'),
+(15, 2, 2, 103, 680445, '2023-05-05 15:21', '2023-05-05 15:21', '2023-05-05 15:21', 340059, '47df8c28793fff44098de20b2fe8b3d4791bc941'),
+(16, 2, 2, 103, 680445, '2023-05-17 15:22', '2023-05-17 15:22', '2023-05-17 15:22', 340059, '27685fda9778a88480faadf5b4334e39b8ea34da'),
+(17, 2, 2, 103, 680445, '2023-06-02 15:22', '2023-06-02 15:22', '2023-06-02 15:22', 340059, '1f5c70335b8737fcbb8bbcc56d366ab3f69e1028'),
+(18, 2, 2, 103, 680445, '2023-06-13 15:23', '2023-06-13 15:23', '2023-06-13 15:23', 340059, '3a65abfa6344b6acba32dfe0c3f38d9be9a8ef14'),
+(19, 2, 2, 103, 680445, '2023-06-26 15:23', '2023-06-26 15:23', '2023-06-26 15:23', 340059, 'db480747a8586a78b16043884881795c53ba2e26'),
+(20, 2, 2, 103, 680445, '2023-07-10 15:25', '2023-07-10 15:25', '2023-07-10 15:25', 340059, 'c5deb666ce9d2972ef988e7a5d3d6e445c65ddef'),
+(21, 3, 3, 207, 680445, '2024-03-05 15:54', '2024-03-05 15:54', '2024-03-05 15:54', 340059, '0280f8343fdd09c19fe920ff02902f564e945cdc'),
+(22, 3, 3, 207, 680445, '2024-03-10 15:55', '2024-03-10 15:55', '2024-03-10 15:55', 340059, '180525ced7fb96928450a76b3464488bb6a791a0'),
+(23, 3, 3, 207, 680445, '2024-03-17 15:56', '2024-03-17 15:56', '2024-03-17 15:56', 340059, 'b3e0b02e22e8e0d3489498c179d03fabe0979f67'),
+(24, 3, 3, 207, 680445, '2024-03-24 15:57', '2024-03-24 15:57', '2024-03-24 15:57', 340059, 'f6ff4a88834822667a42f05344f4fb56288f7852'),
+(25, 3, 3, 207, 680445, '2024-04-01 15:57', '2024-04-01 15:57', '2024-04-01 15:57', 340059, 'af1a21e08190dc30d116d55c6cc05f1b0e5aef20'),
+(26, 3, 3, 207, 680445, '2024-04-10 15:58', '2024-04-10 15:58', '2024-04-10 15:58', 340059, '133fab01cb7bbc414421ad4efe734791db296956'),
+(27, 3, 3, 207, 680445, '2024-04-16 15:58', '2024-04-16 15:58', '2024-04-16 15:58', 340059, 'faf1918e3ec780f4cedf1b9c6175cea93a92e65a'),
+(28, 3, 3, 207, 680445, '2024-04-25 15:58', '2024-04-25 15:58', '2024-04-25 15:58', 340059, 'd39c36b581e04f2a0ec31ee10ae1e06d65fec1a6'),
+(29, 3, 3, 207, 680445, '2024-04-28 15:59', '2024-04-28 15:59', '2024-04-28 15:59', 340059, '84aa665d51ac366cf920ae3cfebc5e48ff037fd4'),
+(30, 3, 3, 207, 680445, '2024-05-04 16:00', '2024-05-04 16:00', '2024-05-04 16:00', 340059, 'fc8b6c22772eb2786372f767e9b9e61bfe87c915'),
+(31, 3, 3, 207, 680445, '2024-05-16 16:01', '2024-05-16 16:01', '2024-05-16 16:01', 340059, '433b93e1d16dddcf16acd78fd94231f92c2d5b50'),
 (32, 4, 4, 800, 680445, '2022-10-24 16:18', '2022-10-24 16:18', '2022-10-24 16:18', 340059, '5801b3ef89ff0f8107ce536d91dddf97e21d33c9'),
 (33, 4, 4, 750, 680445, '2022-11-22 16:20', '2022-11-22 16:20', '2022-11-22 16:20', 340059, 'c93513d3b1262dc6563ad535da2a3d507840ba9f'),
 (34, 4, 4, 930, 680445, '2022-11-12 16:21', '2022-11-12 16:21', '2022-11-12 16:21', 340059, '07e359a79ff344b7acb948a0c2a04f01d1d19599'),
@@ -985,12 +1499,269 @@ INSERT INTO `loan_payment` (`ID`, `CUSTOMERID`, `LOANID`, `AMOUNT`, `POSTED_BY`,
 (52, 6, 8, 207, 680445, '2024-04-19 17:25', '2024-04-19 17:25', '2024-04-19 17:25', 340059, '596439abdaa04657a93b2a41172d6a92f8806715'),
 (53, 6, 8, 207, 680445, '2024-04-26 17:25', '2024-04-26 17:25', '2024-04-26 17:25', 340059, '06d37eeb48976112e0420ddcec096e71d6475fb7'),
 (54, 6, 8, 207, 680445, '2024-05-03 17:26', '2024-05-03 17:26', '2024-05-03 17:26', 340059, '26ddbede201722fecae09c5a4e4cfef12486080d'),
-(55, 6, 8, 206.67, 680445, '2024-05-10 17:26', '2024-05-10 17:26', '2024-05-10 17:26', 340059, '2ddb34335eec67a328b295b2ccb801782ab0344c'),
-(56, 6, 8, 206.67, 680445, '2024-05-17 17:28', '2024-05-17 17:28', '2024-05-17 17:28', 340059, '9cac21edd6419b1dfa2a9a512135eb98a26a4120'),
-(57, 6, 8, 617.65, 680445, '2024-07-19 17:31', '2024-07-19 17:31', '2024-07-19 17:31', 340059, '11fd3160e7192aa09dd4b325f78b50baf38c350f'),
-(58, 5, 7, 2505, 680445, '2024-08-05 21:08', '2024-08-05 21:08', '2024-08-05 21:08', 340059, '2b8d39454388d8345bc7be7b2fc37d1d05b2c322'),
-(59, 1, 1, 1.6599999999998545, 680445, '2024-08-05 21:52', '2024-08-05 21:52', '2024-08-05 21:52', 340059, 'b4053794dc9b4d6c3c5ee57cae21105ce7188eda'),
-(60, 2, 2, 100.93999999999983, 680445, '2024-08-05 21:52', '2024-08-05 21:52', '2024-08-05 21:52', 340059, '56a0fef3e64812f36c94d2ba27a7612d157c8293');
+(55, 6, 8, 207, 680445, '2024-05-10 17:26', '2024-05-10 17:26', '2024-05-10 17:26', 340059, '2ddb34335eec67a328b295b2ccb801782ab0344c'),
+(56, 6, 8, 207, 680445, '2024-05-17 17:28', '2024-05-17 17:28', '2024-05-17 17:28', 340059, '9cac21edd6419b1dfa2a9a512135eb98a26a4120'),
+(57, 6, 8, 618, 680445, '2024-07-19 17:31', '2024-07-19 17:31', '2024-07-19 17:31', 340059, '11fd3160e7192aa09dd4b325f78b50baf38c350f'),
+(58, 7, 9, 207, 680445, '2022-09-21 03:33', '2022-09-21 03:33', '2022-09-21 03:33', 340059, '0ebb130125a878b9ca2c49baf857432c01b0c062'),
+(59, 7, 9, 207, 680445, '2022-09-24 03:34', '2022-09-24 03:34', '2022-09-24 03:34', 340059, '71479b8101da3b85f438f4afe7ca21394bc3dc77'),
+(60, 7, 9, 207, 680445, '2022-10-03 03:35', '2022-10-03 03:35', '2022-10-03 03:35', 340059, '3cf3c3876bf7611ee0e6ef20746538823b86109f'),
+(61, 7, 9, 207, 680445, '2022-10-11 03:35', '2022-10-11 03:35', '2022-10-11 03:35', 340059, '73bd1718ec765bbf7673538f26a982d130537215'),
+(62, 7, 9, 207, 680445, '2022-10-17 03:35', '2022-10-17 03:35', '2022-10-17 03:35', 340059, 'a54657fee98bf6f483921642f6e7ef35df0605ce'),
+(63, 7, 9, 207, 680445, '2022-10-26 03:36', '2022-10-26 03:36', '2022-10-26 03:36', 340059, '2bcea32c0484d0f430731fa09a0044beb7e442ca'),
+(64, 7, 9, 207, 680445, '2022-10-31 03:36', '2022-10-31 03:36', '2022-10-31 03:36', 340059, '16595f3cee63e3f143a2e9307dd2107ca78632e6'),
+(65, 7, 9, 207, 680445, '2022-11-08 03:37', '2022-11-08 03:37', '2022-11-08 03:37', 340059, '89dc37ebdd0b5b61be946bf9e4b7066b6716354c'),
+(66, 7, 9, 207, 680445, '2022-11-16 03:37', '2022-11-16 03:37', '2022-11-16 03:37', 340059, '9a08c7a84a31aa63ff3a5ae003682a3804231768'),
+(67, 7, 9, 207, 680445, '2022-11-22 03:38', '2022-11-22 03:38', '2022-11-22 03:38', 340059, '9c2f4969483fe2029c462bcfdc2f1663621fc531'),
+(68, 7, 9, 413, 680445, '2022-11-29 03:42', '2022-11-29 03:42', '2022-11-29 03:42', 340059, 'f926145902611276c10b9952edf4667cc0701bf7'),
+(69, 9, 10, 207, 680445, '2024-02-02 04:15', '2024-02-02 04:15', '2024-02-02 04:15', 340059, 'fe3e37d0666e77939b2fc22b9008c845ac3cb2d5'),
+(70, 9, 10, 207, 680445, '2024-02-09 04:16', '2024-02-09 04:16', '2024-02-09 04:16', 340059, '35a5c113847e0e28edef17525d9ef8aa394d9f8a'),
+(71, 9, 10, 207, 680445, '2024-02-16 04:16', '2024-02-16 04:16', '2024-02-16 04:16', 340059, '58938fa9d216f48a3281c9a1ad406d727f3cdbec'),
+(72, 9, 10, 297, 680445, '2024-03-01 04:17', '2024-03-01 04:17', '2024-03-01 04:17', 340059, 'cbf659cf61ec0edd54e62a3b14c37b81f4e7bab6'),
+(73, 9, 10, 828, 680445, '2024-04-25 04:18', '2024-04-25 04:18', '2024-04-25 04:18', 340059, '884efc9977299c40b7efc964a39bf0fd871d7e87'),
+(74, 9, 10, 500, 680445, '2024-06-03 04:19', '2024-06-03 04:19', '2024-06-03 04:19', 340059, '58236a509645a0b49e681e5c566fb0b694be84cb'),
+(75, 9, 10, 234, 680445, '2024-08-05 04:19', '2024-08-05 04:19', '2024-08-05 04:19', 340059, '0bc32198f82f8c29320a4ce66e2a88ebc892af14'),
+(76, 10, 11, 207, 680445, '2023-06-26 04:33', '2023-06-26 04:33', '2023-06-26 04:33', 340059, 'c79209af02d78d601fbf43f135c95153f3caa245'),
+(77, 10, 11, 207, 680445, '2023-06-30 04:34', '2023-06-30 04:34', '2023-06-30 04:34', 340059, '421e25de51bcfe74090c22e58f5d98c7366f2dfb'),
+(78, 10, 11, 207, 680445, '2023-07-07 04:34', '2023-07-07 04:34', '2023-07-07 04:34', 340059, 'ffca1e0415e7b36b71f88a10386ffcc9951659d4'),
+(79, 10, 11, 207, 680445, '2023-07-24 04:35', '2023-07-24 04:35', '2023-07-24 04:35', 340059, '9bc410130a8c68b9b6e0dcccd34da3f82d6971d2'),
+(80, 10, 11, 207, 680445, '2023-07-29 04:35', '2023-07-29 04:35', '2023-07-29 04:35', 340059, '302c03c677b0df039415c317c6c8027ca0341793'),
+(81, 10, 11, 207, 680445, '2023-08-07 04:36', '2023-08-07 04:36', '2023-08-07 04:36', 340059, '1827145c5b27f80b126e2af32946cb56e4ebd9e0'),
+(82, 10, 11, 207, 680445, '2023-08-16 04:37', '2023-08-16 04:37', '2023-08-16 04:37', 340059, '0d5768ae58000c634095638f506e6c54e3f45767'),
+(83, 10, 11, 207, 680445, '2023-08-23 04:37', '2023-08-23 04:37', '2023-08-23 04:37', 340059, '8494d19b50d7ce91bed3dff8d25bd28e091aa1c2'),
+(84, 10, 11, 207, 680445, '2023-09-14 04:38', '2023-09-14 04:38', '2023-09-14 04:38', 340059, 'b9f422dd2fca9c4d067cde840382d4e64de3a378'),
+(85, 10, 11, 410, 680445, '2023-09-26 04:40', '2023-09-26 04:40', '2023-09-26 04:40', 340059, '4dcda1f59ab8a63fc6af21babd739fc8005e63ad'),
+(86, 10, 11, 207, 680445, '2023-12-23 04:41', '2023-12-23 04:41', '2023-12-23 04:41', 340059, '1a55f93f97f2d6bc83c89c32a3c446b97c43c5a2'),
+(87, 11, 12, 600, 680445, '0023-07-27 16:52', '0023-07-27 16:52', '0023-07-27 16:52', 340059, '38342a5f57dd7682e002a679963c5b10cb3a24df'),
+(88, 11, 12, 600, 680445, '0023-07-28 16:53', '0023-07-28 16:53', '0023-07-28 16:53', 340059, 'a794ddb7b84bfb8c44d1a476f30ca76f3b5f3441'),
+(89, 12, 13, 207, 680445, '2023-11-03 16:59', '2023-11-03 16:59', '2023-11-03 16:59', 340059, 'c5a94998d14af54046766dd0d929a2432b88413d'),
+(90, 12, 13, 207, 680445, '2023-11-17 17:00', '2023-11-17 17:00', '2023-11-17 17:00', 340059, '5549e52545053fdec79223e5aa5f84b74db09e03'),
+(91, 12, 13, 207, 680445, '2023-11-27 17:00', '2023-11-27 17:00', '2023-11-27 17:00', 340059, '94b7d2d854e16e877f3f766aed8280ce543bcdc8'),
+(92, 12, 13, 207, 680445, '2023-12-07 17:01', '2023-12-07 17:01', '2023-12-07 17:01', 340059, '68bc2b679d48fbca79650a5a5d3b5e37671b9daa'),
+(93, 12, 13, 207, 680445, '2023-12-12 17:01', '2023-12-12 17:01', '2023-12-12 17:01', 340059, '3775bb40788dd86aa53671e6e6bf8223f4e919bf'),
+(94, 12, 13, 207, 680445, '2023-12-15 17:02', '2023-12-15 17:02', '2023-12-15 17:02', 340059, '9dff4b9c3384ab567878e3889221516bbbd7b42f'),
+(95, 12, 13, 207, 680445, '2024-01-29 17:02', '2024-01-29 17:02', '2024-01-29 17:02', 340059, 'e683c421ea8616c25141c22cf3999eb9c53c51a5'),
+(96, 12, 13, 207, 680445, '2024-02-03 17:03', '2024-02-03 17:03', '2024-02-03 17:03', 340059, 'd6d79d81b19587bb3dcec0ada34a7a0ca19a1fbc'),
+(97, 12, 13, 207, 680445, '2024-02-09 17:04', '2024-02-09 17:04', '2024-02-09 17:04', 340059, '90cceda11ac05a2b290b7a1a4d4878d566c4631d'),
+(98, 12, 13, 207, 680445, '2024-03-01 17:05', '2024-03-01 17:05', '2024-03-01 17:05', 340059, 'f8bd9ee63ccc8ab315f36a2e7a29b61cdb632056'),
+(99, 12, 13, 411, 680445, '2024-03-16 17:07', '2024-03-16 17:07', '2024-03-16 17:07', 340059, '98e0f67de688a490fb69a78e16a9d77408c2828f'),
+(100, 13, 16, 207, 680445, '2024-02-16 03:48', '2024-02-16 03:48', '2024-02-16 03:48', 340059, '09df8a4af72541232e421ee42d9e5cad3382ef60'),
+(101, 13, 16, 207, 680445, '2024-02-23 03:49', '2024-02-23 03:49', '2024-02-23 03:49', 340059, '04cf1e74d720f2037dabb7b1ec9f8356120391c7'),
+(102, 13, 16, 207, 680445, '2024-03-01 03:49', '2024-03-01 03:49', '2024-03-01 03:49', 340059, '5dc4a764c071ba667ac5d9030b48d6ce643249bf'),
+(103, 13, 16, 207, 680445, '2024-03-08 03:50', '2024-03-08 03:50', '2024-03-08 03:50', 340059, '161310fc14a67bdfc153dde18ea20cb7beadcd57'),
+(104, 13, 16, 207, 680445, '2024-03-16 03:51', '2024-03-16 03:51', '2024-03-16 03:51', 340059, '4a074074ea25e58f7ca641df34c05b07bb77854e'),
+(105, 13, 16, 207, 680445, '2024-03-22 03:51', '2024-03-22 03:51', '2024-03-22 03:51', 340059, '1761e0b5e53474e99b4cb0298e96aad39531b94c'),
+(106, 13, 16, 207, 680445, '2024-04-05 03:52', '2024-04-05 03:52', '2024-04-05 03:52', 340059, '5cf47195c9931e32170db493caf45feefca95308'),
+(107, 13, 16, 207, 680445, '2024-04-12 03:53', '2024-04-12 03:53', '2024-04-12 03:53', 340059, 'afedbd81af81d8fecce5aab89b21fefa480c5088'),
+(108, 13, 16, 207, 680445, '2024-04-19 03:53', '2024-04-19 03:53', '2024-04-19 03:53', 340059, 'afbca8a92ed16e63b935b170929727e5e58f713f'),
+(109, 13, 16, 207, 680445, '2024-04-26 03:54', '2024-04-26 03:54', '2024-04-26 03:54', 340059, '4d1f5b39124cb2f9edb4cf1e38c648e730663ef0'),
+(110, 14, 14, 414, 680445, '2024-01-12 03:58', '2024-01-12 03:58', '2024-01-12 03:58', 340059, 'e6bb01c696f8694e550e04da3356229e31ff21e6'),
+(111, 14, 14, 414, 680445, '2024-01-26 03:59', '2024-01-26 03:59', '2024-01-26 03:59', 340059, 'c34c8aaf5bc71ea4bcebcb6fcd753ab21708620e'),
+(112, 14, 14, 300, 680445, '2024-02-09 04:00', '2024-02-09 04:00', '2024-02-09 04:00', 340059, 'ecfab50b8512dcc0e1d9baba9959271522a15928'),
+(113, 14, 14, 414, 680445, '2024-02-23 04:00', '2024-02-23 04:00', '2024-02-23 04:00', 340059, '69b0cf110ebc91f2cd855ae320a10cffa7d9fa25'),
+(114, 14, 14, 500, 680445, '2024-03-12 04:01', '2024-03-12 04:01', '2024-03-12 04:01', 340059, 'f45701d08ddf118c29cba6c8fb74f632191dee10'),
+(115, 14, 14, 438, 680445, '2024-04-12 04:02', '2024-04-12 04:02', '2024-04-12 04:02', 340059, 'ec579a2ed98479568ea0efcb82f2965fb1f390a9'),
+(116, 15, 15, 207, 680445, '2024-04-05 04:05', '2024-04-05 04:05', '2024-04-05 04:05', 340059, '644ef756793d7bda084efc27594b794999b1f0af'),
+(117, 15, 15, 207, 680445, '2024-04-12 04:06', '2024-04-12 04:06', '2024-04-12 04:06', 340059, 'd1d4cb11f1c82a639f46363717dcde1680db9ac4'),
+(118, 15, 15, 207, 680445, '2024-04-19 04:06', '2024-04-19 04:06', '2024-04-19 04:06', 340059, 'dea8ef6e0c5276c940b76effdea31b5ebc05f0cb'),
+(119, 15, 15, 207, 680445, '2024-04-29 04:07', '2024-04-29 04:07', '2024-04-29 04:07', 340059, 'fcea22120e495f98c4296862060a05b05654d094'),
+(120, 15, 15, 207, 680445, '2024-05-03 04:07', '2024-05-03 04:07', '2024-05-03 04:07', 340059, '18d85af9e666c95231b26235f733d8d74b4dfc57'),
+(121, 15, 15, 207, 680445, '2024-05-10 04:08', '2024-05-10 04:08', '2024-05-10 04:08', 340059, '1f422f8e552f0f9fb9c47aa3a98c043f397a2398'),
+(122, 15, 15, 207, 680445, '2024-05-20 04:08', '2024-05-20 04:08', '2024-05-20 04:08', 340059, 'b831788b03e456f456fd6c4aae7d83af5b1ae150'),
+(123, 15, 15, 207, 680445, '2024-05-24 04:09', '2024-05-24 04:09', '2024-05-24 04:09', 340059, '3c0f3545c35bd130f526215a6962b2b9f5ba669a'),
+(124, 15, 15, 207, 680445, '2024-06-03 04:09', '2024-06-03 04:09', '2024-06-03 04:09', 340059, '40f5b5d462cc27ad676411d357c845ec924e9538'),
+(125, 15, 15, 207, 680445, '2024-06-10 04:10', '2024-06-10 04:10', '2024-06-10 04:10', 340059, 'd62d6009d74437ad67f15eb4f9b52a8e34c208a1'),
+(126, 15, 15, 410, 680445, '2024-06-18 04:11', '2024-06-18 04:11', '2024-06-18 04:11', 340059, 'a455e773d656df6a12c01c6f41569d5c61ee0ac0'),
+(127, 16, 17, 207, 680445, '2024-03-01 04:16', '2024-03-01 04:16', '2024-03-01 04:16', 340059, '4cd67e29c3211f4c2e0f3db07ad2ee9a54b24ea9'),
+(128, 16, 17, 207, 680445, '2024-03-11 04:17', '2024-03-11 04:17', '2024-03-11 04:17', 340059, '6a72ba37ec3d7cb942b683a3d338a77fb9f9a0a1'),
+(129, 16, 17, 414, 680445, '2024-03-22 04:17', '2024-03-22 04:17', '2024-03-22 04:17', 340059, '82b328b6b0da231498288f169738d03c6bc12b49'),
+(130, 16, 17, 207, 680445, '2024-04-05 04:18', '2024-04-05 04:18', '2024-04-05 04:18', 340059, 'c6c095d95ec10601739b80715affa057f981133b'),
+(131, 16, 17, 207, 680445, '2024-04-12 04:18', '2024-04-12 04:18', '2024-04-12 04:18', 340059, 'fea29d542ad1d112f8a2ad205878d25abca4fd78'),
+(132, 16, 17, 207, 680445, '2024-04-19 04:19', '2024-04-19 04:19', '2024-04-19 04:19', 340059, 'a8f54f47532f5c507274d34a5121b985049b6f69'),
+(133, 16, 17, 207, 680445, '2024-04-26 04:19', '2024-04-26 04:19', '2024-04-26 04:19', 340059, 'ddb575e710514613ec30fd60b645189056bf0a0a'),
+(134, 16, 17, 207, 680445, '2024-05-03 04:20', '2024-05-03 04:20', '2024-05-03 04:20', 340059, '54dee475ba8343e8137b3745d46e175bf6ddc661'),
+(135, 16, 17, 207, 680445, '2024-05-10 04:20', '2024-05-10 04:20', '2024-05-10 04:20', 340059, '706448d11dab5719cb20007401b345e957354fcc'),
+(136, 16, 17, 410, 680445, '2024-05-17 04:21', '2024-05-17 04:21', '2024-05-17 04:21', 340059, 'dd7ce61bac564cb2ad66250915fe2ddb14455638'),
+(137, 18, 19, 207, 680445, '2024-06-09 04:49', '2024-06-09 04:49', '2024-06-09 04:49', 340059, '536d402af1d3d913b2f992d41921181c36f8d648'),
+(138, 18, 19, 207, 680445, '2024-06-16 04:50', '2024-06-16 04:50', '2024-06-16 04:50', 340059, 'fc833a23325f41b76938d66a96bbbbd9ddd00657'),
+(139, 18, 19, 207, 680445, '2024-06-23 04:50', '2024-06-23 04:50', '2024-06-23 04:50', 340059, '5913cc6fb5265668f1f59790961345d1bcb2b898'),
+(140, 18, 19, 207, 680445, '2024-06-30 04:51', '2024-06-30 04:51', '2024-06-30 04:51', 340059, 'e9e1e540b9741c26f2ae1832e513ce699594820e'),
+(141, 18, 19, 207, 680445, '2024-07-07 04:51', '2024-07-07 04:51', '2024-07-07 04:51', 340059, '64219c06703ffa17cf8266303bbe89dec4fc2e7b'),
+(142, 18, 19, 207, 680445, '2024-07-14 04:51', '2024-07-14 04:51', '2024-07-14 04:51', 340059, '92b64887761a494af2ed0ab2e054a3f1b83672a0'),
+(143, 18, 19, 207, 680445, '2024-07-24 04:52', '2024-07-24 04:52', '2024-07-24 04:52', 340059, 'ec036f492f60e6c8bc5230dbc521c7edc215fcac'),
+(144, 18, 19, 207, 680445, '2024-07-28 04:53', '2024-07-28 04:53', '2024-07-28 04:53', 340059, 'a75f2665ee05687a57fcc922df748d805328ea2d'),
+(145, 18, 19, 207, 680445, '2024-08-08 04:53', '2024-08-08 04:53', '2024-08-08 04:53', 340059, '0ab197c148e1eee24584bb2f07ac485b354ca404'),
+(146, 18, 19, 207, 680445, '2024-08-15 04:54', '2024-08-15 04:54', '2024-08-15 04:54', 340059, '4137c6dc71d90a36a06c3d2d2c322f218900fcbf'),
+(147, 18, 19, 410, 680445, '2024-08-31 04:55', '2024-08-31 04:55', '2024-08-31 04:55', 340059, '000be6b85aa33ea9a989abe5c11dd96330884da3'),
+(148, 19, 20, 207, 680445, '2024-02-23 05:07', '2024-02-23 05:07', '2024-02-23 05:07', 340059, '83581fa24a02c1a28e40b0b510df277adaee0202'),
+(149, 19, 20, 207, 680445, '2024-03-01 05:08', '2024-03-01 05:08', '2024-03-01 05:08', 340059, '428e6d0ea13caed1189f1617b96242bc69cd3438'),
+(150, 19, 20, 414, 680445, '2024-03-16 05:08', '2024-03-16 05:08', '2024-03-16 05:08', 340059, '77a4c662136e042937a48b997fc34cf2394c29ff'),
+(151, 19, 20, 370, 680445, '2024-04-03 05:09', '2024-04-03 05:09', '2024-04-03 05:09', 340059, '992def497683669585b8b5a1bbf95aa6aabe22ec'),
+(152, 19, 20, 1000, 680445, '2024-04-26 05:10', '2024-04-26 05:10', '2024-04-26 05:10', 340059, '5824c6bfafb59239c7e0a09542a723355208e1e9'),
+(153, 19, 20, 282, 680445, '2024-05-03 05:11', '2024-05-03 05:11', '2024-05-03 05:11', 340059, 'ad02053664eec45b5f5cb4d03639b505e36405b2'),
+(154, 19, 21, 414, 680445, '2024-05-17 05:16', '2024-05-17 05:16', '2024-05-17 05:16', 340059, '21ed5f4299b87426a7890a8976458133af275951'),
+(155, 20, 22, 290, 680445, '2024-02-23 05:29', '2024-02-23 05:29', '2024-02-23 05:29', 340059, 'b1bae29b2db0b4db88a6c331167f2a2fc7f61da6'),
+(156, 20, 22, 290, 680445, '2024-03-01 05:30', '2024-03-01 05:30', '2024-03-01 05:30', 340059, '58050bfb58b74ff6c04def485f222ee953b06e90'),
+(157, 20, 22, 290, 680445, '2024-03-08 05:31', '2024-03-08 05:31', '2024-03-08 05:31', 340059, '5e6b69e56ee4b8ad38b432237c3bc91109080a20'),
+(158, 20, 22, 290, 680445, '2024-03-15 05:31', '2024-03-15 05:31', '2024-03-15 05:31', 340059, '152540092bdfa5285a0435078055c37ed6b02f91'),
+(159, 20, 22, 580, 680445, '2024-04-05 05:32', '2024-04-05 05:32', '2024-04-05 05:32', 340059, '4157febba4c274db95ddd0e63435c38f3b0b7fe5'),
+(160, 20, 22, 740, 680445, '2024-04-12 05:33', '2024-04-12 05:33', '2024-04-12 05:33', 340059, '41a1eb1a73c88605f62052ea1792a9b4a18abf0e'),
+(161, 20, 23, 517, 680445, '2024-04-22 05:39', '2024-04-22 05:39', '2024-04-22 05:39', 340059, 'fd2fe8ff48c3649c0df5f07abed300454b4651c2'),
+(162, 20, 23, 517, 680445, '2024-05-14 05:39', '2024-05-14 05:39', '2024-05-14 05:39', 340059, '57693e77cc12c69cb7236d6ad57e180bb926063d'),
+(163, 20, 23, 517, 680445, '2024-05-20 05:40', '2024-05-20 05:40', '2024-05-20 05:40', 340059, '79742b2af05699eb7bc32ce2d77beacd8526052d'),
+(164, 21, 24, 207, 680445, '2024-02-23 05:51', '2024-02-23 05:51', '2024-02-23 05:51', 340059, '4a8f39b3abeb428f82c5e5752dbc2653425217c0'),
+(165, 21, 24, 207, 680445, '2024-03-01 05:52', '2024-03-01 05:52', '2024-03-01 05:52', 340059, 'bf91750ee85ad925538d3ce7183f966fea09117d'),
+(166, 21, 24, 207, 680445, '2024-03-08 05:52', '2024-03-08 05:52', '2024-03-08 05:52', 340059, '709da6176419a759b2b7638dc4c83c4081ee7431'),
+(167, 21, 24, 414, 680445, '2024-03-22 05:53', '2024-03-22 05:53', '2024-03-22 05:53', 340059, 'b16d7d72461713862742487a64a3504c5a3b7c06'),
+(168, 21, 24, 207, 680445, '2024-04-05 05:53', '2024-04-05 05:53', '2024-04-05 05:53', 340059, '78ef7e2aabfd77fbee72d6437ba800bf895eb297'),
+(169, 21, 24, 207, 680445, '2024-04-12 05:54', '2024-04-12 05:54', '2024-04-12 05:54', 340059, 'c7586a363927c88c606a609621c030ce30916500'),
+(170, 21, 24, 207, 680445, '2024-04-19 05:55', '2024-04-19 05:55', '2024-04-19 05:55', 340059, 'cf0541a05de25fa7318c46d170000335f375203d'),
+(171, 21, 24, 207, 680445, '2024-04-26 05:55', '2024-04-26 05:55', '2024-04-26 05:55', 340059, '495220b9f96e3594479cf70ff4fd29f859f776fd'),
+(172, 21, 24, 207, 680445, '2024-05-03 05:56', '2024-05-03 05:56', '2024-05-03 05:56', 340059, '884b6f74570864c80ad09d362519fc3e50ae349e'),
+(173, 21, 24, 410, 680445, '2024-05-10 05:56', '2024-05-10 05:56', '2024-05-10 05:56', 340059, '2e4f6f5d38f667761d9ba4cbf062c9268240fb60'),
+(174, 21, 25, 414, 680445, '2024-06-07 06:02', '2024-06-07 06:02', '2024-06-07 06:02', 340059, '2d8ab5b0d2062e070de22903994349fc174adc74'),
+(175, 21, 25, 414, 680445, '2024-06-21 06:02', '2024-06-21 06:02', '2024-06-21 06:02', 340059, '79a8261d075c590f70037fa8c94297c95ff7c59d'),
+(176, 21, 25, 414, 680445, '2024-06-28 06:03', '2024-06-28 06:03', '2024-06-28 06:03', 340059, '12b8930a43baef0c7c5bfdb18ac7b3216a6442a3'),
+(177, 21, 25, 414, 680445, '2024-07-12 06:03', '2024-07-12 06:03', '2024-07-12 06:03', 340059, '3e9aace4fa23a09cc33bcc7ba95e1d28d1ab1967'),
+(178, 21, 25, 414, 680445, '2024-07-19 06:04', '2024-07-19 06:04', '2024-07-19 06:04', 340059, '10e9416eb32e4457a270a409898fc70e0fa8208d'),
+(179, 21, 25, 414, 680445, '0007-07-26 06:04', '0007-07-26 06:04', '0007-07-26 06:04', 340059, '88c204d29dce1c9193b3196b783c9503981c27f0'),
+(180, 22, 26, 350, 680445, '2024-03-22 06:16', '2024-03-22 06:16', '2024-03-22 06:16', 340059, '28c87eb20a915d8d2aa42887b13efe19489db6ae'),
+(181, 22, 26, 220, 680445, '2024-03-29 06:17', '2024-03-29 06:17', '2024-03-29 06:17', 340059, 'b13d85659eec1e4f2c60dc31c0dad0b70e1e6982'),
+(182, 22, 26, 207, 680445, '2024-04-12 06:17', '2024-04-12 06:17', '2024-04-12 06:17', 340059, '3869a4a163b442edde483dc0498241ee87651aa2'),
+(183, 22, 26, 207, 680445, '2024-04-26 06:18', '2024-04-26 06:18', '2024-04-26 06:18', 340059, 'd716958493adafc842870436124df839b6d25e20'),
+(184, 22, 26, 207, 680445, '2024-05-17 06:19', '2024-05-17 06:19', '2024-05-17 06:19', 340059, 'dd37444359317f93f4f41ecd381757bba9ddb045'),
+(185, 22, 26, 250, 680445, '2024-06-21 06:19', '2024-06-21 06:19', '2024-06-21 06:19', 340059, 'd061d0d6ea35af19bff1f524000901c1d3390035'),
+(186, 22, 26, 207, 680445, '2024-07-05 06:20', '2024-07-05 06:20', '2024-07-05 06:20', 340059, 'cc41eba5736cc02f26b07bc60cfdc1b3641e7e30'),
+(187, 22, 26, 207, 680445, '2024-07-23 06:20', '2024-07-23 06:20', '2024-07-23 06:20', 340059, '66818fba7bd0f5391c6063a1890bf803e4eb93bc'),
+(188, 23, 27, 310, 680445, '2023-05-20 06:34', '2023-05-20 06:34', '2023-05-20 06:34', 340059, '0b8398f921b2d34a9357885eb2bfd7a89db3ef1a'),
+(189, 23, 27, 310, 680445, '2023-05-29 06:34', '2023-05-29 06:34', '2023-05-29 06:34', 340059, 'c724aab10c089c652a32bfe93b928a641eb7982d'),
+(190, 23, 27, 310, 680445, '2023-06-26 06:35', '2023-06-26 06:35', '2023-06-26 06:35', 340059, '5e85c0090cd261e9af42e4f79cd888570ae161e9'),
+(191, 23, 27, 310, 680445, '2023-08-01 06:35', '2023-08-01 06:35', '2023-08-01 06:35', 340059, 'ec65df95813186bab648aa990ee9504a3f9ea35d'),
+(192, 23, 27, 310, 680445, '2023-09-26 06:36', '2023-09-26 06:36', '2023-09-26 06:36', 340059, 'dcb7a0cf7235458044f988194771db2c0c18b840'),
+(193, 23, 27, 310, 680445, '2023-10-04 06:36', '2023-10-04 06:36', '2023-10-04 06:36', 340059, '2a09fd9ab6263c857a15b7d552112aa66f82d399'),
+(194, 18, 28, 310, 680445, '2023-10-04 06:58', '2023-10-04 06:58', '2023-10-04 06:58', 340059, '092924f48e43219970f68dedc7aab86c7dfa0741'),
+(195, 18, 28, 310, 680445, '2023-10-13 06:59', '2023-10-13 06:59', '2023-10-13 06:59', 340059, '6dd6e93b772053cac35c288436614806ebfc464b'),
+(196, 18, 28, 310, 680445, '2023-10-19 06:59', '2023-10-19 06:59', '2023-10-19 06:59', 340059, 'a845c4c02b394c88b5f8d66b9b3ac34a6b1d94d9'),
+(197, 18, 28, 310, 680445, '2023-11-01 07:00', '2023-11-01 07:00', '2023-11-01 07:00', 340059, '8139c7c37311c9da3b16006fc864e2860f313596'),
+(198, 18, 28, 2480, 680445, '2024-02-22 07:01', '2024-02-22 07:01', '2024-02-22 07:01', 340059, 'bd9a818f37894fdff64d298e9acc694d392417e4'),
+(199, 16, 29, 414, 680445, '2024-07-05 07:08', '2024-07-05 07:08', '2024-07-05 07:08', 340059, 'cdbb91ad5616050ae050befd56afc5c781ede88c'),
+(200, 16, 29, 414, 680445, '2024-07-12 07:08', '2024-07-12 07:08', '2024-07-12 07:08', 340059, '2f0c4acce02acef61e4541f44964684a0dc0f748'),
+(201, 14, 30, 400, 680445, '2024-07-05 07:14', '2024-07-05 07:14', '2024-07-05 07:14', 340059, '37d01af3c60740422bc70bdef79607666c038155'),
+(202, 14, 30, 400, 680445, '2024-07-19 07:14', '2024-07-19 07:14', '2024-07-19 07:14', 340059, '3c1511158b0680d3411255f2f83966c8544fd491'),
+(203, 15, 31, 414, 680445, '2024-07-22 07:19', '2024-07-22 07:19', '2024-07-22 07:19', 340059, 'f7e71b5a048ad91cf97b023c9544eef22fca7fa3'),
+(204, 15, 31, 828, 680445, '2024-08-06 07:20', '2024-08-06 07:20', '2024-08-06 07:20', 340059, 'd895d48f556e9d07936fb8758a2b0eeb5823cda2'),
+(205, 24, 32, 155, 680445, '2024-05-28 07:59', '2024-05-28 07:59', '2024-05-28 07:59', 340059, '987e6f0eb8c3a35689a6fd5e8954a1c01818e758'),
+(206, 24, 32, 155, 680445, '2024-06-03 08:00', '2024-06-03 08:00', '2024-06-03 08:00', 340059, 'a6a37907e1141f69251a6d04dfd9a0ff178980f7'),
+(207, 24, 32, 155, 680445, '2024-06-07 08:01', '2024-06-07 08:01', '2024-06-07 08:01', 340059, '13bddd378de7fd127d01a5efd325b7a54ace4ffb'),
+(208, 24, 32, 155, 680445, '2024-06-14 08:01', '2024-06-14 08:01', '2024-06-14 08:01', 340059, '3e23218706d4af651abae25c2261cf3be1fa5ee4'),
+(209, 24, 32, 155, 680445, '2024-06-21 08:02', '2024-06-21 08:02', '2024-06-21 08:02', 340059, '42c26264c22356c46ba713d0baeec68f49da21e3'),
+(210, 24, 32, 155, 680445, '2024-06-28 08:02', '2024-06-28 08:02', '2024-06-28 08:02', 340059, '2889bc0615abdd8b8c337ec2369cc3a5b0378f6c'),
+(211, 24, 32, 155, 680445, '2024-07-05 08:02', '2024-07-05 08:02', '2024-07-05 08:02', 340059, '723a5b16b86d99eb89d8e6629ee0ce91a815143e'),
+(212, 24, 32, 155, 680445, '2024-07-15 08:03', '2024-07-15 08:03', '2024-07-15 08:03', 340059, '1958174be5908633b6adb0c97b57b636932374ae'),
+(213, 24, 32, 155, 680445, '2024-07-23 08:04', '2024-07-23 08:04', '2024-07-23 08:04', 340059, 'eeb61722401d6cebe349bad1cf69036cac0f2713'),
+(214, 24, 32, 155, 680445, '2024-07-28 08:04', '2024-07-28 08:04', '2024-07-28 08:04', 340059, 'f906932509977a2d91150adc24856e0833eb31d5'),
+(215, 25, 33, 620, 680445, '2023-02-10 08:14', '2023-02-10 08:14', '2023-02-10 08:14', 340059, '655504dd093e9421fafa6c2813c09b2479061d85'),
+(216, 25, 33, 600, 680445, '2023-04-03 08:15', '2023-04-03 08:15', '2023-04-03 08:15', 340059, 'ca1361b23697e4f10b5d552d971672119dda726c'),
+(217, 25, 33, 2500, 680445, '2023-12-12 08:16', '2023-12-12 08:16', '2023-12-12 08:16', 340059, '091570bbece85b86e2caf792ce4f1d9fa6a32ef5'),
+(218, 26, 34, 930, 680445, '2023-04-26 08:32', '2023-04-26 08:32', '2023-04-26 08:32', 340059, '3db29495f9bf206be52c63336050bf759ce2c0af'),
+(219, 26, 34, 930, 680445, '2023-05-16 08:32', '2023-05-16 08:32', '2023-05-16 08:32', 340059, 'ee3955405707fc240c8743030ed464ed13e9ab78'),
+(220, 26, 34, 930, 680445, '2023-06-06 08:33', '2023-06-06 08:33', '2023-06-06 08:33', 340059, 'e8d2f9b99fc027bb1de1e3d4d543f0c6be27252b'),
+(221, 26, 34, 930, 680445, '2023-06-21 08:33', '2023-06-21 08:33', '2023-06-21 08:33', 340059, 'f3d55a75c7db1b7cd2c2c8d5493ae1eec9a2887c'),
+(222, 26, 35, 1242, 680445, '2023-11-30 08:38', '2023-11-30 08:38', '2023-11-30 08:38', 340059, '7cb2b1a7d58c7e7ee3e22ff7957a078909ead534'),
+(223, 26, 35, 1242, 680445, '2024-02-02 08:39', '2024-02-02 08:39', '2024-02-02 08:39', 340059, 'c0d9b2cd1f9feda69a57717b85840fe0de1d5657'),
+(224, 26, 35, 1242, 680445, '2024-03-08 08:40', '2024-03-08 08:40', '2024-03-08 08:40', 340059, '6f7e11d239a8dd62f335cd83a99b244d9420cd07'),
+(225, 26, 36, 724, 680445, '2023-07-23 09:37', '2023-07-23 09:37', '2023-07-23 09:37', 340059, '9bd5e5b24eff1bcaf24e12ff078a99f5a0bee511'),
+(226, 26, 36, 724, 680445, '2023-08-07 09:37', '2023-08-07 09:37', '2023-08-07 09:37', 340059, 'a42f278af4f449065ce43c98154bd8ecd7acf80b'),
+(227, 26, 36, 724, 680445, '2023-08-11 09:38', '2023-08-11 09:38', '2023-08-11 09:38', 340059, 'ba29113793ca95b487cedcbadf75b576450bb558'),
+(228, 26, 36, 724, 680445, '2023-08-25 09:39', '2023-08-25 09:39', '2023-08-25 09:39', 340059, 'f34b701642efeb05f14305c0417c44a51c692043'),
+(229, 26, 36, 724, 680445, '2023-09-01 09:39', '2023-09-01 09:39', '2023-09-01 09:39', 340059, '6c6fce1b6635621c38ff964c9fc1a49db50476ee'),
+(230, 26, 36, 724, 680445, '2023-09-17 09:39', '2023-09-17 09:39', '2023-09-17 09:39', 340059, 'b45c02928765e11f5a0beec01e954527ab491489'),
+(231, 27, 37, 207, 680445, '2024-05-03 10:00', '2024-05-03 10:00', '2024-05-03 10:00', 340059, 'ddafc83b4b0df3ab065b4c3938f92e1c61c0e3f5'),
+(232, 27, 37, 210, 680445, '2024-05-20 10:00', '2024-05-20 10:00', '2024-05-20 10:00', 340059, '1356415b8efc0cc64fc3de5cc52add964eae1b14'),
+(233, 27, 37, 210, 680445, '2024-06-03 10:01', '2024-06-03 10:01', '2024-06-03 10:01', 340059, 'b5bc76c70ede88c7592342432df923d9d1f7bb5e'),
+(234, 27, 37, 210, 680445, '2024-06-20 10:01', '2024-06-20 10:01', '2024-06-20 10:01', 340059, 'd9c7d805b1527eff7a1e2c02acef4d26264f37f8'),
+(235, 27, 37, 403, 680445, '2024-07-23 10:02', '2024-07-23 10:02', '2024-07-23 10:02', 340059, '8036bbfd1e702146173e81ba36f2b0e57537816b'),
+(236, 8, 38, 310, 680445, '2023-02-10 10:10', '2023-02-10 10:10', '2023-02-10 10:10', 340059, '50d3721de8be0cba04e0f64664325818c9d8a5e7'),
+(237, 8, 38, 310, 680445, '2023-02-17 10:10', '2023-02-17 10:10', '2023-02-17 10:10', 340059, '3d37cbcec97c10902659b535738380e839777184'),
+(238, 8, 38, 310, 680445, '2023-02-24 10:11', '2023-02-24 10:11', '2023-02-24 10:11', 340059, '42a0d37f7133212afa0ad7ab401f2fda06dacf11'),
+(239, 8, 38, 310, 680445, '2023-03-03 10:11', '2023-03-03 10:11', '2023-03-03 10:11', 340059, '33537d23dd7213071aba8656f7f8d5da66ec7449'),
+(240, 8, 38, 310, 680445, '2023-03-10 10:11', '2023-03-10 10:11', '2023-03-10 10:11', 340059, '87a0311f55ac72a620bc06b3ff1252b8faf6d518'),
+(241, 8, 38, 310, 680445, '2023-03-27 10:12', '2023-03-27 10:12', '2023-03-27 10:12', 340059, '22d7ad32e6b7009b44b994b45112667502d6a265'),
+(242, 8, 38, 1860, 680445, '2023-04-06 10:13', '2023-04-06 10:13', '2023-04-06 10:13', 340059, '8191f7871a42af75b8679b5b3e2718100b3ae3b5'),
+(243, 8, 39, 984, 680445, '2023-05-08 10:19', '2023-05-08 10:19', '2023-05-08 10:19', 340059, 'de382d386e774bebab11e5495d4f11baa96d5d87'),
+(244, 8, 39, 994, 680445, '2023-05-22 10:20', '2023-05-22 10:20', '2023-05-22 10:20', 340059, '40f1dd707d71f6ed7fa7cfe982e8bc8a80e091c2'),
+(245, 8, 39, 988, 680445, '2023-06-29 10:21', '2023-06-29 10:21', '2023-06-29 10:21', 340059, '9ff8ce94d8c0394f1f2d737fefe152d008f24a82'),
+(246, 26, 36, 724, 680445, '2023-09-25 16:39', '2023-09-25 16:39', '2023-09-25 16:39', 340059, 'a260666a73d6953709a07090c7ce3dbf905e0005'),
+(247, 26, 36, 724, 680445, '2023-10-02 16:40', '2023-10-02 16:40', '2023-10-02 16:40', 340059, '977812519a616b4e79e274b7ba1fff9df9b58a58'),
+(248, 26, 36, 724, 680445, '2023-10-06 16:40', '2023-10-06 16:40', '2023-10-06 16:40', 340059, 'b8cec7f8361521e40c17eb20220b990639e599b4'),
+(249, 26, 36, 724, 680445, '2023-10-16 16:41', '2023-10-16 16:41', '2023-10-16 16:41', 340059, 'afa72ada0555c105de3566e13b38a88deff9e150'),
+(250, 26, 36, 1440, 680445, '2023-10-23 16:42', '2023-10-23 16:42', '2023-10-23 16:42', 340059, '58884bfd9ab2e862aab62c60d1f439e8c08c1de6'),
+(251, 19, 21, 420, 680445, '2024-05-28 17:29', '2024-05-28 17:29', '2024-05-28 17:29', 340059, 'b89ecfafdde32cfba9c1f99daf343d94640d4a14'),
+(252, 19, 21, 420, 680445, '2024-06-07 17:30', '2024-06-07 17:30', '2024-06-07 17:30', 340059, '3943d252557526fc459e8ec96c9f096e858dd87a'),
+(253, 19, 21, 800, 680445, '2024-06-20 17:31', '2024-06-20 17:31', '2024-06-20 17:31', 340059, '647825b1dd60b76e29c93190d352fc2b15c624e3'),
+(254, 19, 21, 800, 680445, '2024-07-12 17:32', '2024-07-12 17:32', '2024-07-12 17:32', 340059, 'a532a091a934c25630c235e5e8f80caa01dc0808'),
+(255, 17, 18, 540, 680445, '2024-04-11 12:37', '2024-04-11 12:37', '2024-04-11 12:37', 340059, 'df42ac471331b5f5003a95dc0be16e668977c920'),
+(256, 17, 18, 540, 680445, '2024-05-07 12:37', '2024-05-07 12:37', '2024-05-07 12:37', 340059, 'e945d09b35582f4ac8bc03cd294a0f66bb939fe6'),
+(257, 17, 18, 540, 680445, '2024-05-31 12:39', '2024-05-31 12:39', '2024-05-31 12:39', 340059, 'cb43818d6b0c180f2baec75ad9a23d38d551b58a'),
+(258, 17, 18, 540, 680445, '2024-06-06 12:40', '2024-06-06 12:40', '2024-06-06 12:40', 340059, 'fbad6b4be305b441da668621ea0e73f2eec10927'),
+(260, 3, 3, 203, 680445, '2024-07-01 14:02', '2024-07-01 14:02', '2024-07-01 14:02', 340059, 'eb18ffbfd9b46f2e50739affb033828ab60bb7c8'),
+(261, 26, 35, 413, 680445, '2024-08-08 14:10', '2024-08-08 14:10', '2024-08-08 14:10', 340059, 'cc15e1916a13c8a3c6fb5dce31ea24ce65a46d9e'),
+(262, 26, 35, 413, 680445, '2024-08-08 14:12', '2024-08-08 14:12', '2024-08-08 14:12', 340059, '332b95d5bbf37162049561aa686e2d6ca2abb1c1'),
+(263, 26, 35, 408, 680445, '2024-08-08 14:13', '2024-08-08 14:13', '2024-08-08 14:13', 340059, 'b4f86e94ee6a6c7abd65fea4388568e4d0596eb0'),
+(264, 2, 2, 103, 680445, '2024-08-08 14:16', '2024-08-08 14:16', '2024-08-08 14:16', 340059, '54c34dfe579cb8f1efbfb2536d2d5ec7a864891c'),
+(265, 2, 2, 1, 680445, '2024-08-08 14:17', '2024-08-08 14:17', '2024-08-08 14:17', 340059, 'c3840268c848e5e415ada65cf78edb8b1e2d3019'),
+(266, 4, 5, 1000, 680445, '2024-08-08 14:19', '2024-08-08 14:19', '2024-08-08 14:19', 340059, 'ddd4a70f85127719fa7f319752ba753a21b0b4ae'),
+(267, 4, 5, 680, 680445, '2024-08-08 14:29', '2024-08-08 14:29', '2024-08-08 14:29', 340059, '9e1404491e5e7e639770681df5bd2444c8724186'),
+(268, 4, 5, 640, 680445, '2024-08-08 14:30', '2024-08-08 14:30', '2024-08-08 14:30', 340059, 'c1b791fe9321caa72dd9414cb3ccb48e4af91cb3'),
+(269, 5, 7, 975, 680445, '2024-08-08 14:32', '2024-08-08 14:32', '2024-08-08 14:32', 340059, '4cfaa8bad2c60b0ccd7a5a0e7c7673a5a6f695e8'),
+(270, 13, 16, 410, 680445, '2024-08-09 17:14', '2024-08-09 17:14', '2024-08-09 17:14', 340059, '31fdc0b39903cb62413e1aa0f7dc7927bb9b5dab'),
+(271, 24, 32, 310, 680445, '2024-08-12 15:40', '2024-08-12 15:40', '2024-08-12 15:40', 340059, 'd17a897c5ee6c028c6d7084e18d46fc94e3e56fc'),
+(272, 15, 31, 414, 680445, '2024-08-13 13:25', '2024-08-13 13:25', '2024-08-13 13:25', 340059, '34392703522f8ee2c6a3bbd43f262303ba20e225'),
+(273, 21, 25, 414, 680445, '2024-08-16 16:48', '2024-08-16 16:48', '2024-08-16 16:48', 340059, '215d25796771d4482624c0dd1bd912465448cb23'),
+(274, 16, 29, 414, 680445, '2024-08-16 16:48', '2024-08-16 16:48', '2024-08-16 16:48', 340059, '9296a432e6dc78bdde67ed9d1e51ad070819a491'),
+(275, 18, 41, 207, 680445, '2024-08-23 10:48', '2024-08-23 10:48', '2024-08-23 10:48', 340059, '211150279ec309d6d0460ddd3cc7e961eaa2e60f'),
+(276, 29, 43, 207, 680445, '2024-08-23 13:43', '2024-08-23 13:43', '2024-08-23 13:43', 340059, 'c1a9faa2518d057ff792b24d62cacd198736dd68'),
+(277, 15, 31, 414, 680445, '2024-08-23 13:54', '2024-08-23 13:54', '2024-08-23 13:54', 340059, '4a284e394ca157da183f32445e7592e89bd97752'),
+(278, 28, 42, 207, 680445, '2024-08-23 15:30', '2024-08-23 15:30', '2024-08-23 15:30', 340059, 'e38187e8e458693e017c643d2fe65244967a347c'),
+(279, 15, 31, 414, 680445, '2024-08-30 10:19', '2024-08-30 10:19', '2024-08-30 10:19', 340059, '50a065b451ca4683a3ab1a69eff2e638edb61e6b'),
+(280, 18, 41, 207, 680445, '2024-08-30 10:28', '2024-08-30 10:28', '2024-08-30 10:28', 340059, '1057621a83e64bc0807a11c472230e7d5d3569a0'),
+(281, 29, 43, 207, 680445, '2024-08-30 11:26', '2024-08-30 11:26', '2024-08-30 11:26', 340059, '29ccd85795248a25d30a781b3d4fd7361ebefaaa'),
+(282, 28, 42, 207, 680445, '2024-08-30 17:01', '2024-08-30 17:01', '2024-08-30 17:01', 340059, '53e0516b1af32120f3583653e13d5c96169628a5'),
+(283, 21, 25, 827, 680445, '2024-09-02 11:34', '2024-09-02 11:34', '2024-09-02 11:34', 340059, '66cdd5b28ea759c5d19622d183c578a5529f1059'),
+(284, 18, 41, 207, 680445, '2024-09-06 10:08', '2024-09-06 10:08', '2024-09-06 10:08', 340059, 'f96b2f190e3394e6e2b9fa31c6ff3b84795cd437'),
+(285, 29, 43, 207, 680445, '2024-09-06 10:09', '2024-09-06 10:09', '2024-09-06 10:09', 340059, 'f72cbdf059889cdac849646b71060fdd73458b68'),
+(286, 15, 31, 414, 680445, '2024-09-06 10:10', '2024-09-06 10:10', '2024-09-06 10:10', 340059, 'b6dd7d7b24a1923a0df4031574ba12a4b02e1c6d'),
+(287, 30, 44, 207, 680445, '2024-09-06 13:52', '2024-09-06 13:52', '2024-09-06 13:52', 340059, 'd1864e81096115d47399f6d4623218d5d9672569'),
+(288, 19, 21, 800, 680445, '2024-09-06 13:54', '2024-09-06 13:54', '2024-09-06 13:54', 340059, 'c75969a7b9625c9233236d9f84be751955d382c2'),
+(289, 28, 42, 207, 680445, '2024-09-10 06:14', '2024-09-10 06:14', '2024-09-10 06:14', 340059, 'cfe99be7383baa3e4496e3413e615e7ac9c84563'),
+(290, 10, 46, 207, 680445, '2024-09-13 09:26', '2024-09-13 09:26', '2024-09-13 09:26', 340059, 'fafc202caff590de15344a5b2b6a84640fa2909d'),
+(291, 29, 43, 207, 680445, '2024-09-13 12:28', '2024-09-13 12:28', '2024-09-13 12:28', 340059, 'c5553dce31d0f7729fd2d26d631ac15f96344ecf'),
+(292, 18, 41, 207, 680445, '2024-09-13 15:50', '2024-09-13 15:50', '2024-09-13 15:50', 340059, '40696b0603e5475d8070f808691d4cf10274dc0e'),
+(293, 15, 31, 414, 680445, '2024-09-13 15:51', '2024-09-13 15:51', '2024-09-13 15:51', 340059, '780f69c295881e8227f7bc18c4d119ad7e31484c'),
+(294, 30, 44, 207, 680445, '2024-09-13 15:52', '2024-09-13 15:52', '2024-09-13 15:52', 340059, 'e44b458690c6bdbac0517124be26f3c1240cf93b'),
+(295, 21, 25, 415, 680445, '2024-09-13 17:05', '2024-09-13 17:05', '2024-09-13 17:05', 340059, 'e7f637976094aa8124b7319c0b84d6acdb4ad54b'),
+(296, 16, 29, 1242, 680445, '2024-09-13 17:08', '2024-09-13 17:08', '2024-09-13 17:08', 340059, 'dde9dbf260210faf0282eecf87cd14618d0096ee'),
+(297, 6, 45, 207, 680445, '2024-09-16 12:07', '2024-09-16 12:07', '2024-09-16 12:07', 340059, 'c1feebd47742ac9e42ac3eb7bc4c0c87c15c97ab'),
+(298, 29, 43, 207, 680445, '2024-09-20 08:26', '2024-09-20 08:26', '2024-09-20 08:26', 340059, 'f325d415947e517625358b0c3fde2ffaeece38b7'),
+(299, 10, 46, 207, 680445, '2024-09-20 08:27', '2024-09-20 08:27', '2024-09-20 08:27', 340059, '48de035ef9cbca69b74f9dfe3024796c3e342c67'),
+(300, 30, 44, 207, 680445, '2024-09-20 11:07', '2024-09-20 11:07', '2024-09-20 11:07', 340059, 'c45aa11f4dc51a40baa24c60ea265463ec8de26f'),
+(301, 30, 44, 207, 680445, '2024-09-20 11:08', '2024-09-20 11:08', '2024-09-20 11:08', 340059, '2ea776be56f4fe37142f79d416feb9d7d4d73876'),
+(302, 16, 29, 414, 680445, '2024-09-24 09:37', '2024-09-24 09:37', '2024-09-24 09:37', 340059, '6545edf8b954bf7ba1b7584ec43ea4cab1e4030e'),
+(303, 18, 41, 207, 680445, '2024-09-24 09:38', '2024-09-24 09:38', '2024-09-24 09:38', 340059, '694ecb82089bf953bcff4ec24237942c74f44760'),
+(304, 6, 45, 207, 680445, '2024-09-24 09:38', '2024-09-24 09:38', '2024-09-24 09:38', 340059, '2ef41f981e572efaeae3863451495bc41dff8284'),
+(305, 15, 31, 414, 680445, '2024-09-25 14:31', '2024-09-25 14:31', '2024-09-25 14:31', 340059, '2dfef2c10aa9e87a37a7d297851c30daed7fc058'),
+(306, 10, 46, 207, 680445, '2024-09-25 14:32', '2024-09-25 14:32', '2024-09-25 14:32', 340059, 'cf5c5e1ebd276f48c48bbadbf0588a1a055d250c'),
+(307, 29, 43, 207, 680445, '2024-09-27 09:20', '2024-09-27 09:20', '2024-09-27 09:20', 340059, '458df7ab2e64c41043b6c14870f6bd766f753dfd'),
+(308, 18, 41, 207, 680445, '2024-09-27 09:31', '2024-09-27 09:31', '2024-09-27 09:31', 340059, 'dd4d3bfc9534412947c77137a38a13df61a5533e'),
+(309, 18, 41, 207, 680445, '2024-10-04 09:55', '2024-10-04 09:55', '2024-10-04 09:55', 340059, '29d4b273649336d88013ce18f39a9e80b795b2b5'),
+(310, 10, 46, 207, 680445, '2024-10-04 09:57', '2024-10-04 09:57', '2024-10-04 09:57', 340059, '133846645acb70c3646841c682ad65338bf633f7'),
+(311, 29, 43, 207, 680445, '2024-10-04 10:41', '2024-10-04 10:41', '2024-10-04 10:41', 340059, '713379122c2d3ae8acae3cad26723e80ed681793'),
+(312, 16, 29, 414, 680445, '2024-10-04 16:22', '2024-10-04 16:22', '2024-10-04 16:22', 340059, '33b54a6721abb7dabddc7b38bcb438c20d70e802'),
+(313, 15, 31, 414, 680445, '2024-10-04 16:23', '2024-10-04 16:23', '2024-10-04 16:23', 340059, '6bcb38b2b6cf1136654d9fda534b6b42841db80d'),
+(314, 6, 45, 414, 680445, '2024-10-07 11:23', '2024-10-07 11:23', '2024-10-07 11:23', 340059, 'ac0fac7fe85048a6cf30e866b445ae0ca26e9c58'),
+(315, 19, 21, 900, 680445, '2024-10-07 11:25', '2024-10-07 11:25', '2024-10-07 11:25', 340059, 'fd59f8d2871f0085607d19643f436aba1b3fedc4'),
+(316, 10, 46, 207, 680445, '2024-10-11 10:37', '2024-10-11 10:37', '2024-10-11 10:37', 340059, '4193e709adfd1b776db6617bca58f5f0c2d8f5c1'),
+(317, 29, 43, 207, 680445, '2024-10-11 10:37', '2024-10-11 10:37', '2024-10-11 10:37', 340059, '2b6429d4ec0c4ef25d74e008788bb88db50487a0'),
+(318, 18, 41, 207, 680445, '2024-10-11 10:37', '2024-10-11 10:37', '2024-10-11 10:37', 340059, '23c07404499d737b5496701458a2c963fdab6a48');
 
 -- --------------------------------------------------------
 
@@ -999,9 +1770,9 @@ INSERT INTO `loan_payment` (`ID`, `CUSTOMERID`, `LOANID`, `AMOUNT`, `POSTED_BY`,
 --
 
 CREATE TABLE `loan_product_tb` (
-  `ID` int NOT NULL,
+  `ID` int(11) NOT NULL,
   `NAME` varchar(200) NOT NULL,
-  `CODE` int NOT NULL,
+  `CODE` int(11) NOT NULL,
   `MIN_AMOUNT` double DEFAULT NULL,
   `MAX_AMOUNT` double DEFAULT NULL,
   `FORM_FEE` double DEFAULT NULL,
@@ -1010,9 +1781,9 @@ CREATE TABLE `loan_product_tb` (
   `PENALTY` double NOT NULL,
   `DATE_CREATED` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `DATE_MODIFIED` varchar(200) NOT NULL,
-  `CCODE` int NOT NULL,
+  `CCODE` int(11) NOT NULL,
   `HCODE` longtext NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
 
 --
 -- Dumping data for table `loan_product_tb`
@@ -1030,10 +1801,10 @@ INSERT INTO `loan_product_tb` (`ID`, `NAME`, `CODE`, `MIN_AMOUNT`, `MAX_AMOUNT`,
 --
 
 CREATE TABLE `loan_tb` (
-  `ID` bigint NOT NULL,
-  `CODE` int NOT NULL,
+  `ID` bigint(20) NOT NULL,
+  `CODE` int(11) NOT NULL,
   `ACCOUNT_NO` varchar(100) NOT NULL,
-  `LOAN_PRODUCT_CODE` int DEFAULT NULL,
+  `LOAN_PRODUCT_CODE` int(11) DEFAULT NULL,
   `AMOUNT` double NOT NULL,
   `INTEREST` double DEFAULT NULL,
   `TOTAL` double DEFAULT NULL,
@@ -1041,32 +1812,70 @@ CREATE TABLE `loan_tb` (
   `PENALTY` double NOT NULL,
   `COLAT` longtext NOT NULL,
   `LOAN_PERIOD` varchar(100) DEFAULT NULL,
-  `CAPACITY` int NOT NULL COMMENT '1:1 Week 2:2 Weeks',
+  `CAPACITY` int(11) NOT NULL COMMENT '1:1 Week 2:2 Weeks',
   `DAYS_LEFT` varchar(100) DEFAULT NULL,
-  `STATUS` int NOT NULL COMMENT '0:Active 1:Pending 2:Declined 3:Matured',
-  `REPAY_STATUS` int NOT NULL COMMENT '0:Complete 1:Pending',
+  `STATUS` int(11) NOT NULL COMMENT '0:Active 1:Pending 2:Declined 3:Matured',
+  `REPAY_STATUS` int(11) NOT NULL COMMENT '0:Complete 1:Pending',
   `DATE_CREATED` varchar(200) NOT NULL,
   `DATE_APPROVE` varchar(200) NOT NULL,
   `DATE_MATURE` varchar(200) DEFAULT NULL,
   `DATE_MODIFIED` varchar(200) DEFAULT NULL,
-  `POSTED_BY` int NOT NULL,
-  `CCODE` int NOT NULL,
+  `POSTED_BY` int(11) NOT NULL,
+  `CCODE` int(11) NOT NULL,
   `HCODE` longtext NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
 
 --
 -- Dumping data for table `loan_tb`
 --
 
 INSERT INTO `loan_tb` (`ID`, `CODE`, `ACCOUNT_NO`, `LOAN_PRODUCT_CODE`, `AMOUNT`, `INTEREST`, `TOTAL`, `REPAYMENT`, `PENALTY`, `COLAT`, `LOAN_PERIOD`, `CAPACITY`, `DAYS_LEFT`, `STATUS`, `REPAY_STATUS`, `DATE_CREATED`, `DATE_APPROVE`, `DATE_MATURE`, `DATE_MODIFIED`, `POSTED_BY`, `CCODE`, `HCODE`) VALUES
-(1, 1000, 'GRE/BUS/2024/000001', 1000, 2000, 480, 2480, 0, 0, 'CONTAINER', '3', 1, '90', 0, 0, '2022-08-22 13:56', '2024-08-05', '2024-11-3', '2024-08-05 21:05', 680445, 340059, 'e7d1efe6696d1ee66263b1ac575791dfb93eebdb'),
-(2, 1001, 'GRE/BUS/2024/000002', 1000, 1000, 240, 1240, 0, 0, 'KIOSK', '3', 1, '90', 0, 0, '2022-09-12 15:10', '2024-08-05', '2024-11-3', '2024-08-05 03:15:45pm', 680445, 340059, '0063d8fb697e0fa2e9e3ea3163e7e18734f7dd27'),
-(4, 1003, 'GRE/BUS/2024/000004', 1000, 2000, 480, 2480, 0, 0, 'HOUSE', '3', 1, '90', 0, 0, '2022-09-02 16:15', '2024-08-05', '2024-11-3', '2024-08-05 22:16', 680445, 340059, 'd27c8f687fb7964c55d28f7313eef0ce1a84b33d'),
-(5, 1004, 'GRE/BUS/2024/000004', 1000, 4000, 960, 4960, 0, 0, 'HOUSE', '3', 1, '90', 0, 1, '2023-07-08 16:22', '2024-08-05', '2024-11-3', '2024-08-06 10:23', 680445, 340059, '7bf844efda704ceee622c971dfc4fb334e6a142c'),
-(6, 1005, 'GRE/BUS/2024/000005', 1000, 2000, 480, 2480, 0, 0, 'CONTAINER', '3', 1, '90', 0, 0, '2022-12-05 16:46', '2024-08-05', '2024-11-3', '2024-08-05 21:06', 680445, 340059, 'ce1e9e8724a32f5ef3453b190050413a3126a5a2'),
-(7, 1006, 'GRE/BUS/2024/000005', 1000, 3000, 480, 3480, 0, 0, 'CONTAINER', '2', 1, '60', 0, 0, '2023-07-13 16:56', '2024-08-05', '2024-10-4', '2024-08-05 04:57:53pm', 680445, 340059, '2f8f204c8adbc110916d456c545b352427546200'),
-(8, 1007, 'GRE/BUS/2024/000006', 1000, 2000, 480, 2480, 0, 0, 'CONTAINER', '3', 1, '90', 0, 1, '2024-02-22 17:19', '2024-08-05', '2024-11-3', '2024-08-06 10:23', 680445, 340059, 'd861322d0b532168fb410231cbdf317e095e4d1d'),
-(9, 1008, 'GRE/BUS/2024/000003', 1000, 2000, 160, 2160, 0, 0, 'My car', '1', 1, '30', 1, 1, '2024-08-06 10:23', '0', '0', '2024-08-06 10:23', 660546, 340059, '6f3138fd2279623353dd77d71bab2466fe1486bd');
+(1, 1000, 'GRE/BUS/2024/000001', 1000, 2000, 480, 2480, 0, 0, 'CONTAINER', '3', 1, '90', 0, 0, '2022-08-22 13:56', '2024-08-05', '2024-11-3', '2024-08-07 18:11', 680445, 340059, 'e7d1efe6696d1ee66263b1ac575791dfb93eebdb'),
+(2, 1001, 'GRE/BUS/2024/000002', 1000, 1000, 240, 1240, 0, 0, 'KIOSK', '3', 1, '90', 0, 0, '2022-09-12 15:10', '2024-08-05', '2024-11-3', '2024-08-08 14:16', 680445, 340059, '0063d8fb697e0fa2e9e3ea3163e7e18734f7dd27'),
+(3, 1002, 'GRE/BUS/2024/000003', 1000, 2000, 480, 2480, 0, 0, 'LAND', '3', 1, '90', 0, 0, '2024-04-22 15:52', '2024-08-05', '2024-11-3', '2024-08-08 14:00', 680445, 340059, '419c9deecff7d08995840084230602a3af756b3d'),
+(4, 1003, 'GRE/BUS/2024/000004', 1000, 2000, 480, 2480, 0, 0, 'HOUSE', '3', 1, '90', 0, 0, '2022-09-02 16:15', '2024-08-05', '2024-11-3', '2024-08-07 16:22', 680445, 340059, 'd27c8f687fb7964c55d28f7313eef0ce1a84b33d'),
+(5, 1004, 'GRE/BUS/2024/000004', 1000, 4000, 960, 4960, 0, 0, 'HOUSE', '3', 1, '90', 0, 0, '2023-07-08 16:22', '2024-08-05', '2024-11-3', '2024-08-08 14:29', 680445, 340059, '7bf844efda704ceee622c971dfc4fb334e6a142c'),
+(6, 1005, 'GRE/BUS/2024/000005', 1000, 2000, 480, 2480, 0, 0, 'CONTAINER', '3', 1, '90', 0, 0, '2022-12-05 16:46', '2024-08-05', '2024-11-3', '2024-08-07 16:22', 680445, 340059, 'ce1e9e8724a32f5ef3453b190050413a3126a5a2'),
+(7, 1006, 'GRE/BUS/2024/000005', 1000, 3000, 480, 3480, 0, 0, 'CONTAINER', '2', 1, '60', 0, 0, '2023-07-13 16:56', '2024-08-05', '2024-10-4', '2024-08-08 14:30', 680445, 340059, '2f8f204c8adbc110916d456c545b352427546200'),
+(8, 1007, 'GRE/BUS/2024/000006', 1000, 2000, 480, 2480, 0, 0, 'CONTAINER', '3', 1, '90', 0, 0, '2024-02-22 17:19', '2024-08-05', '2024-11-3', '2024-08-07 18:01', 680445, 340059, 'd861322d0b532168fb410231cbdf317e095e4d1d'),
+(9, 1008, 'GRE/BUS/2024/000007', 1000, 2000, 480, 2480, 0, 0, 'STORE NEAR KPONE KKMA', '3', 1, '90', 0, 0, '2022-09-01 03:31', '2024-08-06', '2024-11-4', '2024-08-07 16:23', 680445, 340059, '1f575c88d994387fb567d30c637cdc46357b0301'),
+(10, 1009, 'GRE/BUS/2024/000009', 1000, 2000, 480, 2480, 0, 0, 'CONTAINER ', '3', 1, '90', 0, 0, '2024-01-18 04:12', '2024-08-06', '2024-11-4', '2024-08-07 16:22', 680445, 340059, '7409e4db21cec7f55157889f5c51fe32de64535f'),
+(11, 1010, 'GRE/BUS/2024/0000010', 1000, 2000, 480, 2480, 0, 0, 'CONTAINER', '3', 1, '90', 0, 0, '2023-06-12 04:31', '2024-08-06', '2024-11-4', '2024-08-07 18:01', 680445, 340059, 'fa9be058d57e5495f6c9ffdb072ed579711dfb92'),
+(12, 1011, 'GRE/BUS/2024/0000011', 1000, 2000, 480, 2480, 0, 0, 'shop', '3', 1, '90', 0, 1, '2023-05-16 16:49', '2024-08-06', '2024-11-4', '2024-10-11 10:37', 680445, 340059, 'd2549645bb1f8ee379de678cb24d1cee0fe3729d'),
+(13, 1012, 'GRE/BUS/2024/0000012', 1000, 2000, 480, 2480, 0, 0, 'MOTORCYCLE (PRAYAH)', '3', 1, '90', 0, 0, '2023-10-18 16:54', '2024-08-06', '2024-11-4', '2024-08-07 16:23', 680445, 340059, 'ca9e9501c99a084f9c7c832c5556754b2511a254'),
+(14, 1013, 'GRE/BUS/2024/0000014', 1000, 2000, 480, 2480, 0, 0, 'taxi', '3', 1, '90', 0, 0, '2023-12-11 17:09', '2024-08-07', '2024-11-5', '2024-08-07 16:22', 680445, 340059, 'e783980dc2bad502200cb88d016c3c47b8424593'),
+(15, 1014, 'GRE/BUS/2024/0000015', 1000, 2000, 480, 2480, 0, 0, 'NONE', '3', 1, '90', 0, 0, '2024-03-26 18:00', '2024-08-07', '2024-11-5', '2024-08-07 16:22', 680445, 340059, '3429929a7d285c047049cccbe47efe1beacdc040'),
+(16, 1015, 'GRE/BUS/2024/0000013', 1000, 2000, 480, 2480, 0, 0, 'store', '3', 1, '90', 0, 0, '2024-02-01 03:42', '2024-08-07', '2024-11-5', '2024-08-09 17:13', 680445, 340059, 'c91cd1c9772e43a607691fb9df136636204ac556'),
+(17, 1016, 'GRE/BUS/2024/0000016', 1000, 2000, 480, 2480, 0, 0, 'popcorn machine', '3', 1, '90', 0, 0, '2024-02-19 04:13', '2024-08-07', '2024-11-5', '2024-08-07 16:22', 680445, 340059, '1e6836120e257595302ac50b641f70bdeb50fded'),
+(18, 1017, 'GRE/BUS/2024/0000017', 1000, 2000, 160, 2160, 0, 0, 'hair drier', '1', 1, '30', 0, 0, '2024-03-11 04:23', '2024-08-08', '2024-9-7', '2024-08-08 12:39', 680445, 340059, '73bd1f7ea5c7b109f2cebe68428bdc39ae77e03e'),
+(19, 1018, 'GRE/BUS/2024/0000018', 1000, 2000, 480, 2480, 0, 0, 'CONTAINER', '3', 1, '90', 0, 0, '2023-05-29 04:47', '2024-08-07', '2024-11-5', '2024-08-07 16:22', 680445, 340059, '9b1ef5abb9572646f9ee6aca3a4c0fd21e7b34eb'),
+(20, 1019, 'GRE/BUS/2024/0000019', 1000, 2000, 480, 2480, 0, 0, 'NONE', '3', 1, '90', 0, 0, '2024-02-12 05:05', '2024-08-07', '2024-11-5', '2024-08-07 16:22', 680445, 340059, '43b0cec63e5196abf7975a611d25bcdeff595d98'),
+(21, 1020, 'GRE/BUS/2024/0000019', 1000, 4000, 960, 4960, 0, 0, 'NONE', '3', 1, '90', 0, 1, '2024-06-05 05:13', '2024-08-07', '2024-11-5', '2024-10-11 10:37', 680445, 340059, '09a67c2f01d895b8f3dce0f241f83a317958b6b0'),
+(22, 1021, 'GRE/BUS/2024/0000020', 1000, 2000, 480, 2480, 0, 0, 'CONTAINER ', '3', 1, '90', 0, 0, '2024-02-15 05:26', '2024-08-07', '2024-11-5', '2024-08-07 16:22', 680445, 340059, 'a293f26800ba73902027e1361805af7aecddfc5f'),
+(23, 1022, 'GRE/BUS/2024/0000020', 1000, 5000, 1200, 6200, 0, 0, 'CONTAINER', '3', 1, '90', 0, 1, '2024-04-15 05:35', '2024-08-07', '2024-11-5', '2024-10-11 10:37', 680445, 340059, '4cd3353dc38739af28bc39102b58773dbf8d2024'),
+(24, 1023, 'GRE/BUS/2024/0000021', 1000, 2000, 480, 2480, 0, 0, 'SPARE PART CONTAINER', '3', 1, '90', 0, 0, '2024-02-14 05:49', '2024-08-07', '2024-11-5', '2024-08-07 16:22', 680445, 340059, '7359a57422e72ed2e3e86320b99048e7e46f5f3a'),
+(25, 1024, 'GRE/BUS/2024/0000021', 1000, 4000, 960, 4960, 0, 0, 'SPARE PART SHOP ', '3', 1, '90', 0, 1, '2024-05-24 06:00', '2024-08-07', '2024-11-5', '2024-10-11 10:37', 680445, 340059, '30408dfb870fc9bdd139d40438b9a4ea2d0e1f14'),
+(26, 1025, 'GRE/BUS/2024/0000022', 1000, 2000, 480, 2480, 0, 0, 'STORE', '3', 1, '90', 0, 1, '2024-03-05 06:13', '2024-08-07', '2024-11-5', '2024-10-11 10:37', 680445, 340059, '7e1be7b36f2152a8f4c09668aed48785c6c9ce70'),
+(27, 1026, 'GRE/BUS/2024/0000023', 1000, 3000, 720, 3720, 0, 0, 'CAR (TAXI', '3', 1, '90', 0, 1, '2023-05-11 06:32', '2024-08-07', '2024-11-5', '2024-10-11 10:37', 680445, 340059, '99d943ac4e96232ebe6e42428dd3f17972b450bf'),
+(28, 1027, 'GRE/BUS/2024/0000018', 1000, 3000, 720, 3720, 0, 0, 'CONTAINER', '3', 1, '90', 0, 0, '2023-12-09 06:38', '2024-08-07', '2024-11-5', '2024-08-07 16:22', 680445, 340059, 'c39c98e2271ce4f8917ad6ca6ee86b876d1d98a2'),
+(29, 1028, 'GRE/BUS/2024/0000016', 1000, 4000, 960, 4960, 0, 0, 'DEEP FREEZER', '3', 1, '90', 0, 1, '2024-06-24 07:04', '2024-08-07', '2024-11-5', '2024-10-11 10:37', 680445, 340059, 'f3f7bd16c6a7680a5843374d5cc936090f9e5f0f'),
+(30, 1029, 'GRE/BUS/2024/0000014', 1000, 2000, 480, 2480, 0, 0, 'TAXI', '3', 1, '90', 0, 1, '2024-05-20 07:11', '2024-08-07', '2024-11-5', '2024-10-11 10:37', 680445, 340059, 'dc97cdabab8ae0d2f8257b63e3fac430cb9ef688'),
+(31, 1030, 'GRE/BUS/2024/0000015', 1000, 4000, 960, 4960, 0, 0, 'NONE', '3', 1, '90', 0, 1, '2024-08-11 07:16', '2024-08-07', '2024-11-5', '2024-10-11 10:37', 680445, 340059, '5d54157554338c78a193775adf42145b897f61a0'),
+(32, 1031, 'GRE/BUS/2024/0000024', 1000, 1500, 360, 1860, 0, 0, 'MOTORCYCLE (PRAGYA', '3', 1, '90', 0, 0, '2024-05-13 07:39', '2024-08-07', '2024-11-5', '2024-08-12 15:40', 680445, 340059, 'f06cdf91f3b8cf008fadf022094ed2f9af4d57b1'),
+(33, 1032, 'GRE/BUS/2024/0000025', 1000, 3000, 720, 3720, 0, 0, 'WELDING MACHINE', '3', 1, '90', 0, 0, '2023-01-27 08:12', '2024-08-07', '2024-11-5', '2024-08-07 16:22', 680445, 340059, '5284413305419aae54a1c37c59c876231634f612'),
+(34, 1033, 'GRE/BUS/2024/0000026', 1000, 3000, 720, 3720, 0, 0, 'NONE', '3', 1, '90', 0, 0, '2023-03-07 08:28', '2024-08-07', '2024-11-5', '2024-08-07 16:22', 680445, 340059, 'bb5a58f0e61cdffa0e39ebead7faf275649ca4c5'),
+(35, 1034, 'GRE/BUS/2024/0000026', 1000, 4000, 960, 4960, 0, 0, 'CAR', '3', 1, '90', 0, 0, '2023-11-20 08:35', '2024-08-07', '2024-11-5', '2024-08-08 14:13', 680445, 340059, 'ff8c495430833461c75d032f5193449e6963950b'),
+(36, 1035, 'GRE/BUS/2024/0000026', 1000, 7000, 1680, 8680, 0, 0, 'CAR', '3', 1, '90', 0, 0, '2023-07-13 09:33', '2024-08-07', '2024-11-5', '2024-08-07 16:41', 680445, 340059, '1ddeb332e5be1a51e4c86f66a6efeaf0f57efc6b'),
+(37, 1036, 'GRE/BUS/2024/0000027', 1000, 1000, 240, 1240, 0, 0, 'WASHING MACHINE', '3', 2, '90', 0, 0, '2024-04-22 09:57', '2024-08-07', '2024-11-5', '2024-08-07 16:22', 680445, 340059, 'fbf85c076c9eed98691edd65bc92a55585dc65c9'),
+(38, 1037, 'GRE/BUS/2024/000008', 1000, 3000, 720, 3720, 0, 0, 'NONE', '3', 1, '90', 0, 0, '2023-01-28 10:08', '2024-08-07', '2024-11-5', '2024-08-07 16:22', 680445, 340059, 'f698b2712bd1d938b00497766c2d515a1a574991'),
+(39, 1038, 'GRE/BUS/2024/000008', 1000, 8000, 1920, 9920, 0, 0, 'PREPAID MACHINE', '3', 1, '90', 0, 1, '2023-04-11 10:15', '2024-08-07', '2024-11-5', '2024-10-11 10:37', 680445, 340059, '727a17a9fc6a9930e8a8d99acb8e13607be3b2f4'),
+(40, 1039, 'GRE/BUS/2024/0000017', 1000, 3000, 720, 3720, 0, 0, 'HAIR DRIER', '3', 1, '90', 0, 1, '2024-06-10 12:41', '2024-08-08', '2024-11-6', '2024-10-11 10:37', 680445, 340059, 'a5f7dde5fd1a3786bc66989db17e5aade409770d'),
+(41, 1040, 'GRE/BUS/2024/0000018', 1000, 2000, 480, 2480, 0, 0, 'CONTAINER (AMARK PHONE REPAIRES)', '3', 1, '90', 0, 1, '2024-08-12 10:40', '2024-08-12', '2024-11-10', '2024-10-11 10:37', 680445, 340059, '437d1712474e64d0ceed14e415356c8b451c8500'),
+(42, 1041, 'GRE/BUS/2024/0000028', 1000, 2000, 480, 2480, 0, 0, 'HOME USE ACCESSARIES CONTAINER ', '3', 1, '90', 0, 1, '2024-08-12 12:00', '2024-08-12', '2024-11-10', '2024-10-11 10:37', 680445, 340059, 'de43d9d2c7de017d628d0877684b2792cb60a544'),
+(43, 1042, 'GRE/BUS/2024/0000029', 1000, 2000, 480, 2480, 0, 0, '  CONTAINER (KITCHEN SET) ', '3', 1, '90', 0, 1, '2024-08-12 13:59', '2024-08-12', '2024-11-10', '2024-10-11 10:37', 680445, 340059, 'a72d8dd4fbc559b832d6a7302726722489c287cf'),
+(44, 1043, 'GRE/BUS/2024/0000030', 1000, 2000, 480, 2480, 0, 0, 'ADEPA CLOTHE (CONTAINER)', '3', 1, '90', 0, 1, '2024-08-23 10:45', '2024-08-23', '2024-11-21', '2024-10-11 10:37', 680445, 340059, '6128e9f51a674b3eab633125bbb752a5c56ac7d7'),
+(45, 1044, 'GRE/BUS/2024/000006', 1000, 2000, 480, 2480, 0, 0, 'container (sika avenue', '3', 1, '90', 0, 1, '2024-09-02 11:06', '2024-09-04', '2024-12-3', '2024-10-11 10:37', 680445, 340059, '15ec68a8ba8b9aee7cad06fe7c0332f970255f83'),
+(46, 1045, 'GRE/BUS/2024/0000010', 1000, 2000, 480, 2480, 0, 0, 'REFRIGERATOTR', '3', 1, '90', 0, 1, '2024-09-04 13:36', '2024-09-04', '2024-12-3', '2024-10-11 10:37', 680445, 340059, 'bf899652d1c1a5f4a599068a686140edb7023ec7');
 
 -- --------------------------------------------------------
 
@@ -1075,17 +1884,17 @@ INSERT INTO `loan_tb` (`ID`, `CODE`, `ACCOUNT_NO`, `LOAN_PRODUCT_CODE`, `AMOUNT`
 --
 
 CREATE TABLE `momo_trans_tb` (
-  `ID` int NOT NULL,
+  `ID` int(11) NOT NULL,
   `DEPOSIT` varchar(200) NOT NULL,
   `DEPOSIT_COMM` varchar(200) DEFAULT NULL,
   `CASHOUT` varchar(200) NOT NULL,
   `CASHOUT_COMM` varchar(200) DEFAULT NULL,
-  `POSTED_BY` int DEFAULT NULL,
+  `POSTED_BY` int(11) DEFAULT NULL,
   `DATE_CREATED` varchar(200) NOT NULL,
   `DATE_MODIFIED` varchar(50) DEFAULT NULL,
-  `CCODE` int DEFAULT NULL,
-  `HCODE` longtext
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb3;
+  `CCODE` int(11) DEFAULT NULL,
+  `HCODE` longtext DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
 
 -- --------------------------------------------------------
 
@@ -1094,11 +1903,11 @@ CREATE TABLE `momo_trans_tb` (
 --
 
 CREATE TABLE `month_tb` (
-  `ID` int NOT NULL,
+  `ID` int(11) NOT NULL,
   `MONTHCODE` varchar(50) NOT NULL,
   `CODE` varchar(50) NOT NULL,
   `SELECTION` varchar(5) DEFAULT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb3;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
 
 -- --------------------------------------------------------
 
@@ -1107,12 +1916,12 @@ CREATE TABLE `month_tb` (
 --
 
 CREATE TABLE `no_account_tb` (
-  `ID` int NOT NULL,
-  `CLIENT_ID` int DEFAULT NULL,
-  `DATE_CREATED` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `CCODE` int NOT NULL,
+  `ID` int(11) NOT NULL,
+  `CLIENT_ID` int(11) DEFAULT NULL,
+  `DATE_CREATED` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `CCODE` int(11) NOT NULL,
   `HCODE` longtext NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb3;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
 
 -- --------------------------------------------------------
 
@@ -1121,12 +1930,12 @@ CREATE TABLE `no_account_tb` (
 --
 
 CREATE TABLE `occupation_tb` (
-  `ID` int NOT NULL,
+  `ID` int(11) NOT NULL,
   `OCCUPATION` varchar(200) NOT NULL,
-  `DATE_CREATED` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `CCODE` int NOT NULL,
+  `DATE_CREATED` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `CCODE` int(11) NOT NULL,
   `HCODE` longtext NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
 
 --
 -- Dumping data for table `occupation_tb`
@@ -1175,18 +1984,18 @@ INSERT INTO `occupation_tb` (`ID`, `OCCUPATION`, `DATE_CREATED`, `CCODE`, `HCODE
 --
 
 CREATE TABLE `penalty_tb` (
-  `ID` bigint NOT NULL,
-  `CUSTOMERID` bigint DEFAULT NULL,
-  `LOANID` bigint DEFAULT NULL,
+  `ID` bigint(20) NOT NULL,
+  `CUSTOMERID` bigint(20) DEFAULT NULL,
+  `LOANID` bigint(20) DEFAULT NULL,
   `BALANCE` double NOT NULL,
   `PRATE` double NOT NULL,
   `AMOUNT` double NOT NULL,
-  `POSTED_BY` int NOT NULL,
-  `DATE_NORMAL` varchar(200) COLLATE utf8mb4_general_ci NOT NULL,
-  `DATE_CREATED` varchar(100) COLLATE utf8mb4_general_ci NOT NULL,
-  `DATE_MODIFIED` varchar(100) COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `CCODE` int NOT NULL,
-  `HCODE` longtext COLLATE utf8mb4_general_ci NOT NULL
+  `POSTED_BY` int(11) NOT NULL,
+  `DATE_NORMAL` varchar(200) NOT NULL,
+  `DATE_CREATED` varchar(100) NOT NULL,
+  `DATE_MODIFIED` varchar(100) DEFAULT NULL,
+  `CCODE` int(11) NOT NULL,
+  `HCODE` longtext NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -1196,7 +2005,7 @@ CREATE TABLE `penalty_tb` (
 --
 
 CREATE TABLE `product_tb` (
-  `ID` int NOT NULL,
+  `ID` int(11) NOT NULL,
   `NAME` varchar(200) NOT NULL,
   `CODE` varchar(200) DEFAULT NULL,
   `INITIAL_MIN_AMOUNT` varchar(200) NOT NULL,
@@ -1207,13 +2016,13 @@ CREATE TABLE `product_tb` (
   `INTEREST_PERIOD` varchar(200) DEFAULT NULL,
   `DEPOSIT_COMM` double DEFAULT NULL,
   `WITHDRAWAL_COMM` double DEFAULT NULL,
-  `SOURCE` int DEFAULT NULL COMMENT '1:SUSU/Savings 2:Agency',
-  `CLIENT_ID` int DEFAULT NULL,
-  `DATE_CREATED` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `SOURCE` int(11) DEFAULT NULL COMMENT '1:SUSU/Savings 2:Agency',
+  `CLIENT_ID` int(11) DEFAULT NULL,
+  `DATE_CREATED` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `DATE_MODIFIED` varchar(100) DEFAULT NULL,
-  `CCODE` int DEFAULT NULL,
-  `HCODE` longtext
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+  `CCODE` int(11) DEFAULT NULL,
+  `HCODE` longtext DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Dumping data for table `product_tb`
@@ -1240,13 +2049,13 @@ INSERT INTO `product_tb` (`ID`, `NAME`, `CODE`, `INITIAL_MIN_AMOUNT`, `INITIAL_M
 --
 
 CREATE TABLE `residence_tb` (
-  `ID` int NOT NULL,
+  `ID` int(11) NOT NULL,
   `AREA` varchar(200) NOT NULL,
-  `DATE_CREATED` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `DATE_CREATED` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `DATE_MODIFIED` varchar(100) DEFAULT NULL,
-  `CCODE` int DEFAULT NULL,
-  `HCODE` longtext
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `CCODE` int(11) DEFAULT NULL,
+  `HCODE` longtext DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Dumping data for table `residence_tb`
@@ -1300,19 +2109,19 @@ INSERT INTO `residence_tb` (`ID`, `AREA`, `DATE_CREATED`, `DATE_MODIFIED`, `CCOD
 --
 
 CREATE TABLE `role_settings` (
-  `ID` int NOT NULL,
-  `ROLE` int NOT NULL,
-  `REGISTER` int NOT NULL COMMENT '0:Active 1: Inactive',
-  `DEPOSIT` int NOT NULL COMMENT '0:Active 1: Inactive',
-  `WITHDRAWAL` int NOT NULL COMMENT '0:Active 1: Inactive',
-  `TRANSFER` int NOT NULL COMMENT '0:Active 1: Inactive',
-  `HISTORY` int NOT NULL COMMENT '0:Active 1: Inactive',
-  `LOAN` int NOT NULL COMMENT '0:Active 1: Inactive',
+  `ID` int(11) NOT NULL,
+  `ROLE` int(11) NOT NULL,
+  `REGISTER` int(11) NOT NULL COMMENT '0:Active 1: Inactive',
+  `DEPOSIT` int(11) NOT NULL COMMENT '0:Active 1: Inactive',
+  `WITHDRAWAL` int(11) NOT NULL COMMENT '0:Active 1: Inactive',
+  `TRANSFER` int(11) NOT NULL COMMENT '0:Active 1: Inactive',
+  `HISTORY` int(11) NOT NULL COMMENT '0:Active 1: Inactive',
+  `LOAN` int(11) NOT NULL COMMENT '0:Active 1: Inactive',
   `DATE_MODIFIED` varchar(100) DEFAULT NULL,
-  `POSTED_BY` int NOT NULL COMMENT '0:Active 1: Inactive',
-  `CCODE` int NOT NULL,
+  `POSTED_BY` int(11) NOT NULL COMMENT '0:Active 1: Inactive',
+  `CCODE` int(11) NOT NULL,
   `HCODE` longtext NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
 
 --
 -- Dumping data for table `role_settings`
@@ -1510,12 +2319,12 @@ INSERT INTO `role_settings` (`ID`, `ROLE`, `REGISTER`, `DEPOSIT`, `WITHDRAWAL`, 
 --
 
 CREATE TABLE `role_tb` (
-  `ID` int NOT NULL,
+  `ID` int(11) NOT NULL,
   `ROLE` varchar(200) NOT NULL,
-  `DATE_CREATED` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `CCODE` int DEFAULT NULL,
-  `HCODE` longtext
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb3;
+  `DATE_CREATED` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `CCODE` int(11) DEFAULT NULL,
+  `HCODE` longtext DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
 
 --
 -- Dumping data for table `role_tb`
@@ -1536,12 +2345,12 @@ INSERT INTO `role_tb` (`ID`, `ROLE`, `DATE_CREATED`, `CCODE`, `HCODE`) VALUES
 --
 
 CREATE TABLE `sessions` (
-  `id` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `user_id` bigint UNSIGNED DEFAULT NULL,
-  `ip_address` varchar(45) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `user_agent` text COLLATE utf8mb4_unicode_ci,
-  `payload` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
-  `last_activity` int NOT NULL
+  `id` varchar(255) NOT NULL,
+  `user_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `ip_address` varchar(45) DEFAULT NULL,
+  `user_agent` text DEFAULT NULL,
+  `payload` longtext NOT NULL,
+  `last_activity` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -1605,19 +2414,19 @@ INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, 
 CREATE TABLE `sms_settings` (
   `APIKEY` varchar(255) DEFAULT NULL,
   `SID` varchar(50) DEFAULT NULL,
-  `WELCOME_SMS` int NOT NULL COMMENT '0:Active 1: Inactive',
-  `DEPOSIT_SMS` int NOT NULL COMMENT '0:Active 1: Inactive',
-  `WITHDRAWAL_SMS` int NOT NULL COMMENT '0:Active 1: Inactive',
-  `TRANSFER_SMS` int NOT NULL COMMENT '0:Active 1: Inactive',
-  `WELCOME_MESS` longtext,
-  `DEPOSIT_MESS` longtext,
-  `WITHDRAWAL_MESS` longtext,
-  `TRANSFER_MESS` longtext,
+  `WELCOME_SMS` int(11) NOT NULL COMMENT '0:Active 1: Inactive',
+  `DEPOSIT_SMS` int(11) NOT NULL COMMENT '0:Active 1: Inactive',
+  `WITHDRAWAL_SMS` int(11) NOT NULL COMMENT '0:Active 1: Inactive',
+  `TRANSFER_SMS` int(11) NOT NULL COMMENT '0:Active 1: Inactive',
+  `WELCOME_MESS` longtext DEFAULT NULL,
+  `DEPOSIT_MESS` longtext DEFAULT NULL,
+  `WITHDRAWAL_MESS` longtext DEFAULT NULL,
+  `TRANSFER_MESS` longtext DEFAULT NULL,
   `DATE_MODIFIED` varchar(50) DEFAULT NULL,
-  `POSTED_BY` int NOT NULL,
-  `CCODE` int NOT NULL,
+  `POSTED_BY` int(11) NOT NULL,
+  `CCODE` int(11) NOT NULL,
   `HCODE` longtext NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
 
 --
 -- Dumping data for table `sms_settings`
@@ -1693,14 +2502,14 @@ INSERT INTO `sms_settings` (`APIKEY`, `SID`, `WELCOME_SMS`, `DEPOSIT_SMS`, `WITH
 --
 
 CREATE TABLE `sms_tb` (
-  `ID` int NOT NULL,
+  `ID` int(11) NOT NULL,
   `ACCOUNT_NO` varchar(200) NOT NULL,
   `MESSAGE` varchar(255) DEFAULT NULL,
   `CONTACT` varchar(20) DEFAULT NULL,
-  `DATE_CREATED` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `CCODE` int NOT NULL,
+  `DATE_CREATED` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `CCODE` int(11) NOT NULL,
   `HCODE` longtext NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb3;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
 
 -- --------------------------------------------------------
 
@@ -1709,13 +2518,13 @@ CREATE TABLE `sms_tb` (
 --
 
 CREATE TABLE `status_tb` (
-  `ID` int NOT NULL,
+  `ID` int(11) NOT NULL,
   `STATUS` varchar(10) DEFAULT NULL,
   `DESCRIPTION` varchar(200) NOT NULL,
-  `DATE_CREATED` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `CCODE` int NOT NULL,
+  `DATE_CREATED` timestamp NOT NULL DEFAULT current_timestamp(),
+  `CCODE` int(11) NOT NULL,
   `HCODE` longtext NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
 
 -- --------------------------------------------------------
 
@@ -1724,66 +2533,20 @@ CREATE TABLE `status_tb` (
 --
 
 CREATE TABLE `subscription_tb` (
-  `ID` int NOT NULL,
-  `SUBSCRIPTION` int NOT NULL,
-  `DAYS_LEFT` int NOT NULL,
+  `ID` int(11) NOT NULL,
+  `SUBSCRIPTION` int(200) NOT NULL,
+  `DAYS_LEFT` int(255) NOT NULL,
   `DATE_MODIFIED` varchar(50) DEFAULT NULL,
-  `CCODE` int NOT NULL,
+  `CCODE` int(11) NOT NULL,
   `HCODE` longtext NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
 
 --
 -- Dumping data for table `subscription_tb`
 --
 
 INSERT INTO `subscription_tb` (`ID`, `SUBSCRIPTION`, `DAYS_LEFT`, `DATE_MODIFIED`, `CCODE`, `HCODE`) VALUES
-(2, 10000, 7, '2022-06-27', 603870, 'sgsgadfdsfasdf54545457fdfdfbhyyrtrtrtwwe'),
-(3, 7, 7, '2022-07-14', 520403, 'db9302fccba5ffb8fcae7304e5c4feeb5a87a917'),
-(4, 126, 7, '2022-07-14', 949796, '40d14c22f0f42f205d87eec7204f76fc56b8af24'),
-(5, 7, 7, '2022-07-15', 984706, '6464c61388ac736d6aa7083aa72a8550ee19f176'),
-(6, 7, 0, '2022-07-15', 618608, '55fd4a0ef5f3263a232a656716c21d0907e4c087'),
-(7, 7, 5, '2022-07-15', 297358, 'abe8171f9e8dcc23fb9de34e63f6b98a67c831a5'),
-(8, 7, 7, '2022-07-15', 618782, 'b8c8f8de814707c3efb8039e26bc94d967494860'),
-(9, 7, 7, '2022-07-15', 984103, '7b62626f607e96b7f7e341f5c4575e759affa943'),
-(10, 7, 7, '2022-07-15', 515097, 'a09033d3a296ba246d4de9762093474b8b02221d'),
-(11, 7, 7, '2022-07-15', 626175, '7d99875a3544fe085a49ecd41e2bec25b612213c'),
-(12, 7, 7, '2022-07-15', 463006, '33ddb3a617e320c55e1245d0954c4ace2c426a1e'),
-(13, 7, 7, '2022-07-15', 723795, '4d5716c4194509f57006682a658b620cf861f363'),
-(14, 1095, 0, '2024-02-04', 233211, '6ecf66b14ff3ba7b27646b6ca86f518ee110d560'),
-(15, 7, 7, '2022-07-15', 563554, '010877e66b2858c76c179987beb463f45efd655f'),
-(16, 7, 0, '2022-07-15', 811193, '1811df29dcc06bcfd79633e3dada7f17d5525496'),
-(17, 7, 0, '2022-08-09', 715676, '80b412bc35427324bc0f6ac9ba3612717b63e7c2'),
-(18, 7, 0, '2022-08-23', 610240, '2d256aad63c59b5c3a52957408c5c92411c0e89e'),
-(19, 4094, 0, '2022-08-29', 570826, 'b8c9f616241a97f0e6c71fef33498fa29c136ef2'),
-(20, 7, 4, '2022-09-13', 392986, '0458116f0e60540d5e2b3ef71ce8c9e3bb51c5bb'),
-(21, 7, 4, '2022-09-13', 137093, 'b84eaebc113f99e1bebec57b32c1d227b1b15773'),
-(22, 7, 4, '2022-09-13', 764459, '84b8b9aa688133d6f42cae132bbf68fe9ab790fd'),
-(23, 30, 0, '2022-09-13', 381272, '2d642792006767b849cd63c97dec2b29d7b62b5a'),
-(24, 7, 7, '2022-09-16', 474308, 'ef65a217bfa27ed45c83aead5e0d112f5774e6ae'),
-(25, 126, 126, '2022-09-21', 994529, 'ef183fd9674ab581477f4fd3b60daafd9318c8c4'),
-(26, 7, 0, '2022-10-11', 200776, '310342bf7470679910f1b5267bc7122aceb48390'),
-(27, 7, 0, '2022-11-06', 548706, '82ad82a5a84c31c42ebcd53e39f123ef2fa8ecb3'),
-(28, 7, 0, '2023-03-06', 898101, '2958f6ac47090c311d79fdfc660e43932187e698'),
-(29, 7, 0, '2023-04-23', 451923, 'cb0dbd6965ace79e54cae174ecbfca9d70481026'),
-(30, 7, 0, '2023-05-29', 473858, '652d03ad857c88b39dca0709ce273ff41feaad3b'),
-(31, 7, 7, '2023-06-05', 169954, '892041df232a589f0d309af6767bba2b9b28ded2'),
-(32, 7, 7, '2023-12-04', 379999, 'a3c30703caa0f3269da0a074b4a3778f9ec7bdf9'),
-(33, 1000000, 999897, '2024-08-06', 340059, '8f0c2c43ae0fc88cebaf6aa6a5d132c84cb33153'),
-(34, 7, 7, '2024-06-03', 197163, '0fd0b406f5eb4c4fe49947269799a651e07573aa'),
-(35, 39, 23, '2024-07-21 22:31', 518163, '8e5f7e995e4a3f9102ece0710b643eaf58929fef'),
-(36, 12, 1, '2024-07-21 23:56', 929764, 'aaa16be1dedc256b103ab9bb8d6306887ce1e740'),
-(37, 7, 0, '2024-06-03', 267680, 'c21d39e26cc093cab3dca8b6a141f1b0a1fc0cbb'),
-(38, 7, 0, '2024-06-03', 371265, '6098b03817a21703a479bc73c000e8d8d1cef57a'),
-(39, 12, 2, '2024-07-21 22:55', 933642, 'f00b564263a0d3a91370dc236fff5820464dca41'),
-(40, 355, 699, '2024-08-01', 377586, '692f785fb86a37105a3e5f2220c885da48c44e28'),
-(41, 29, 18, '2024-07-21 22:59', 961704, '586ded982a4562812da2d46f2d30157a292038c6'),
-(42, 349, 688, '2024-08-01', 516448, 'c67d70145332c7dd4851e10f7622b6a7ba048c07'),
-(43, 7, 7, '2024-07-15', 558404, '59105ffe393f10c9bc44d881e54dfdb2deb71ec6'),
-(44, 362, 351, '2024-07-21 23:00', 499047, '70c2d9832651bba13dc49e8b2f7003b48d5b5cd9'),
-(45, 180, 352, '2024-08-01', 270530, 'efd7b182bb867cb754ce3556327c15a816aac6c9'),
-(46, 7, 7, '2024-07-19', 751991, '8a157712126a73b44142a34331b707b9f12bc8dd'),
-(47, 365, 721, '2024-08-01', 598200, 'f842a6d5504d5a4890a1616aa2bd99b375d6c1a0'),
-(48, 7, 0, '2024-07-31', 352648, '35e95b3fafcf673fd34a69158d604ce21d6a6c23');
+(33, 10000155, 10000170, '2024-10-11', 340059, '8f0c2c43ae0fc88cebaf6aa6a5d132c84cb33153');
 
 -- --------------------------------------------------------
 
@@ -1792,17 +2555,17 @@ INSERT INTO `subscription_tb` (`ID`, `SUBSCRIPTION`, `DAYS_LEFT`, `DATE_MODIFIED
 --
 
 CREATE TABLE `susucomm_tb` (
-  `ID` bigint NOT NULL,
-  `SOURCE` int DEFAULT NULL COMMENT '1:Deposit 2: Withdrawal',
-  `DEPID` int NOT NULL,
+  `ID` bigint(20) NOT NULL,
+  `SOURCE` int(11) DEFAULT NULL COMMENT '1:Deposit 2: Withdrawal',
+  `DEPID` int(11) NOT NULL,
   `AMOUNT` double NOT NULL,
   `RATE` double NOT NULL,
   `COMMISSION` double NOT NULL,
-  `POSTED_BY` int NOT NULL,
-  `DATE_CREATED` varchar(100) COLLATE utf8mb4_general_ci NOT NULL,
-  `DATE_MODIFIED` varchar(100) COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `CCODE` int NOT NULL,
-  `HCODE` longtext COLLATE utf8mb4_general_ci NOT NULL
+  `POSTED_BY` int(11) NOT NULL,
+  `DATE_CREATED` varchar(100) NOT NULL,
+  `DATE_MODIFIED` varchar(100) DEFAULT NULL,
+  `CCODE` int(11) NOT NULL,
+  `HCODE` longtext NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -1812,13 +2575,13 @@ CREATE TABLE `susucomm_tb` (
 --
 
 CREATE TABLE `sync_history` (
-  `ID` int NOT NULL,
+  `ID` int(11) NOT NULL,
   `DATE_CREATED` varchar(50) DEFAULT NULL,
   `LAST_DATE` varchar(50) NOT NULL,
   `LAST_TIME` varchar(50) NOT NULL,
-  `SYNC_BY` int DEFAULT NULL,
+  `SYNC_BY` int(11) DEFAULT NULL,
   `HOST_ID` varchar(50) DEFAULT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb3;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
 
 --
 -- Dumping data for table `sync_history`
@@ -1940,20 +2703,97 @@ INSERT INTO `sync_history` (`ID`, `DATE_CREATED`, `LAST_DATE`, `LAST_TIME`, `SYN
 --
 
 CREATE TABLE `withdrawal_tb` (
-  `ID` bigint NOT NULL,
-  `CODE` bigint NOT NULL,
-  `AMOUNT` varchar(200) COLLATE utf8mb4_general_ci NOT NULL,
-  `CLIENT_ID` bigint DEFAULT NULL,
-  `ACCOUNT_NUMBER` varchar(200) COLLATE utf8mb4_general_ci NOT NULL,
-  `DATE_CREATED` varchar(100) COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `PHOTO` longtext COLLATE utf8mb4_general_ci,
-  `DATE_NORMAL` varchar(200) COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `DATE_MODIFIED` varchar(50) COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `CREATED_BY` int DEFAULT NULL,
-  `TAG` int NOT NULL COMMENT '1:Deposit 2:Withdrawal',
-  `CCODE` int DEFAULT NULL,
-  `HCODE` longtext COLLATE utf8mb4_general_ci
+  `ID` bigint(11) NOT NULL,
+  `CODE` bigint(11) NOT NULL,
+  `AMOUNT` varchar(200) NOT NULL,
+  `CLIENT_ID` bigint(11) DEFAULT NULL,
+  `ACCOUNT_NUMBER` varchar(200) NOT NULL,
+  `DATE_CREATED` varchar(100) DEFAULT NULL,
+  `PHOTO` longtext DEFAULT NULL,
+  `DATE_NORMAL` varchar(200) DEFAULT NULL,
+  `DATE_MODIFIED` varchar(50) DEFAULT NULL,
+  `CREATED_BY` int(11) DEFAULT NULL,
+  `TAG` int(11) NOT NULL COMMENT '1:Deposit 2:Withdrawal',
+  `CCODE` int(11) DEFAULT NULL,
+  `HCODE` longtext DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `withdrawal_tb`
+--
+
+INSERT INTO `withdrawal_tb` (`ID`, `CODE`, `AMOUNT`, `CLIENT_ID`, `ACCOUNT_NUMBER`, `DATE_CREATED`, `PHOTO`, `DATE_NORMAL`, `DATE_MODIFIED`, `CREATED_BY`, `TAG`, `CCODE`, `HCODE`) VALUES
+(1, 710509, '1100', 964216306, 'GRE 0000000025', '2022-12-22 12:15:31pm', 'none', '2022-12-22', NULL, 680445, 2, 340059, '468ce17f3b53f140e0ac10ea2d4134f839f93623'),
+(2, 581963, '1950', 964216306, 'GRE 0000000025', '2023-01-10 12:16:06pm', 'none', '2023-01-10', NULL, 680445, 2, 340059, 'ae41083628f06691ec6730bde791c0f4d105a061'),
+(3, 629402, '260', 558365177, 'GRE 0000000026', '2022-12-22 12:27:03pm', 'none', '2022-12-22', NULL, 680445, 2, 340059, '61768ec71175916f69787908ab6469d3572144a8'),
+(4, 952051, '100', 502344178, 'GRE 0000000028', '2022-08-02 01:00:20pm', 'none', '2022-08-02', NULL, 680445, 2, 340059, '6994cc8410db3ba9d6188761d0b42d16b7f9ca20'),
+(5, 380654, '100', 502344178, 'GRE 0000000028', '2022-09-21 01:01:26pm', 'none', '2022-09-21', NULL, 680445, 2, 340059, '4242b8811dba769938655cdc33a6003dfc0a0e1d'),
+(6, 716224, '150', 502344178, 'GRE 0000000028', '2022-09-22 01:01:50pm', 'none', '2022-09-22', NULL, 680445, 2, 340059, 'c1b4167f7796234b0b8b5dae2fd331628dae5424'),
+(7, 761574, '50', 502344178, 'GRE 0000000028', '2022-10-18 01:02:06pm', 'none', '2022-10-18', NULL, 680445, 2, 340059, '110a66e6cf68b2bc46ff7077556ce30eeba3017e'),
+(8, 509076, '300', 502344178, 'GRE 0000000028', '2022-12-09 01:02:36pm', 'none', '2022-12-09', NULL, 680445, 2, 340059, 'fd84399f3390f58d937e821b1fc3237c1f44df87'),
+(9, 965246, '30', 502344178, 'GRE 0000000028', '2023-02-15 01:04:03pm', 'none', '2023-02-15', NULL, 680445, 2, 340059, '6a2f571349dbd019eb3fac6caf604f1d610df917'),
+(10, 519839, '1000', 118760168, 'GRE 0000000029', '2022-11-11 01:18:11pm', 'none', '2022-11-11', NULL, 680445, 2, 340059, '5aece445fda52684bb69b7e328ffec7dc27985a6'),
+(11, 305347, '800', 118760168, 'GRE 0000000029', '2022-12-23 01:22:57pm', 'none', '2022-12-23', NULL, 680445, 2, 340059, '2e41a4e12ffa73007cd9496424e06ac4bd668290'),
+(12, 265549, '900', 118760168, 'GRE 0000000029', '2023-06-02 01:28:21pm', 'none', '2023-06-02', NULL, 680445, 2, 340059, '89727b1bfb3f146da7d4075e3c8c3bd657df276c'),
+(13, 275390, '450', 829181896, 'GRE 0000000030', '2024-06-18 05:47:09pm', 'none', '2024-06-18', NULL, 680445, 2, 340059, '6e257a76bc05e1636c34c4941fdf035e14be2a03'),
+(14, 240231, '200', 829181896, 'GRE 0000000030', '2024-06-19 05:47:36pm', 'none', '2024-06-19', NULL, 680445, 2, 340059, '598793dad96f8d3b39d810dcc555974a42b69f3d'),
+(15, 853318, '50', 829181896, 'GRE 0000000030', '2024-08-01 05:48:08pm', 'none', '2024-08-01', NULL, 680445, 2, 340059, '69b82fdb4dfe405046c629730e007b21ebacc29b'),
+(16, 763030, '100', 576165856, 'GRE 0000000031', '2023-07-20 03:07:24pm', 'none', '2023-07-20', NULL, 680445, 2, 340059, '6a852ee1e7af2f4c030a611b792c299dd4936b51'),
+(17, 712532, '50', 576165856, 'GRE 0000000031', '2023-07-24 03:07:39pm', 'none', '2023-07-24', NULL, 680445, 2, 340059, '387a41f7f955317fa5c07f5c6cfd2ea3990bf3af'),
+(18, 548469, '100', 576165856, 'GRE 0000000031', '2023-08-01 03:07:58pm', 'none', '2023-08-01', NULL, 680445, 2, 340059, '809d1eaf33ac76e5bae211b08d4aa2ba405940b5'),
+(19, 261361, '60', 576165856, 'GRE 0000000031', '2023-09-11 03:08:19pm', 'none', '2023-09-11', NULL, 680445, 2, 340059, '46c93f630ea4b0cdb1deace4c181d56212c3d567'),
+(20, 326684, '300', 576165856, 'GRE 0000000031', '2023-11-15 03:10:34pm', 'none', '2023-11-15', NULL, 680445, 2, 340059, '41116ca6b82d286aecc6bcc5c1b6bad6fc588ada'),
+(21, 208373, '100', 576165856, 'GRE 0000000031', '2023-11-29 03:11:22pm', 'none', '2023-11-29', NULL, 680445, 2, 340059, '1b3f3cc5a6a94018743dbb80528ae36e12b6f265'),
+(22, 708705, '100', 576165856, 'GRE 0000000031', '2023-12-05 03:11:48pm', 'none', '2023-12-05', NULL, 680445, 2, 340059, '077e1cf1092ce5b0657ef2dc86655eb1997aeab5'),
+(23, 512885, '50', 576165856, 'GRE 0000000031', '2023-12-14 03:12:08pm', 'none', '2023-12-14', NULL, 680445, 2, 340059, '5d182ce8bb71e9db4032aba9d5dbf254f7c4a146'),
+(24, 576070, '300', 576165856, 'GRE 0000000031', '2024-03-12 03:12:34pm', 'none', '2024-03-12', NULL, 680445, 2, 340059, '6188853045024ecd83bd836eb552f45623e56fb1'),
+(25, 638487, '70', 576165856, 'GRE 0000000031', '2024-03-16 03:13:06pm', 'none', '2024-03-16', NULL, 680445, 2, 340059, '643811f8118af9cb057bbfdfcbf0f042aec44ced'),
+(26, 745549, '300', 576165856, 'GRE 0000000031', '2024-05-14 03:14:02pm', 'none', '2024-05-14', NULL, 680445, 2, 340059, '1ff3e6f38512d4b88b063bd2d0b6a45e91b2181d'),
+(27, 301611, '50', 576165856, 'GRE 0000000031', '2024-06-03 03:14:31pm', 'none', '2024-06-03', NULL, 680445, 2, 340059, '31e74c5a94403fd3eeba42352777a139fb806ed7'),
+(28, 230411, '200', 576165856, 'GRE 0000000031', '2024-06-03 03:15:15pm', 'none', '2024-06-03', NULL, 680445, 2, 340059, 'a9346d412775a526c7b2579604f4dd305570ed1b'),
+(29, 665303, '200', 326252747, 'GRE 0000000032', '2022-07-22 03:58:24pm', 'none', '2022-07-22', NULL, 680445, 2, 340059, 'b1c3dad57946928f30ccddc4cefdf9f5a774aa15'),
+(30, 470528, '300', 326252747, 'GRE 0000000032', '2022-07-25 03:58:46pm', 'none', '2022-07-25', NULL, 680445, 2, 340059, '8df8ad270e254576015174f81e6f1cfeb82f8a83'),
+(31, 880762, '260', 326252747, 'GRE 0000000032', '2022-08-17 03:59:32pm', 'none', '2022-08-17', NULL, 680445, 2, 340059, '6c05e4beeaef9496066daa0df880f01b22eadd6c'),
+(32, 893374, '100', 326252747, 'GRE 0000000032', '2022-09-21 04:00:40pm', 'none', '2022-09-21', NULL, 680445, 2, 340059, '2ef2f985b30a1fb392f0deb5378df795217e7161'),
+(33, 308570, '300', 326252747, 'GRE 0000000032', '2022-10-12 04:01:47pm', 'none', '2022-10-12', NULL, 680445, 2, 340059, '744afa87d421da971f34cb81157f148d61e9ba54'),
+(34, 199349, '20', 326252747, 'GRE 0000000032', '2022-10-19 04:02:47pm', 'none', '2022-10-19', NULL, 680445, 2, 340059, '58eec27f6e8d0a312eba604b3e3267b1c75c3b1d'),
+(35, 364392, '50', 326252747, 'GRE 0000000032', '2022-10-24 04:03:23pm', 'none', '2022-10-24', NULL, 680445, 2, 340059, '8f94cc86d5a8f4fe224f9a1eb2fba0f402ed2170'),
+(36, 728200, '170', 326252747, 'GRE 0000000032', '2022-10-28 04:04:31pm', 'none', '2022-10-28', NULL, 680445, 2, 340059, 'fb0d2d08828bccb391e3614b3552b6da83d4c5a3'),
+(37, 362399, '100', 326252747, 'GRE 0000000032', '2022-11-12 04:07:41pm', 'none', '2022-11-12', NULL, 680445, 2, 340059, 'f8fc698c42ee47905ec31f2839b0b21678c0f8b7'),
+(38, 950083, '700', 326252747, 'GRE 0000000032', '2022-11-19 04:08:15pm', 'none', '2022-11-19', NULL, 680445, 2, 340059, 'd25162fceb91dc2f35578dea2c452ba76a93aaaa'),
+(39, 537333, '100', 326252747, 'GRE 0000000032', '2022-12-01 04:08:33pm', 'none', '2022-12-01', NULL, 680445, 2, 340059, '0dbe6bbbc5c9c84dc56b822e79f0416eadd0fd1e'),
+(40, 581572, '300', 326252747, 'GRE 0000000032', '2022-12-08 04:08:50pm', 'none', '2022-12-08', NULL, 680445, 2, 340059, 'd9d326db3d1d155b70e2b27a0bd3a460a407e3d9'),
+(41, 844045, '150', 326252747, 'GRE 0000000032', '2022-12-17 04:09:13pm', 'none', '2022-12-17', NULL, 680445, 2, 340059, '4c4effdc09eb8cd0521319215adc19e7263a2242'),
+(42, 536021, '80', 326252747, 'GRE 0000000032', '2023-01-13 04:10:02pm', 'none', '2023-01-13', NULL, 680445, 2, 340059, '53d02e5cd866c09c3c5d5026b6885a32ce469b0f'),
+(43, 444118, '50', 326252747, 'GRE 0000000032', '2023-01-14 04:10:15pm', 'none', '2023-01-14', NULL, 680445, 2, 340059, 'ed1610d87df170e6e56e578c58638c0baa0ab744'),
+(44, 793187, '800', 326252747, 'GRE 0000000032', '2023-01-26 04:10:31pm', 'none', '2023-01-26', NULL, 680445, 2, 340059, 'd01f95b6921f6cbad056a914022c0ad81012f543'),
+(45, 202908, '350', 326252747, 'GRE 0000000032', '2023-04-11 04:11:23pm', 'none', '2023-04-11', NULL, 680445, 2, 340059, '3363724adc773f9aa4ab0eaf5367711301964580'),
+(46, 260703, '500', 326252747, 'GRE 0000000032', '2023-04-14 04:12:11pm', 'none', '2023-04-14', NULL, 680445, 2, 340059, '60a00932e62bb9870280eac71dcce0a40bea6fb1'),
+(47, 117546, '340', 326252747, 'GRE 0000000032', '2023-05-31 04:14:01pm', 'none', '2023-05-31', NULL, 680445, 2, 340059, 'ac0075019519a9ce4eb5df635cb2e5d8aea94bb8'),
+(48, 337386, '600', 326252747, 'GRE 0000000032', '2023-11-10 04:16:40pm', 'none', '2023-11-10', NULL, 680445, 2, 340059, '25f7bfbb69a9ed3d8fe508e183bbb09abdb73df6'),
+(49, 525464, '500', 326252747, 'GRE 0000000032', '2024-01-08 04:18:41pm', 'none', '2024-01-08', NULL, 680445, 2, 340059, 'e3c651807e4a796dabdae5564064bd7b1bd03cfd'),
+(50, 224591, '1250', 326252747, 'GRE 0000000032', '2024-02-09 04:19:22pm', 'none', '2024-02-09', NULL, 680445, 2, 340059, 'ca8f8989acf3614dc3cac94af506785f058c4010'),
+(51, 720374, '200', 326252747, 'GRE 0000000032', '2024-03-08 04:20:05pm', 'none', '2024-03-08', NULL, 680445, 2, 340059, '025b10838a1e012fb3b68c9f0ba6ae12c6425086'),
+(52, 708758, '200', 326252747, 'GRE 0000000032', '2024-06-10 04:21:02pm', 'none', '2024-06-10', NULL, 680445, 2, 340059, '8b9ac1e5d455b0ada82748d26ca2a586dbf14d03'),
+(53, 994080, '50', 326252747, 'GRE 0000000032', '2024-07-30 04:21:46pm', 'none', '2024-07-30', NULL, 680445, 2, 340059, '5846d68a4583ed4d34e136b97ed1831c52c412d0'),
+(54, 952913, '50', 326252747, 'GRE 0000000032', '2024-08-08 12:29:28pm', 'none', '2024-08-08', NULL, 680445, 2, 340059, '7f3643c7f253a16be42c3692d1e46d59bea86c6a'),
+(55, 422456, '300', 576165856, 'GRE 0000000031', '2024-08-14 03:35:36pm', 'none', '2024-08-14', NULL, 680445, 2, 340059, '98e36969de3aa2a8563e5a2459190a6810e7e0e7'),
+(56, 883558, '100', 326252747, 'GRE 0000000032', '2024-08-14 01:15:58pm', 'none', '2024-08-14', NULL, 680445, 2, 340059, '150d6b3a1dce19e78016b6ff3fb64141b85cc793'),
+(57, 677516, '200', 576165856, 'GRE 0000000031', '2024-08-22 04:22:43pm', 'none', '2024-08-22', NULL, 680445, 2, 340059, 'c15e379ef21dea3c29da4fc1a3ccfc299acd5373'),
+(58, 125515, '200', 829181896, 'GRE 0000000030', '2024-08-26 04:45:30pm', 'none', '2024-08-26', NULL, 680445, 2, 340059, 'b0ccd974da5cb5a0388f7fcb405312ad3edbfa9c'),
+(59, 413443, '800', 829181896, 'GRE 0000000030', '2024-08-28 08:27:17am', 'none', '2024-08-28', NULL, 680445, 2, 340059, '34edb59ad4f76d1dd3767ac13c5ac682dba07559'),
+(60, 101632, '100', 576165856, 'GRE 0000000031', '2024-08-30 03:01:03pm', 'none', '2024-08-30', NULL, 680445, 2, 340059, '8b1f8cab526486bba165b08a5b22cdb45eadb4da'),
+(61, 499574, '450', 829181896, 'GRE 0000000030', '2024-09-09 10:10:00am', 'none', '2024-09-09', NULL, 680445, 2, 340059, 'f1815f86c1c2642d57aef442a3d71fd2fe5b9c1a'),
+(62, 928046, '200', 576165856, 'GRE 0000000031', '2024-09-09 12:44:03pm', 'none', '2024-09-09', NULL, 680445, 2, 340059, '6b3e1ee807966849776babbbb08643d3a620b87f'),
+(63, 513460, '500', 576165856, 'GRE 0000000031', '2024-09-13 02:56:03pm', 'none', '2024-09-13', NULL, 680445, 2, 340059, '0a504310ec69cffdf1459b073e3a076b6b4bca9b'),
+(64, 916632, '200', 576165856, 'GRE 0000000031', '2024-09-17 05:20:43pm', 'none', '2024-09-17', NULL, 680445, 2, 340059, '5cdc5085999b788aafc498048aaf8efa4e86c8f0'),
+(65, 260361, '100', 326252747, 'GRE 0000000032', '2024-09-19 03:08:18pm', 'none', '2024-09-19', NULL, 680445, 2, 340059, '4caa3112acb23179adc993a99d91a40e41d845f9'),
+(66, 890473, '500', 576165856, 'GRE 0000000031', '2024-09-25 01:07:30pm', 'none', '2024-09-25', NULL, 680445, 2, 340059, 'e7f1df67322d9bf94a7c9eba26e6c90c7efe5eb2'),
+(67, 890560, '50', 326252747, 'GRE 0000000032', '2024-09-26 09:19:46am', 'none', '2024-09-26', NULL, 680445, 2, 340059, '494d40683b4a064f14618449ba094d770bba2ffd'),
+(68, 218510, '400', 576165856, 'GRE 0000000031', '2024-09-27 04:18:46pm', 'none', '2024-09-27', NULL, 680445, 2, 340059, 'e155700dea249c9c961cd6504968899a23ac61ad'),
+(69, 789738, '100', 326252747, 'GRE 0000000032', '2024-09-30 12:16:09pm', 'none', '2024-09-30', NULL, 680445, 2, 340059, 'c89e242077178715fad1e0cb99a369f82ffb22e6'),
+(70, 318994, '900', 326252747, 'GRE 0000000032', '2024-10-08 01:02:53pm', 'none', '2024-10-08', NULL, 680445, 2, 340059, 'ef7d9f6711af7b0a60075d78c86e6e7fee4a8337'),
+(71, 129293, '300', 326252747, 'GRE 0000000032', '2024-10-11 10:52:07am', 'none', '2024-10-11', NULL, 680445, 2, 340059, '8fe171f4135df97337453b2151b56b4651944ea6');
 
 --
 -- Indexes for dumped tables
@@ -2250,247 +3090,247 @@ ALTER TABLE `withdrawal_tb`
 -- AUTO_INCREMENT for table `account_number_tb`
 --
 ALTER TABLE `account_number_tb`
-  MODIFY `ID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=65;
+  MODIFY `ID` int(200) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=65;
 
 --
 -- AUTO_INCREMENT for table `account_tb`
 --
 ALTER TABLE `account_tb`
-  MODIFY `ID` int NOT NULL AUTO_INCREMENT;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `acc_status_tb`
 --
 ALTER TABLE `acc_status_tb`
-  MODIFY `ID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `activation_tb`
 --
 ALTER TABLE `activation_tb`
-  MODIFY `ID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
 
 --
 -- AUTO_INCREMENT for table `activity_tb`
 --
 ALTER TABLE `activity_tb`
-  MODIFY `ID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=193;
 
 --
 -- AUTO_INCREMENT for table `admin_tb`
 --
 ALTER TABLE `admin_tb`
-  MODIFY `ID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=91;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=91;
 
 --
 -- AUTO_INCREMENT for table `balance_tb`
 --
 ALTER TABLE `balance_tb`
-  MODIFY `ID` bigint NOT NULL AUTO_INCREMENT;
+  MODIFY `ID` bigint(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `charge_tb`
 --
 ALTER TABLE `charge_tb`
-  MODIFY `ID` bigint NOT NULL AUTO_INCREMENT;
+  MODIFY `ID` bigint(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=81;
 
 --
 -- AUTO_INCREMENT for table `check_tb`
 --
 ALTER TABLE `check_tb`
-  MODIFY `ID` int NOT NULL AUTO_INCREMENT;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `client_tb`
 --
 ALTER TABLE `client_tb`
-  MODIFY `ID` bigint NOT NULL AUTO_INCREMENT;
+  MODIFY `ID` bigint(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `client_temp_tb`
 --
 ALTER TABLE `client_temp_tb`
-  MODIFY `ID` bigint NOT NULL AUTO_INCREMENT;
+  MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `company_tb`
 --
 ALTER TABLE `company_tb`
-  MODIFY `ID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=75;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=75;
 
 --
 -- AUTO_INCREMENT for table `delist_tb`
 --
 ALTER TABLE `delist_tb`
-  MODIFY `ID` bigint NOT NULL AUTO_INCREMENT;
+  MODIFY `ID` bigint(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `deposit_tb`
 --
 ALTER TABLE `deposit_tb`
-  MODIFY `ID` bigint NOT NULL AUTO_INCREMENT;
+  MODIFY `ID` bigint(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=144;
 
 --
 -- AUTO_INCREMENT for table `dept_tb`
 --
 ALTER TABLE `dept_tb`
-  MODIFY `id` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT for table `fees_tb`
 --
 ALTER TABLE `fees_tb`
-  MODIFY `ID` int NOT NULL AUTO_INCREMENT;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `fee_tb`
 --
 ALTER TABLE `fee_tb`
-  MODIFY `ID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `formfee_tb`
 --
 ALTER TABLE `formfee_tb`
-  MODIFY `id` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
 
 --
 -- AUTO_INCREMENT for table `form_tb`
 --
 ALTER TABLE `form_tb`
-  MODIFY `ID` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
 
 --
 -- AUTO_INCREMENT for table `haccount_tb`
 --
 ALTER TABLE `haccount_tb`
-  MODIFY `ID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
 
 --
 -- AUTO_INCREMENT for table `hcharge_tb`
 --
 ALTER TABLE `hcharge_tb`
-  MODIFY `ID` bigint NOT NULL AUTO_INCREMENT;
+  MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `hproduct_tb`
 --
 ALTER TABLE `hproduct_tb`
-  MODIFY `ID` int NOT NULL AUTO_INCREMENT;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `interest_tb`
 --
 ALTER TABLE `interest_tb`
-  MODIFY `ID` int NOT NULL AUTO_INCREMENT;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `loanreg_tb`
 --
 ALTER TABLE `loanreg_tb`
-  MODIFY `id` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- AUTO_INCREMENT for table `loan_payment`
 --
 ALTER TABLE `loan_payment`
-  MODIFY `ID` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=61;
+  MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=319;
 
 --
 -- AUTO_INCREMENT for table `loan_product_tb`
 --
 ALTER TABLE `loan_product_tb`
-  MODIFY `ID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `loan_tb`
 --
 ALTER TABLE `loan_tb`
-  MODIFY `ID` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
 
 --
 -- AUTO_INCREMENT for table `momo_trans_tb`
 --
 ALTER TABLE `momo_trans_tb`
-  MODIFY `ID` int NOT NULL AUTO_INCREMENT;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `month_tb`
 --
 ALTER TABLE `month_tb`
-  MODIFY `ID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `no_account_tb`
 --
 ALTER TABLE `no_account_tb`
-  MODIFY `ID` int NOT NULL AUTO_INCREMENT;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `penalty_tb`
 --
 ALTER TABLE `penalty_tb`
-  MODIFY `ID` bigint NOT NULL AUTO_INCREMENT;
+  MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `product_tb`
 --
 ALTER TABLE `product_tb`
-  MODIFY `ID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `residence_tb`
 --
 ALTER TABLE `residence_tb`
-  MODIFY `ID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
 
 --
 -- AUTO_INCREMENT for table `role_settings`
 --
 ALTER TABLE `role_settings`
-  MODIFY `ID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=187;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=187;
 
 --
 -- AUTO_INCREMENT for table `role_tb`
 --
 ALTER TABLE `role_tb`
-  MODIFY `ID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `sms_tb`
 --
 ALTER TABLE `sms_tb`
-  MODIFY `ID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `status_tb`
 --
 ALTER TABLE `status_tb`
-  MODIFY `ID` int NOT NULL AUTO_INCREMENT;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `subscription_tb`
 --
 ALTER TABLE `subscription_tb`
-  MODIFY `ID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
 
 --
 -- AUTO_INCREMENT for table `susucomm_tb`
 --
 ALTER TABLE `susucomm_tb`
-  MODIFY `ID` bigint NOT NULL AUTO_INCREMENT;
+  MODIFY `ID` bigint(20) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `sync_history`
 --
 ALTER TABLE `sync_history`
-  MODIFY `ID` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=110;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=110;
 
 --
 -- AUTO_INCREMENT for table `withdrawal_tb`
 --
 ALTER TABLE `withdrawal_tb`
-  MODIFY `ID` bigint NOT NULL AUTO_INCREMENT;
+  MODIFY `ID` bigint(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=72;
 
 --
 -- Constraints for dumped tables

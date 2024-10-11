@@ -46,31 +46,45 @@ class amwork_controller extends route
 		
 		$balremain=$total-$allpayment;
 		if($status==="0"){
-		 $lastpay=$db->get_data_here_value("SELECT DATE_CREATED FROM loan_payment WHERE LOANID=$loanid","DATE_CREATED");
+		 $lastpay=$db->get_data_here_value("SELECT DATE_CREATED FROM loan_payment WHERE LOANID=$loanid AND CUSTOMERID=$customerid ORDER BY ID DESC LIMIT 1","DATE_CREATED");
+		 $dlast=explode(' ',$lastpay);
+		 $lastpay=$dlast[0];
 		 if($lastpay===0){
 		  $days_bet=$db->days_diff($date_approve, date("Y-m-d"));
 		  $calc=$db->calcPay($weektype, $stopay, $days_bet);
 		  $calc=json_decode($calc);
 		  if($calc->amount>$balremain){
-		  	echo json_encode(array("amount"=>$balremain));
+		  	echo json_encode(array("amount"=>$balremain, "origamt1"=>$calc->amount));
 		  }else{
-		  	echo $db->calcPay($weektype, $stopay, $days_bet);
+		  	echo $this->check_against_balance($days_bet, $weektype, $stopay, $balremain, $calc->amount);
 		  }
 		 }else{
           $days_bet=$db->days_diff($lastpay, date("Y-m-d"));
           $calc=$db->calcPay($weektype, $stopay, $days_bet);
 		  $calc=json_decode($calc);
           if($calc->amount>$balremain){
-		  	echo json_encode(array("amount"=>$balremain));
+		  	echo json_encode(array("amount"=>$balremain, "origamt2"=>$calc->amount));
 		  }else{
-		  	echo $db->calcPay($weektype, $stopay, $days_bet);
+		  	echo $this->check_against_balance($days_bet, $weektype, $stopay, $balremain, $calc->amount);
 		  }
 		 }
 		}else if($status==="3"){
 		 if($allpayment!==$total){
-            echo json_encode(array("amount"=>$total-$allpayment));
+            echo json_encode(array("amount"=>$total-$allpayment, "origamt3"=>"In third"));
 		   }
 		 }
+	   }
+
+	   function check_against_balance($days_bet, $weektype, $stopay, $balremain, $calcamt){
+	   	$db = $this->user_initing;
+	   	$calc=$db->calcPay($weektype, $stopay, 7);
+	   	$calc=json_decode($calc);
+        $rem=$balremain-$calcamt;
+        if($rem<$calc->amount){
+          return json_encode(array("amount"=>$balremain));
+        }else{
+         return $db->calcPay($weektype, $stopay, $days_bet);	
+        }
 	   }
     }
 ?>

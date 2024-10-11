@@ -30,7 +30,7 @@ class amwork_controller extends route
         {
           $customer=$db->get_data_here_value("SELECT CONCAT(surname,' ',othername) AS NAME FROM loanreg_tb WHERE id='".$row["CUSTOMERID"]."'","NAME");
            $accno=$db->get_data_here_value("SELECT code FROM loanreg_tb WHERE id='".$row["CUSTOMERID"]."'","code");
-           $code=$db->get_data_here_value("SELECT CODE FROM loan_tb WHERE ACCOUNT_NO='$accno'","CODE");
+           $code=$db->get_data_here_value("SELECT CODE FROM loan_tb WHERE ACCOUNT_NO='$accno' AND ID=".$row["LOANID"]."","CODE");
           $image=$db->get_data_here_value("SELECT image FROM loanreg_tb WHERE id='".$row["CUSTOMERID"]."'","image");
 
           if($image!==0){
